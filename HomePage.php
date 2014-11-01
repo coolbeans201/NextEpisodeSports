@@ -1,7 +1,7 @@
 #!/usr/local/bin/php
 <html><head><title>Home Page</title></head>
 <style>
-	select {overflow-y: scroll}
+	html {overflow-y: scroll}
 </style>
 <body bgcolor="#FFA500">
 <p align = "center"><b><font size = 6>Welcome to Next Episode Sports!</font></b></p>
