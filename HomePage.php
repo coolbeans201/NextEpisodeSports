@@ -121,7 +121,7 @@
 				<li><a href="StatsQuery.php">Statistical Queries</a></li>
 			</ul>
 		</li>
-		<li><a href="Team.php">Teams</a>			
+		<li><a href="Team.php">Team</a>			
 		</li>
 		<li><a href="Inspiration.php">Inspiration</a></li>
 	</ul>
