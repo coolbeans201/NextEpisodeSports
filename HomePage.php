@@ -2,47 +2,43 @@
 <html>
 
 <head>
-	<title>NExt Episode</title>
+	<title>Next Episode</title>
 	<meta name="keywords" content="Next Episode, homepage">
 	<meta name="description" content="Next Episode Sports Database">
 	<meta name="author" content="Derek Hua, Matt Weingarten, Xin He, Jesse Chau">
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
-	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Alegreya+Sans+SC|Rock+Salt|Fredericka+the+Great">
+	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
 	
     <style>
         <style style="text/css">
+        html {overflow-y: scroll}
         
 		h1 {
-			
-		}
-		
-		 body {
-			font-family: 'Open Sans', sans-serif;
-			font-size: 24px;
-			background-image: url("park_firework2.png");
-			background-repeat: no-repeat;
-			background-color: #FFFFFF;
-			background-position: center top;
-			background-width: 100%;
-     	}
-				
-        .buttoncenter {
-            text-align:center;
-			margin-top:500px;
-        }
-        
-		#pagetitle{
-			margin-top:150px;
 			font-family: 'Rock Salt', sans-serif;
-			font-size: 36px;
-			color:#FFFFFF;
+			font-size: 60px;
+			font-weight: normal;
+			color:#000000;
 			text-align: center;
 		}
+		
+		body {
+			font-family: 'Open Sans', sans-serif;
+			font-size: 24px;
+			background-color: #F9F4E1;
+     	}
+		
+		.chooseoperation {
+			text-align:center;
+		}
+		
+        .buttoncenter {
+            text-align:center;
+        }
+        
         
 		nav ul ul {
 			display: none;
 		}
-
 		nav ul li:hover > ul {
 			display: block;
 		}
@@ -76,6 +72,7 @@
 		nav ul li:hover a {
 			color: #fff;
 		}
+		
 		nav ul li a {
 			display: block; padding: 25px 40px;
 			color: #757575; text-decoration: none;
@@ -96,39 +93,40 @@
 			padding: 15px 40px;
 			color: #fff;
 		}	
+		
 		nav ul ul li a:hover {
 			background: #4b545f;
 		}
-	
+		
+		nav ul ul ul {
+			position: absolute; left: 100%; top:0;
+		}
     </style>
 
 </head>
 
-<body>
+<body background="squared_metal.png">
 
-	<div  class="buttoncenter">
-		<nav>
+<h1> Welcome to Next Episode Sports! </h1>
+
+<hr noshade size=5 width="100%">
+
+<nav class="buttoncenter">
+	<ul>
+		<li><a href="#">Functions</a>
 			<ul>
-				<li><a href="#">Functions</a>
-					<ul>
-						<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
-						<li><a href="CompareQuery.php">Compare</a></li>
-						<li><a href="SortQuery.php">Sort</a></li>
-						<li><a href="StatsQuery.php">Statistical Queries</a></li>
-					</ul>
-				</li>
-				<li><a href="#">Team</a>
-					
-				</li>
-				<li><a href="#">Inspiration</a></li>
+				<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
+				<li><a href="CompareQuery.php">Compare</a></li>
+				<li><a href="SortQuery.php">Sort</a></li>
+				<li><a href="StatsQuery.php">Statistical Queries</a></li>
 			</ul>
-		</nav>
-	</div>
-
-
-</body>
-</html>
-
+		</li>
+		<li><a href="Team.php">Team</a>			
+		</li>
+		<li><a href="Inspiration.php">Inspiration</a></li>
+	</ul>
+</nav>
+</body></html>
 
 
 
