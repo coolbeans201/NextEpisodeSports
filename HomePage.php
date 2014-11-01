@@ -2,7 +2,7 @@
 <html>
 
 <head>
-	<title>NExt Episode</title>
+	<title>Next Episode</title>
 	<meta name="keywords" content="Next Episode, homepage">
 	<meta name="description" content="Next Episode Sports Database">
 	<meta name="author" content="Derek Hua, Matt Weingarten, Xin He, Jesse Chau">
@@ -39,7 +39,6 @@
 		nav ul ul {
 			display: none;
 		}
-
 		nav ul li:hover > ul {
 			display: block;
 		}
@@ -111,55 +110,16 @@
 <h1> Welcome to Next Episode Sports! </h1>
 
 <hr noshade size=5 width="100%">
-
 <nav class="buttoncenter">
 	<ul>
-		<li><a href="HomePage.php">Home</a></li>
 		<li><a href="#">Functions</a>
 			<ul>
 				<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
 				<li><a href="CompareQuery.php">Compare</a></li>
-				<li><a href="SortQuery.php">Sort</a>
-					<ul>
-						<li><a href="#">shit</a></li>
-						<li><a href="#">fuck</a></li>
-					</ul>
-				</li>
+				<li><a href="SortQuery.php">Sort</a></li>
 				<li><a href="StatsQuery.php">Statistical Queries</a></li>
 			</ul>
 		</li>
-		<li><a href="#">About</a>
-			
-		</li>
-		<li><a href="#">Inspiration</a></li>
 	</ul>
 </nav>
-
-
-<div class="">Choose an operation:</div>
-
-<div class="buttoncenter">
-	<form action = "StatsRetrieval.php" method = "post">
-		<select name = "operationChoice" size = "1" required>
-			<option value="StatsRetrieval.php">Retrieve Stats</option>
-			<option value="ComparePlayers.php">Compare</option>
-			<option value="Sort.php">Sort by Statistic</option>
-			<option value="StatQueries.php">Statistical Queries</option>
-		</select>
-	<input type = "submit" style = "background-color: lightgreen"/>
-	</form>
-	
-<?php $selectedValue = $_POST['operationChoice']; echo $selectedValue; ?> 
-</div>
-
 </body></html>
-
-
-
-
-
-
-
-
-
-
