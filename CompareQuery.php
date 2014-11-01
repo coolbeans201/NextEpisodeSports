@@ -6,3 +6,5 @@
 <body bgcolor="#FA8072">
 <p align = "center"><b><font size = 6>To Compare, Do The Following:</font></b></p>
 <hr noshade size=5 width="100%">
+
+<!// nigger//>
