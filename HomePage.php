@@ -19,17 +19,16 @@
 		 body {
 			font-family: 'Open Sans', sans-serif;
 			font-size: 24px;
-			background-image: url("park_firework.jpg");
+			background-image: url("park_firework2.png");
 			background-repeat: no-repeat;
 			background-color: #FFFFFF;
 			background-position: center top;
-			background-size: 1920px;
-			
+			background-width: 100%;
      	}
 				
         .buttoncenter {
             text-align:center;
-			margin-top:127px;
+			margin-top:500px;
         }
         
 		#pagetitle{
@@ -107,11 +106,6 @@
 
 <body>
 
-	<div id=pagetitle>
-		<h1>N E X T &nbsp E P I S O D E &nbsp S P O R T S</h1> 
-	</div>
-
-	
 	<div  class="buttoncenter">
 		<nav>
 			<ul>
