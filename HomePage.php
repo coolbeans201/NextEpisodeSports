@@ -110,6 +110,7 @@
 <h1> Welcome to Next Episode Sports! </h1>
 
 <hr noshade size=5 width="100%">
+
 <nav class="buttoncenter">
 	<ul>
 		<li><a href="#">Functions</a>
@@ -120,6 +121,9 @@
 				<li><a href="StatsQuery.php">Statistical Queries</a></li>
 			</ul>
 		</li>
+		<li><a href="Team.php">Teams</a>			
+		</li>
+		<li><a href="Inspiration.php">Inspiration</a></li>
 	</ul>
 </nav>
 </body></html>
