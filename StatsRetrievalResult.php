@@ -20,7 +20,12 @@
 			color:#000000;
 			text-align: center;
 		}
-		
+		#footer {
+    			position : absolute;
+    			bottom : 0;
+    			height : 40px;
+    			align : left;
+  		}
 		body {
 			font-family: 'Open Sans', sans-serif;
 			font-size: 24px;
@@ -106,4 +111,14 @@
 <body background="squared_metal.png">
 <h1>Stats Retrieval Result</h1>
 <hr noshade size=5 width="100%">
+<div id="footer">
+<form action="http://cise.ufl.edu/~weingart/HomePage.php">
+    <left><input type="submit" style = "color: red" value="Home"></left>
+</form>
+<form action="http://cise.ufl.edu/~weingart/StatsRetrievalQuery.php">
+    <right><input type="submit" style = "color: green" value="Search again"></right>
+</form>
+</div>
+</body>
+</html>
 
