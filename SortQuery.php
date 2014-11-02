@@ -159,38 +159,34 @@
 
 
 <form name="myform" method="post" action="#">
-<font size="3">Select Sport: </font>
+<div>
+<font size="4">Select sport: </font>
 <select name="box1" onchange="playerType(this.selectedIndex), Box3(this.selectedIndex)">
 	<option>-Select a Sport-</option>
 	<option>Baseball</option>
 	<option>Basketball</option>
 	<option>Hockey</option>
 </select>
-<br>
-
-<font size="3">Select Player Type: </font>
+</div>
+<div>
+<font size="4">Select player type: </font>
 <select name="playertype"></select>
-<br>
-
-<font size="3">Select Statistics Type: </font>
-
+</div>
+<div>
+<font size="4">Select Statistics Type: </font>
 <select name="box3"></select>
-<br>
-
-<font size="3">Select Data Range: </font>
+</div>
+<div>
+<font size="4">Select data range: </font>
 <select name="datarange">
-  <option>Top 5</option>
-  <option>Top 10</option>
-  <option>Top 20</option>
-  <option>Top 50</option>
-  <option>Top 100</option>
+  <option value = "5">Top 5</option>
+  <option value = "10">Top 10</option>
+  <option value = "20">Top 20</option>
+  <option value = "50">Top 50</option>
+  <option value = "100">Top 100</option>
 </select>
-<br>
-
-<form action="http://cise.ufl.edu/~xinhe/SortResult.php">
-    <input type="submit" value="Go to Results">
+</div>
+<input type="submit" style = "color: green" value="Compute">
 </form>
-
-<form action="http://cise.ufl.edu/~xinhe/HomePage.php">
-    <input type="submit" value="Homepage">
-</form>
+</body>
+</html>
