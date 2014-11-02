@@ -1,7 +1,6 @@
 #!/usr/local/bin/php
 <!--compare-->
 <html>
-
 <head>
 	<title>Compare Query</title>
 	<meta name="keywords" content="Next Episode, compare query">
@@ -156,29 +155,19 @@
 	</nav>
 	
 	
-	<form name="myform" method="post" action="#">
+	<form name="myform" method="post" action="CompareResult.php">
 		<div>
-			<p> SPORT: <select name="box1" onchange="Box2(this.selectedIndex)" onchange="Box3(this.selectedIndex)">
-				<option value="a">-select sport-</option>
+			<font size = "4"> Select sport: <select name="box1" onchange="Box2(this.selectedIndex)" onchange="Box3(this.selectedIndex)">
+				<option value="a">-Select a Sport-</option>
 				<option value="b">Baseball</option>
 				<option value="c">Basketball</option>
 				<option value="d">Hockey</option>
-			</select></p>
-			<p> PLAYER TYPE: <select name="box2"></select></p>
-			
-			<p> NAME: </p>
-			
-			<p> vs. </p>
-			<p >NAME: <select name="box3"></select></p>
-		</div>
+			</select></font></div>
+			<div><font size = "4"> Select player type: <select name="box2"></select></font></div>
+			<div><font size = "4"> Select name: <select name = "box3"></select></font></div>
+			<div><font size = "4"> vs. </font></div>
+			<div><font size = "4">Select name: <select name="box3"></select></font></div>
+	<input type="submit" style = "color: green" value="Compute">
 	</form>
-	
-
-	<form action="CompareQuery.php">
-		<input type="submit" value="Go!">
-	</form>
-
-	
-	
-	
 </body>
+</html>
