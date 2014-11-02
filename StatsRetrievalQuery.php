@@ -1,8 +1,9 @@
+#!/usr/local/bin/php
 <html>
 
 <head>
-	<title>Stats Retrieval Result</title>
-	<meta name="keywords" content="Next Episode, stats retrieval result">
+	<title>Stats Retrieval Query</title>
+	<meta name="keywords" content="Next Episode, stats retrieval query">
 	<meta name="description" content="Next Episode Sports Database">
 	<meta name="author" content="Derek Hua, Matt Weingarten, Xin He, Jesse Chau">
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
@@ -126,9 +127,8 @@
     </style>
 </head>
 <body background="squared_metal.png">
-<h1>Stats Query</h1>
+<h1>Stats Retrieval Query</h1>
 <hr noshade size=5 width="100%">
-
 <nav class="buttoncenter">
 	<ul>
 		<li><a href="HomePage.php">Home</a>
@@ -147,25 +147,25 @@
 </nav>
 
 <form name="myform" method="post" action="StatsRetrievalResult.php">
-<div>Select Sport&nbsp
+<div>
+<font size = "4">Select sport:</font>
 <select name="sport" onchange="PlayerType(this.selectedIndex)">
     <option value="a">-Select a Sport-</option>
     <option value="basketball">Basketball</option>
     <option value="baseball">Baseball</option>
 	<option value="hockey">Hockey</option>
 </select>
-<br>
-Select Player Type:&nbsp
+</div>
+<div>
+<font size = "4">Select player type:</font>
 <select name="playertype"></select>
-<br>
-Select Name:&nbsp
+</div>
+<div>
+<font size = "4">Select name:</font>
 <select name="name">
 </select>
-
-
 </div>
-<input type="submit" value="Go">
+<input type="submit" style = "color: green" value="Go">
 </form>
-
 </body>
 </html>
