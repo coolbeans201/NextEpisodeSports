@@ -1,6 +1,5 @@
 #!/usr/local/bin/php
 <html>
-
 <head>
 	<title>Stats Result</title>
 	<meta name="keywords" content="Next Episode, stats result">
@@ -111,13 +110,21 @@
 <body background="squared_metal.png">
 <h1>Stats Result</h1>
 <hr noshade size=5 width="100%">
-<div id="footer">
-<form action="http://cise.ufl.edu/~weingart/HomePage.php">
-    <left><input type="submit" style = "color: red" value="Home"></left>
-</form>
-<form action="http://cise.ufl.edu/~weingart/StatsQuery.php">
-    <right><input type="submit" style = "color: green" value="Search again"></right>
-</form>
-</div>
+<nav class="buttoncenter">
+	<ul>
+		<li><a href = "HomePage.php">Home</a></li>
+		<li><a href="#">Functions</a>
+			<ul>
+				<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
+				<li><a href="CompareQuery.php">Compare</a></li>
+				<li><a href="SortQuery.php">Sort</a></li>
+				<li><a href="StatsQuery.php">Statistical Queries</a></li>
+			</ul>
+		</li>
+		<li><a href="Team.php">Team</a>			
+		</li>
+		<li><a href="Inspiration.php">Inspiration</a></li>
+	</ul>
+</nav>
 </body>
 </html>
