@@ -1,6 +1,4 @@
 #!/usr/local/bin/php
-<!--sort-->
-
 <html>
 
 <head>
@@ -10,6 +8,38 @@
 	<meta name="author" content="Derek Hua, Matt Weingarten, Xin He, Jesse Chau">
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
+
+	<script type="text/javascript">
+	var varieties=[
+	[""],
+	["Manager","Pitcher","Position Player","Team"],
+	["Coach","Player","Team"],
+	["Coach","Goalie","Position Player","Team"]
+	];
+	
+	function playerType(idx) {
+	var f=document.myform;
+	f.playertype.options.length=null;
+	for(i=0; i<varieties[idx].length; i++) {
+    	f.playertype.options[i]=new Option(varieties[idx][i], i); 
+    		}    
+	}
+
+	var stats=[
+	[],
+	["Games","Starts","Atbats","Runs","Hits","Batting average","Doubles", "Triples","Home runs","Slugging","RBI","Stolen bases","Caught stealing","Walks","Strikeouts", "Intentional walks", "Hit by pitch", "OBP", "Sac hits", "Sac flies", "GIDP", "Outs", "Putouts", "Assists", "Errors", "Double plays", "Passed balls", "Wild pitches", "Stolen bases allowed", "Caught stealing allowed", "Fielding percent", "Wins", "Losses", "Winning percentage", "Complete games", "Shutouts", "Saves", "Outs", "Earned runs", "ERA", "Balks", "Batters faced", "Finishes", "H9", "HR9", "BB9", "SO9", "Runs allowed", "Hits allowed", "Home runs allowed", "Walks allowed", "Strikeouts forced"],
+	["Wins", "Losses", "Winning percentage", "Postseason wins", "Postseason losses", "Postseason winning percentage", "Minutes", "Points", "Offensive rebounds", "Defensive rebounds", "Rebounds", "Assists", "Steals", "Blocks", "Turnovers", "Fouls", "Field goal attempts", "Field goals made", "Field goal percentage", "Free throw attempts", "Free throws made", "Free throw percentage", "Three point attempts", "Three point percentage", "Points per game", "Rebounds per game", "Assists per game", "Field goals made allowed", "Field goal attempts allowed", "Field goal percentage allowed", "Free throws made allowed", "Free throw attempts allowed", "Three point made allowed", "Three point attempts allowed", "Three point percentage allowed", "Offensive rebounds allowed", "Defensive rebounds allowed", "Rebounds allowed", "Rebounds allowed per game", "Assists allowed", "Assists allowed per game", "Fouls allowed", "Steals allowed", "Turnovers allowed", "Blocks allowed", "Points allowed", "Points allowed per game", "Offensive team rebounds", "Defensive team rebounds", "Home wins", "Home losses", "Home winning percentage", "Away wins", "Away losses", "Away winning percentage", "Neutral wins", "Neutral losses", "Neutral winning percentage", "Conference wins", "Conference losses", "Conference winning percentage", "Division wins", "Division losses", "Division winning percentage", "Games"],
+	["Wins", "Losses", "Ties", "Points per game", "Postseason wins", "Postseason losses", "Postseason ties", "Postseason winning percentage", "Games", "Minutes", "Empty net goals", "Shutouts", "Goals allowed", "Shots allowed", "Save percentage", "Shootout wins", "Shootout losses", "Shootout winning percentage", "Shootout shots allowed", "Shootout goals allowed", "Shootout save percentage", "Goals", "Goals per game", "Assists", "Assists per game", "Points", "Points per game", "Penalty minutes", "+/-", "Power play goals", "Power play assists", "Short handed goals", "Short handed assists", "Game winning goals", "Game tying goals", "Shots", "Shot percent", "Shootout shots", "Shootout goals", "Shootout goal deciding goals", "Shootout shot percent", "Overtime losses", "Goal differential", "Bench minutes", "Power play chances", "Short handed goals allowed", "Penalty kill goals", "Penalty kill chances", "Home wins", "Home losses", "Home ties", "Home OT losses", "Home points per game", "Road wins", "Road losses", "Road ties", "Road OT losses", "Road points per game"]];
+	
+	function Statistics(idx) {
+	var f=document.myForm;
+	f.statistics.options.length=null;
+	for(i=0; i < stats[idx].length; i++) {
+		f.statistics.options[i]=new Option(stats[idx][i], i); 
+		}    
+	}
+	onload=function() {playertype(0); Statistics(0)};
+	</script>
 	
     <style>
         <style style="text/css">
@@ -106,33 +136,42 @@
     </style>
 </head>
 <body background="squared_metal.png">
-	<h1>Compare Query</h1>
+<h1>Sort Query</h1>
+<hr noshade size=5 width="100%">
 
-	<hr noshade size=5 width="100%">
-	
-	<nav class="buttoncenter">
-		<ul>
-			<li><a href="HomePage.php">Home</a></li>
-			<li><a href="#">Functions</a>
-				<ul>
-					<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
-					<li><a href="CompareQuery.php">Compare</a></li>
-					<li><a href="SortQuery.php">Sort</a></li>
-					<li><a href="StatsQuery.php">Statistical Queries</a></li>
-				</ul>
-			</li>
-			<li><a href="Team.php">Team</a>			
-			</li>
-			<li><a href="Inspiration.php">Inspiration</a></li>
-		</ul>
-	</nav>	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-</body>
+<form name="myform" method="post" action="#">
+<font size="3">Select Sport: </font>
+<select name="box1" onchange="playerType(this.selectedIndex), Statistics(this.selectedIndex)">
+	<option>-Select a Sport-</option>
+	<option>Baseball</option>
+	<option>Basketball</option>
+	<option>Hockey</option>
+</select>
+<br>
+
+<font size="3">Select Player Type: </font>
+<select name="playertype"></select>
+<br>
+
+<font size="3">Select Statistics Type: </font>
+
+<select name="statistics"></select>
+<br>
+
+<font size="3">Select Data Range: </font>
+<select name="datarange">
+  <option>Top 5</option>
+  <option>Top 10</option>
+  <option>Top 20</option>
+  <option>Top 50</option>
+  <option>Top 100</option>
+</select>
+<br>
+
+<form action="http://cise.ufl.edu/~xinhe/SortResult.php">
+    <input type="submit" value="Go to Results">
+</form>
+
+<form action="http://cise.ufl.edu/~xinhe/HomePage.php">
+    <input type="submit" value="Homepage">
+</form>
