@@ -1,0 +1,64 @@
+Baseball player: SELECT DISTINCT nameFirst, nameLast
+				 FROM BaseballMaster
+				 WHERE nameFirst IS NOT NULL AND nameLast IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID FROM BaseballFielding)
+																											     UNION
+																												(SELECT DISTINCT playerID FROM BaseballFieldingPostseason)
+																												 UNION
+																												(SELECT DISTINCT playerID FROM BaseballBatting)
+																												 UNION
+																												(SELECT DISTINCT playerID FROM BaseballBattingPostseason))
+				 ORDER BY nameFirst, nameLast;
+Baseball pitcher: SELECT DISTINCT nameFirst, nameLast
+			      FROM BaseballMaster
+				  WHERE nameFirst IS NOT NULL AND nameLast IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT pitcherID FROM BaseballPitching)
+																												  UNION
+																												(SELECT DISTINCT playerID FROM BaseballPitchingPostseason))
+				  ORDER BY nameFirst, nameLast;
+Baseball coach:   SELECT DISTINCT nameFirst, nameLast
+			      FROM BaseballMaster
+				  WHERE nameFirst IS NOT NULL AND nameLast IS NOT NULL AND managerID IS NOT NULL AND managerID IN ((SELECT DISTINCT managerID FROM BaseballManagers))
+				  ORDER BY nameFirst, nameLast;
+Baseball team:    SELECT DISTINCT name 
+				  FROM BaseballTeams 
+				  ORDER BY name;
+Basketball player: SELECT DISTINCT firstName, lastName
+				   FROM BasketballMaster
+				   WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND ID IS NOT NULL AND ID IN ((SELECT DISTINCT playerID
+																									   FROM BasketballPlayers)
+																									   UNION
+																									  (SELECT DISTINCT player_ID
+																									   FROM BasketballPlayerAllStar))
+				   ORDER BY firstName, lastName;
+Basketball coaches: SELECT DISTINCT firstName, lastName
+					FROM BasketballMaster
+					WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND ID IS NOT NULL AND ID IN ((SELECT DISTINCT coachID
+                                                                                    FROM BasketballCoaches))
+					ORDER BY firstName, lastName;
+Basketball team: SELECT DISTINCT name
+				 FROM BasketballTeams
+				 ORDER BY name;
+Hockey player: SELECT DISTINCT firstName, lastName
+			   FROM HockeyMaster
+			   WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID
+																											   FROM HockeyScoring)
+																											   UNION
+																											  (SELECT DISTINCT playerID
+																											   FROM HockeyScoringShootout))
+			   ORDER BY firstName, lastName;
+Hockey goalie: SELECT DISTINCT firstName, lastName
+			   FROM HockeyMaster
+			   WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT goalieID
+																											   FROM HockeyGoalies)
+																											   UNION
+																											  (SELECT DISTINCT goalieID
+																											   FROM HockeyGoaliesShootout))
+			   ORDER BY firstName, lastName;
+Hockey coach: SELECT DISTINCT firstName, lastName
+			  FROM HockeyMaster
+			  WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND coachID IS NOT NULL AND coachID IN ((SELECT DISTINCT coachID
+																											FROM HockeyCoaches))
+                                                                                                
+			  ORDER BY firstName, lastName;
+Hockey team: SELECT DISTINCT name
+			 FROM HockeyTeams
+			 ORDER BY name;
