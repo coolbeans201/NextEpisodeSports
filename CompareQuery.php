@@ -13,9 +13,9 @@
 	<script type="text/javascript">
 	var varieties=[
 	[],
-	["-select player-","Manager","Pitcher","Position Player","Team"],
-	["-select player-","Coach","Player","Team"],
-	["-select player-","Coach","Goalie","Position Player","Team"]
+	["Manager","Pitcher","Position Player","Team"],
+	["Coach","Player","Team"],
+	[Coach","Goalie","Position Player","Team"]
 	];
 
 	function Box2(idx) {
