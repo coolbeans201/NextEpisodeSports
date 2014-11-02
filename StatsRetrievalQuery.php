@@ -1,16 +1,34 @@
 #!/usr/local/bin/php
-<!--statsretrieval---->
-
 <html>
 
 <head>
-	<title>Stats Retrieval Query</title>
-	<meta name="keywords" content="Next Episode, stats retrieval query">
+	<title>Stats Retrieval Result</title>
+	<meta name="keywords" content="Next Episode, stats retrieval result">
 	<meta name="description" content="Next Episode Sports Database">
 	<meta name="author" content="Derek Hua, Matt Weingarten, Xin He, Jesse Chau">
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
 	
+	<title>Change selection in one box from another</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript">
+	var players =[
+	[""],
+	["Manager","Pitcher","Position Player","Team"],
+	["Coach","Player","Team"],
+	["Coach","Goalie","Position Player","Team"]
+	]
+
+	function Box2(idx) {
+	var f=document.myform;
+	f.box2.options.length=null;
+	for(i=0; i<players[idx].length; i++) {
+		f.box2.options[i]=new Option(players[idx][i], i); 
+		}    
+	}
+	onload=function() {Box2(0);};
+	</script>
+
     <style>
         <style style="text/css">
         html {overflow-y: scroll}
@@ -22,7 +40,12 @@
 			color:#000000;
 			text-align: center;
 		}
-		
+		#footer {
+    			position : absolute;
+    			bottom : 0;
+    			height : 40px;
+    			align : left;
+  		}
 		body {
 			font-family: 'Open Sans', sans-serif;
 			font-size: 24px;
@@ -106,33 +129,47 @@
     </style>
 </head>
 <body background="squared_metal.png">
-	<h1>Compare Query</h1>
+<h1>Stats Query</h1>
+<hr noshade size=5 width="100%">
 
-	<hr noshade size=5 width="100%">
-	
-	<nav class="buttoncenter">
-		<ul>
-			<li><a href="HomePage.php">Home</a></li>
-			<li><a href="#">Functions</a>
-				<ul>
-					<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
-					<li><a href="CompareQuery.php">Compare</a></li>
-					<li><a href="SortQuery.php">Sort</a></li>
-					<li><a href="StatsQuery.php">Statistical Queries</a></li>
-				</ul>
-			</li>
-			<li><a href="Team.php">Team</a>			
-			</li>
-			<li><a href="Inspiration.php">Inspiration</a></li>
-		</ul>
-	</nav>	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+<nav class="buttoncenter">
+	<ul>
+		<li><a href="HomePage.php">Home</a>
+		<li><a href="#">Functions</a>
+			<ul>
+				<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
+				<li><a href="CompareQuery.php">Compare</a></li>
+				<li><a href="SortQuery.php">Sort</a></li>
+				<li><a href="StatsQuery.php">Statistical Queries</a></li>
+			</ul>
+		</li>
+		<li><a href="Team.php">Team</a>			
+		</li>
+		<li><a href="Inspiration.php">Inspiration</a></li>
+	</ul>
+</nav>
+
+<form name="myform" method="post" action="StatsRetrievalResult.php">
+<div>SELECT SPORT:&nbsp&nbsp&nbsp&nbsp&nbsp
+<select name="box1" onchange="Box2(this.selectedIndex)">
+    <option value="a">-Select a Sport-</option>
+    <option value="b">Basketball</option>
+    <option value="c">Baseball</option>
+	<option value="d">Hockey</option>
+</select>
+<br>
+PLAYER TYPE:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<select name="box2"></select>
+<br>
+SELECT NAME:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+<select name="box3">
+</select>
+
+
+</div>
+<br>
+<input type="submit" value="Submit">
+</form>
+
 </body>
+</html>
