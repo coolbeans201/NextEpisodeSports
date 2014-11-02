@@ -15,7 +15,7 @@
 	[],
 	["Manager","Pitcher","Position Player","Team"],
 	["Coach","Player","Team"],
-	[Coach","Goalie","Position Player","Team"]
+	["Coach","Goalie","Position Player","Team"]
 	];
 
 	function Box2(idx) {
