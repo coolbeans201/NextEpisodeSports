@@ -13,9 +13,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<script type="text/javascript">
 	var varieties=[
-	["Manager","Pitcher","Position Player","Team"],
-	["Coach","Player","Team"],
-	["Coach","Goalie","Position Player","Team"]
+	[],
+	["-select player-","Manager","Pitcher","Position Player","Team"],
+	["-select player-","Coach","Player","Team"],
+	["-select player-","Coach","Goalie","Position Player","Team"]
 	];
 
 	function Box2(idx) {
@@ -157,22 +158,27 @@
 	
 	<form name="myform" method="post" action="#">
 		<div>
-			<select name="box1" onchange="Box2(this.selectedIndex)" onchange="Box3(this.selectedIndex)">
-				<option value="a">Baseball</option>
-				<option value="b">Basketball</option>
-				<option value="c">Hockey</option>
-			</select>
-			<select name="box2"></select>
+			<p> SPORT: <select name="box1" onchange="Box2(this.selectedIndex)" onchange="Box3(this.selectedIndex)">
+				<option value="a">-select sport-</option>
+				<option value="b">Baseball</option>
+				<option value="c">Basketball</option>
+				<option value="d">Hockey</option>
+			</select></p>
+			<p> PLAYER TYPE: <select name="box2"></select></p>
+			
+			<p> NAME: </p>
+			
 			<p> vs. </p>
-			<select name="box3"></select>
+			<p >NAME: <select name="box3"></select></p>
 		</div>
 	</form>
 	
 
-	
-
-	<form action="http://google.com">
-    		<input type="submit" value="Go to Google">
+	<form action="CompareQuery.php">
+		<input type="submit" value="Go!">
 	</form>
+
+	
+	
 	
 </body>
