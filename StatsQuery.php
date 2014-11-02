@@ -102,18 +102,36 @@
 			position: absolute; left: 100%; top:0;
 		}
     </style>
-<script type="text/javascript">
-var players=[[],
-["Manager","Pitcher","Position Player","Team"],
-["Coach","Player","Team"],
-["Coach","Goalie","Position Player","Team"]
-];
-function PlayerType(idx) {
-var f=document.myForm;
-f.playerType.options.length=null;
-for(i=0; i < players[idx].length; i++) {
-    f.playerType.options[i]=new Option(players[idx][i], i); 
-    }    
+<script>
+function setOptions(chosen, selBox){
+	selBox.options.length = 0;
+	if (chosen == "selectasport")
+	{
+		setTimeout(setOptions('', document.myForm.begYear), 5);
+	}
+	if (chosen == "baseball")
+	{
+		selBox.options[selBox.options.length] = new Option('Manager', 'baseballmanager');
+		selBox.options[selBox.options.length] = new Option('Pitcher', 'baseballpitcher');
+		selBox.options[selBox.options.length] = new Option('Position Player', 'baseballplayer');
+		selBox.options[selBox.options.length] = new Option('Team', 'baseballteam');
+		setTimeout(setOptions('', document.myForm.begYear), 5);
+	}
+	if (chosen == "basketball")
+	{
+		selBox.options[selBox.options.length] = new Option('Coach', 'basketballcoach');
+		selBox.options[selBox.options.length] = new Option('Player', 'basketballplayer');
+		selBox.options[selBox.options.length] = new Option('Team', 'basketballteam');
+		setTimeout(setOptions('', document.myForm.begYear), 5);
+	}
+	if (chosen == "hockey")
+	{
+		selBox.options[selBox.options.length] = new Option('Coach', 'hockeycoach');
+		selBox.options[selBox.options.length] = new Option('Goalie', 'hockeygoalie');
+		selBox.options[selBox.options.length] = new Option('Player', 'hockeyplayer');
+		selBox.options[selBox.options.length] = new Option('Team', 'hockeyteam');
+		setTimeout(setOptions('', document.myForm.begYear), 5);
+	}
 }
 </script>
 <script type = "text/javascript">
@@ -132,10 +150,26 @@ for(i=0; i < statistics[idx].length; i++) {
 <body background="squared_metal.png">
 <h1>Stats Query</h1>
 <hr noshade size=5 width="100%">
+<nav class="buttoncenter">
+	<ul>
+		<li><a href = "HomePage.php">Home</a></li>
+		<li><a href="#">Functions</a>
+			<ul>
+				<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
+				<li><a href="CompareQuery.php">Compare</a></li>
+				<li><a href="SortQuery.php">Sort</a></li>
+				<li><a href="StatsQuery.php">Statistical Queries</a></li>
+			</ul>
+		</li>
+		<li><a href="Team.php">Team</a>			
+		</li>
+		<li><a href="Inspiration.php">Inspiration</a></li>
+	</ul>
+</nav>
 <form name = "myForm" action = "StatsResult.php" method = "post">
 <div>
 <font size = "4">Select sport: </font>
-<select name = "sport" onChange = "PlayerType(this.selectedIndex); Statistics(this.selectedIndex);">
+<select name = "sport" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); Statistics(this.selectedIndex);">
 	<option value = "selectasport">-Select a Sport-</option>
 	<option value = "baseball">Baseball</option>
 	<option value = "basketball">Basketball</option>
@@ -144,7 +178,7 @@ for(i=0; i < statistics[idx].length; i++) {
 </div>
 <div>
 <font size = "4">Select player type:</font>
-<select name = "playerType"></select>
+<select name = "playerType" onChange = "setOptions(document.myForm.playerType.options[document.myForm.playerType.selectedIndex].value, document.myForm.begYear);"></select>
 </div>
 <div>
 <font size = "4">Select an operation:</font>
