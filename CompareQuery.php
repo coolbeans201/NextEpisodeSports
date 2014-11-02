@@ -1,4 +1,5 @@
 #!/usr/local/bin/php
+<!--compare-->
 <html>
 
 <head>
@@ -8,6 +9,33 @@
 	<meta name="author" content="Derek Hua, Matt Weingarten, Xin He, Jesse Chau">
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<script type="text/javascript">
+	var varieties=[
+	["Manager","Pitcher","Position Player","Team"],
+	["Coach","Player","Team"],
+	["Coach","Goalie","Position Player","Team"]
+	];
+
+	function Box2(idx) {
+	var f=document.myform;
+	f.box2.options.length=null;
+	for(i=0; i<varieties[idx].length; i++) {
+		f.box2.options[i]=new Option(varieties[idx][i], i); 
+		}    
+	}
+	
+	function Box3(idx) {
+	var f=document.myform;
+	f.box3.options.length=null;
+	for(i=0; i<varieties[idx].length; i++) {
+		f.box3.options[i]=new Option(varieties[idx][i], i); 
+		}    
+	}
+	
+	onload=function() {Box2(0); Box3(0)};
+	</script>
 	
     <style>
         <style style="text/css">
@@ -103,6 +131,48 @@
 		}
     </style>
 </head>
+
 <body background="squared_metal.png">
-<h1>Compare Query</h1>
-<hr noshade size=5 width="100%">
+	<h1>Compare Query</h1>
+
+	<hr noshade size=5 width="100%">
+	
+	<nav class="buttoncenter">
+		<ul>
+			<li><a href="HomePage.php">Home</a></li>
+			<li><a href="#">Functions</a>
+				<ul>
+					<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
+					<li><a href="CompareQuery.php">Compare</a></li>
+					<li><a href="SortQuery.php">Sort</a></li>
+					<li><a href="StatsQuery.php">Statistical Queries</a></li>
+				</ul>
+			</li>
+			<li><a href="Team.php">Team</a>			
+			</li>
+			<li><a href="Inspiration.php">Inspiration</a></li>
+		</ul>
+	</nav>
+	
+	
+	<form name="myform" method="post" action="#">
+		<div>
+			<select name="box1" onchange="Box2(this.selectedIndex)" onchange="Box3(this.selectedIndex)">
+				<option value="a">Baseball</option>
+				<option value="b">Basketball</option>
+				<option value="c">Hockey</option>
+			</select>
+			<select name="box2"></select>
+			<p> vs. </p>
+			<select name="box3"></select>
+		</div>
+	</form>
+	
+
+	
+
+	<form action="http://google.com">
+    		<input type="submit" value="Go to Google">
+	</form>
+	
+</body>
