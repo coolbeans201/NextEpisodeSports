@@ -1,4 +1,6 @@
 #!/usr/local/bin/php
+<!--statsretrieval---->
+
 <html>
 
 <head>
@@ -104,5 +106,33 @@
     </style>
 </head>
 <body background="squared_metal.png">
-<h1>Stats Retrieval Query</h1>
-<hr noshade size=5 width="100%">
+	<h1>Compare Query</h1>
+
+	<hr noshade size=5 width="100%">
+	
+	<nav class="buttoncenter">
+		<ul>
+			<li><a href="HomePage.php">Home</a></li>
+			<li><a href="#">Functions</a>
+				<ul>
+					<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
+					<li><a href="CompareQuery.php">Compare</a></li>
+					<li><a href="SortQuery.php">Sort</a></li>
+					<li><a href="StatsQuery.php">Statistical Queries</a></li>
+				</ul>
+			</li>
+			<li><a href="Team.php">Team</a>			
+			</li>
+			<li><a href="Inspiration.php">Inspiration</a></li>
+		</ul>
+	</nav>	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+</body>
