@@ -17,7 +17,6 @@
 	["Coach","Player","Team"],
 	["Coach","Goalie","Position Player","Team"]
 	];
-
 	function Box2(idx) {
 	var f=document.myform;
 	f.box2.options.length=null;
@@ -164,9 +163,34 @@
 				<option value="d">Hockey</option>
 			</select></font></div>
 			<div><font size = "4"> Select player type: <select name="box2"></select></font></div>
-			<div><font size = "4"> Select name: <select name = "box3"></select></font></div>
-			<div><font size = "4"> vs. </font></div>
-			<div><font size = "4">Select name: <select name="box3"></select></font></div>
+			
+	<?php
+	$connection = oci_connect('weingart', 'bridgeoverlord201', '//oracle.cise.ufl.edu/orcl');
+	$sportname = document.myform.box1.value;
+	$playertype = document.myform.box2.value;
+	$query = ' SELECT DISTINCT nameFirst, nameLast
+				 FROM BaseballMaster
+				 WHERE nameFirst IS NOT NULL AND nameLast IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID FROM BaseballFielding)
+																											     UNION
+																												(SELECT DISTINCT playerID FROM BaseballFieldingPostseason)
+																												 UNION
+																												(SELECT DISTINCT playerID FROM BaseballBatting)
+																												 UNION
+																												(SELECT DISTINCT playerID FROM BaseballBattingPostseason))
+				 ORDER BY nameFirst, nameLast';
+	$statement = oci_parse($connection, $query);
+	oci_execute($statement);
+
+	echo '<select name="personbox1">';
+	echo '<option value = "-1">Select:</option>';
+	while($row=oci_fetch_assoc($statement)) {
+	  echo '<option>' . $row['NAMEFIRST'] . ' ' . $row['NAMELAST'] . '</option>';
+	}
+	echo "</select> \n";
+	echo "vs.\n";
+	?>
+
+	<br>
 	<input type="submit" style = "color: green" value="Compute">
 	</form>
 </body>
