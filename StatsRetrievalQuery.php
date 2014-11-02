@@ -1,4 +1,3 @@
-#!/usr/local/bin/php
 <html>
 
 <head>
@@ -9,24 +8,22 @@
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
 	
-	<title>Change selection in one box from another</title>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<script type="text/javascript">
 	var players =[
-	[""],
+	[],
 	["Manager","Pitcher","Position Player","Team"],
 	["Coach","Player","Team"],
 	["Coach","Goalie","Position Player","Team"]
 	]
 
-	function Box2(idx) {
+	function PlayerType(idx) {
 	var f=document.myform;
-	f.box2.options.length=null;
+	f.playertype.options.length=null;
 	for(i=0; i<players[idx].length; i++) {
-		f.box2.options[i]=new Option(players[idx][i], i); 
+		f.playertype.options[i]=new Option(players[idx][i], i); 
 		}    
 	}
-	onload=function() {Box2(0);};
+	onload=function() {PlayerType(0);};
 	</script>
 
     <style>
@@ -150,25 +147,24 @@
 </nav>
 
 <form name="myform" method="post" action="StatsRetrievalResult.php">
-<div>SELECT SPORT:&nbsp&nbsp&nbsp&nbsp&nbsp
-<select name="box1" onchange="Box2(this.selectedIndex)">
+<div>Select Sport&nbsp
+<select name="sport" onchange="PlayerType(this.selectedIndex)">
     <option value="a">-Select a Sport-</option>
-    <option value="b">Basketball</option>
-    <option value="c">Baseball</option>
-	<option value="d">Hockey</option>
+    <option value="basketball">Basketball</option>
+    <option value="baseball">Baseball</option>
+	<option value="hockey">Hockey</option>
 </select>
 <br>
-PLAYER TYPE:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<select name="box2"></select>
+Select Player Type:&nbsp
+<select name="playertype"></select>
 <br>
-SELECT NAME:&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-<select name="box3">
+Select Name:&nbsp
+<select name="name">
 </select>
 
 
 </div>
-<br>
-<input type="submit" value="Submit">
+<input type="submit" value="Go">
 </form>
 
 </body>
