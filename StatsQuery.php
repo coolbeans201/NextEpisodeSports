@@ -22,7 +22,7 @@
 		
 		body {
 			font-family: 'Open Sans', sans-serif;
-			font-size: 24px;
+			font-size: 20px;
 			background-color: #F9F4E1;
      	}
 		
@@ -199,7 +199,7 @@ function ajaxFunction(){
 		<li><a href="Inspiration.php">Inspiration</a></li>
 	</ul>
 </nav>
-<form name = "myForm" action = "getYears.php" method = "post">
+<form name = "myForm" action = "StatsResult.php" method = "post">
 <div>
 <font size = "4">Select sport: </font>
 <select name = "sport" id = "sport1" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); Statistics(this.selectedIndex); ajaxFunction();">
@@ -228,8 +228,8 @@ function ajaxFunction(){
 <select name = "stats" id = "stats1"></select>
 </div>
 <div>
-</form>
 <div id='ajaxDiv'>Date ranges will be loaded here</div>
 <input type= "submit" style = "color: green" value="Compute"></input>
+</form>
 </body>
 </html>
