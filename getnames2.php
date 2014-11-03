@@ -119,7 +119,7 @@
 	oci_execute($statement);
 	
 	echo "Select name: ";
-	echo '<select name="personbox1">';
+	echo '<select name="personbox1" id = "name1">';
 	echo '<option value = "-1">Select:</option>';
 	while($row=oci_fetch_assoc($statement)) {
 		if ($playertype != 'Team'){
