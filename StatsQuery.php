@@ -229,7 +229,7 @@ function ajaxFunction(){
 </div>
 <div>
 </form>
-<div id='ajaxDiv'>Your result will display here</div>
+<div id='ajaxDiv'>Date ranges will be loaded here</div>
 <input type= "submit" style = "color: green" value="Compute"></input>
 </body>
 </html>
