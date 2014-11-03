@@ -45,9 +45,9 @@
 			echo '<option>' . $row['YEAR'] . ' ' . '</option>';
 	}
 	
-	/*
+	
 	echo "</select> \n";
-	echo "Select end year: "	
+	echo "Select end year: ";	
 	echo '<select name="endYear">';
 	echo '<option value = "-1">Select:</option>';
 	while($row=oci_fetch_assoc($statement2)) {
@@ -55,7 +55,6 @@
 	}
 	
 	echo "</select> \n";
-	*/
 	//
 	// VERY important to close Oracle Database Connections and free statements!
 	//
