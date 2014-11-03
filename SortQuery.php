@@ -158,27 +158,27 @@
 
 
 
-<form name="myform" method="post" action="#">
+<form name="myform" method="post" action="SortResult.php">
 <div>
 <font size="4">Select sport: </font>
-<select name="box1" onchange="playerType(this.selectedIndex), Box3(this.selectedIndex)">
+<select name="box1" id = "sport" onchange="playerType(this.selectedIndex), Box3(this.selectedIndex)">
 	<option>-Select a Sport-</option>
-	<option>Baseball</option>
-	<option>Basketball</option>
-	<option>Hockey</option>
+	<option value = "Baseball">Baseball</option>
+	<option value = "Basketball">Basketball</option>
+	<option value = "Hockey">Hockey</option>
 </select>
 </div>
 <div>
 <font size="4">Select player type: </font>
-<select name="playertype"></select>
+<select name="playertype" id = "playertype"></select>
 </div>
 <div>
-<font size="4">Select Statistics Type: </font>
-<select name="box3"></select>
+<font size="4">Select statistic: </font>
+<select name="box3" id = "stat"></select>
 </div>
 <div>
 <font size="4">Select data range: </font>
-<select name="datarange">
+<select name="datarange" id = "range">
   <option value = "5">Top 5</option>
   <option value = "10">Top 10</option>
   <option value = "20">Top 20</option>
