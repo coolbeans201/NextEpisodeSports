@@ -107,6 +107,22 @@
 <body background="squared_metal.png">
 <h1>Team</h1>
 <hr noshade size=5 width="100%">
+<nav class="buttoncenter">
+		<ul>
+			<li><a href="HomePage.php">Home</a></li>
+			<li><a href="#">Functions</a>
+				<ul>
+					<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
+					<li><a href="CompareQuery.php">Compare</a></li>
+					<li><a href="SortQuery.php">Sort</a></li>
+					<li><a href="StatsQuery.php">Statistical Queries</a></li>
+				</ul>
+			</li>
+			<li><a href="Team.php">Team</a>			
+			</li>
+			<li><a href="Inspiration.php">Inspiration</a></li>
+		</ul>
+	</nav>
 <p align = "center"><b><u>Jesse Chau</u></b></p>
 <hr noshade size=5 width="100%">
 <p align = "center"><b><u>Xin He</u></b></p>
@@ -116,7 +132,4 @@
 <p align = "center"><b><u>Matt Weingarten</u></b></p>
 <p>Matt is a third-year Computer Science major with minors in Mathematics and Statistics from Safety Harbor, FL. In his free time, he likes to watch and play sports (hence, the inspiration for this website), play video games, and play Bridge. He never regrets being a Computer Science major, even though the projects that it entails can be time-consuming.</p>
 <hr noshade size=5 width="100%">
-<form action="http://cise.ufl.edu/~weingart/HomePage.php">
-    <center><input type="submit" style = "color: green" value="Home"></center>
-</form>
 </body></html>
