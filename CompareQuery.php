@@ -209,7 +209,7 @@
 		</form>
 		
 		<div id='ajaxDiv'>Your result will display here</div>
-		<input type= "submit" value="Submit"></input>
+		<input type= "submit" style = "color: green" value="Submit"></input>
 			
 	
 
@@ -217,8 +217,6 @@
 
 
 </html>	
-	
-
 
 
 
