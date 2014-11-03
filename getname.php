@@ -1,3 +1,8 @@
+
+
+
+
+
 #!/usr/local/bin/php
 
 <?php
@@ -124,7 +129,7 @@
 	oci_execute($statement2);
 	
 	echo "Select name: ";
-	echo '<select name="personbox1">';
+	echo '<select name="personbox1" id = "name1">';
 	echo '<option value = "-1">Select:</option>';
 	while($row=oci_fetch_assoc($statement)) {
 		if ($playertype != 'Team'){
@@ -139,7 +144,7 @@
 	
 	echo "vs.\n";
 	
-	echo '<select name="personbox2">';
+	echo '<select name="personbox2" id = "name2">';
 	echo '<option value = "-1">Select:</option>';
 	
 	while($row=oci_fetch_assoc($statement2)) {
@@ -160,7 +165,3 @@
 	oci_free_statement($statement2);
 	oci_close($connection);
 ?>
-
-
-
-
