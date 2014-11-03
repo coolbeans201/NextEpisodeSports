@@ -1,23 +1,23 @@
-Baseball player: SELECT DISTINCT nameFirst, nameLast
+Baseball player: SELECT DISTINCT firstName, lastName
 				 FROM BaseballMaster
-				 WHERE nameFirst IS NOT NULL AND nameLast IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID FROM BaseballFielding)
+				 WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID FROM BaseballFielding)
 																											     UNION
 																												(SELECT DISTINCT playerID FROM BaseballFieldingPostseason)
 																												 UNION
 																												(SELECT DISTINCT playerID FROM BaseballBatting)
 																												 UNION
 																												(SELECT DISTINCT playerID FROM BaseballBattingPostseason))
-				 ORDER BY nameFirst, nameLast;
-Baseball pitcher: SELECT DISTINCT nameFirst, nameLast
+				 ORDER BY firstName, lastName;
+Baseball pitcher: SELECT DISTINCT firstName, lastName
 			      FROM BaseballMaster
-				  WHERE nameFirst IS NOT NULL AND nameLast IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT pitcherID FROM BaseballPitching)
+				  WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT pitcherID FROM BaseballPitching)
 																												  UNION
 																												(SELECT DISTINCT playerID FROM BaseballPitchingPostseason))
-				  ORDER BY nameFirst, nameLast;
-Baseball coach:   SELECT DISTINCT nameFirst, nameLast
+				  ORDER BY firstName, lastName;
+Baseball coach:   SELECT DISTINCT firstName, lastName
 			      FROM BaseballMaster
-				  WHERE nameFirst IS NOT NULL AND nameLast IS NOT NULL AND managerID IS NOT NULL AND managerID IN ((SELECT DISTINCT managerID FROM BaseballManagers))
-				  ORDER BY nameFirst, nameLast;
+				  WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND managerID IS NOT NULL AND managerID IN ((SELECT DISTINCT managerID FROM BaseballManagers))
+				  ORDER BY firstName, lastName;
 Baseball team:    SELECT DISTINCT name 
 				  FROM BaseballTeams 
 				  ORDER BY name;
