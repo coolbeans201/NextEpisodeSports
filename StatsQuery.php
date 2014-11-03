@@ -9,7 +9,6 @@
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
 	
-    <style>
         <style style="text/css">
         html {overflow-y: scroll}
         
@@ -142,7 +141,7 @@ for(i=0; i < statistics[idx].length; i++) {
     }    
 }
 </script>
-<script>
+<script type = "text/javascript">
 function ajaxFunction(){
 		 var ajaxRequest;  // The variable that makes Ajax possible!
 			
@@ -178,7 +177,7 @@ function ajaxFunction(){
 		 var queryString = "?sport=" + sport ;
 		 ajaxRequest.open("GET", "getYears.php" + queryString, true);
 		 ajaxRequest.send(null); 
-	}
+}
 </script>
 </head>
 <body background="squared_metal.png">
