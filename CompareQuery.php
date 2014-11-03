@@ -10,6 +10,7 @@
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
 	
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	
 	<script type="text/javascript">
 	var varieties=[
 	[],
@@ -17,27 +18,69 @@
 	["Coach","Player","Team"],
 	["Coach","Goalie","Position Player","Team"]
 	];
+	
 	function Box2(idx) {
 	var f=document.myform;
 	f.box2.options.length=null;
 	for(i=0; i<varieties[idx].length; i++) {
-		f.box2.options[i]=new Option(varieties[idx][i], i); 
+		f.box2.options[i]=new Option(varieties[idx][i], varieties[idx][i]); 
 		}    
 	}
 	
-	function Box3(idx) {
-	var f=document.myform;
-	f.box3.options.length=null;
-	for(i=0; i<varieties[idx].length; i++) {
-		f.box3.options[i]=new Option(varieties[idx][i], i); 
-		}    
+	onload=function() {Box2(0);};
+	
+	
+	
+	function ajaxFunction(){
+		 var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		 try{
+		   // Opera 8.0+, Firefox, Safari
+		   ajaxRequest = new XMLHttpRequest();
+		 }catch (e){
+		   // Internet Explorer Browsers
+		   try{
+			  ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		   }catch (e) {
+			  try{
+				 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			  }catch (e){
+				 // Something went wrong
+				 alert("Your browser broke!");
+				 return false;
+			  }
+		   }
+		 }
+		 // Create a function that will receive data 
+		 // sent from the server and will update
+		 // div section in the same page.
+		 ajaxRequest.onreadystatechange = function(){
+		   if(ajaxRequest.readyState == 4){
+			  var ajaxDisplay = document.getElementById('ajaxDiv');
+			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
+		   }
+		 }
+		 // Now get the value from user and pass it to
+		 // server script.
+		 var sport = document.getElementById('sport').value;
+		 var playertype = document.getElementById('playertype').value;
+		 	 
+		 
+		 var queryString = "?sport=" + sport ;
+		 queryString +=  "&playertype=" + playertype;
+		 ajaxRequest.open("GET", "getname.php" + 
+									  queryString, true);
+		 ajaxRequest.send(null); 
 	}
 	
-	onload=function() {Box2(0); Box3(0)};
+	
 	</script>
 	
-    <style>
-        <style style="text/css">
+	
+	
+	
+ 
+    <style style="text/css">
         html {overflow-y: scroll}
         
 		h1 {
@@ -50,8 +93,8 @@
 		
 		body {
 			font-family: 'Open Sans', sans-serif;
-			font-size: 24px;
-			background-color: #F9F4E1;
+			font-size:20px;
+			font-weight: normal;
      	}
 		
 		.chooseoperation {
@@ -61,7 +104,6 @@
         .buttoncenter {
             text-align:center;
         }
-        
         
 		nav ul ul {
 			display: none;
@@ -153,45 +195,36 @@
 		</ul>
 	</nav>
 	
-	
-	<form name="myform" method="post" action="CompareResult.php">
-		<div>
-			<font size = "4"> Select sport: <select name="box1" onchange="Box2(this.selectedIndex)" onchange="Box3(this.selectedIndex)">
-				<option value="a">-Select a Sport-</option>
-				<option value="b">Baseball</option>
-				<option value="c">Basketball</option>
-				<option value="d">Hockey</option>
-			</select></font></div>
-			<div><font size = "4"> Select player type: <select name="box2"></select></font></div>
+
 			
-	<?php
-	$connection = oci_connect('weingart', 'bridgeoverlord201', '//oracle.cise.ufl.edu/orcl');
-	$sportname = document.myform.box1.value;
-	$playertype = document.myform.box2.value;
-	$query = ' SELECT DISTINCT nameFirst, nameLast
-				 FROM BaseballMaster
-				 WHERE nameFirst IS NOT NULL AND nameLast IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID FROM BaseballFielding)
-																											     UNION
-																												(SELECT DISTINCT playerID FROM BaseballFieldingPostseason)
-																												 UNION
-																												(SELECT DISTINCT playerID FROM BaseballBatting)
-																												 UNION
-																												(SELECT DISTINCT playerID FROM BaseballBattingPostseason))
-				 ORDER BY nameFirst, nameLast';
-	$statement = oci_parse($connection, $query);
-	oci_execute($statement);
+		<form name="myform" method="post" action="getname.php">
+		<div>
+			<font size = "4"> Select sport: <select name="box1" id="sport" onchange="Box2(this.selectedIndex)">
+				<option value="a">-Select a Sport-</option>
+				<option value="Baseball">Baseball</option>
+				<option value="Basketball">Basketball</option>
+				<option value="Hockey">Hockey</option>
+			</select></font></div>
+			<div><font size = "4"> Select player type: <select name="box2" id="playertype" onchange='ajaxFunction()'></select></font></div>
+		</form>
+		
+		<div id='ajaxDiv'>Your result will display here</div>
+		<input type= "submit" value="Submit"></input>
+			
+	
 
-	echo '<select name="personbox1">';
-	echo '<option value = "-1">Select:</option>';
-	while($row=oci_fetch_assoc($statement)) {
-	  echo '<option>' . $row['NAMEFIRST'] . ' ' . $row['NAMELAST'] . '</option>';
-	}
-	echo "</select> \n";
-	echo "vs.\n";
-	?>
-
-	<br>
-	<input type="submit" style = "color: green" value="Compute">
-	</form>
 </body>
-</html>
+
+
+</html>	
+	
+
+
+
+
+
+
+
+
+
+
