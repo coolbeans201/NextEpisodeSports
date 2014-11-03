@@ -202,7 +202,7 @@
 <select name="playertype" id = "playertype" onchange = "ajaxFunction();"></select>
 </div>
 <div id='ajaxDiv'>Names will be loaded here</div>
-<input type= "submit" style = "color:green" value="Submit"></input> <!--Button-->
+<input type= "submit" style = "color:green" value="Compute"></input> <!--Button-->
 </form>
 </body>
 </html>
