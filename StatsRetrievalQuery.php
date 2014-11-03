@@ -21,10 +21,51 @@
 	var f=document.myform;
 	f.playertype.options.length=null;
 	for(i=0; i<players[idx].length; i++) {
-		f.playertype.options[i]=new Option(players[idx][i], i); 
+		f.playertype.options[i]=new Option(players[idx][i], players[idx][i]); 
 		}    
 	}
 	onload=function() {PlayerType(0);};
+	function ajaxFunction(){
+		 var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		 try{
+		   // Opera 8.0+, Firefox, Safari
+		   ajaxRequest = new XMLHttpRequest();
+		 }catch (e){
+		   // Internet Explorer Browsers
+		   try{
+			  ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		   }catch (e) {
+			  try{
+				 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			  }catch (e){
+				 // Something went wrong
+				 alert("Your browser broke!");
+				 return false;
+			  }
+		   }
+		 }
+		 // Create a function that will receive data 
+		 // sent from the server and will update
+		 // div section in the same page.
+		 ajaxRequest.onreadystatechange = function(){
+		   if(ajaxRequest.readyState == 4){
+			  var ajaxDisplay = document.getElementById('ajaxDiv');
+			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
+		   }
+		 }
+		 // Now get the value from user and pass it to
+		 // server script.
+		 var sport = document.getElementById('sport').value;
+		 var playertype = document.getElementById('playertype').value;
+		 	 
+		 
+		 var queryString = "?sport=" + sport ;
+		 queryString +=  "&playertype=" + playertype;
+		 ajaxRequest.open("GET", "getnames2.php" + queryString, true);
+		 ajaxRequest.send(null); 
+	}
+
 	</script>
 
     <style>
@@ -46,7 +87,7 @@
   		}
 		body {
 			font-family: 'Open Sans', sans-serif;
-			font-size: 24px;
+			font-size: 20px;
 			background-color: #F9F4E1;
      	}
 		
@@ -149,23 +190,20 @@
 <form name="myform" method="post" action="StatsRetrievalResult.php">
 <div>
 <font size = "4">Select sport:</font>
-<select name="sport" onchange="PlayerType(this.selectedIndex)">
+<select name="sport" id = "sport" onchange="PlayerType(this.selectedIndex); ajaxFunction();">
     <option value="a">-Select a Sport-</option>
-    <option value="basketball">Basketball</option>
-    <option value="baseball">Baseball</option>
-	<option value="hockey">Hockey</option>
+    <option value="Baseball">Basetball</option>
+    <option value="Basketball">Basketball</option>
+    <option value="Hockey">Hockey</option>
 </select>
 </div>
 <div>
 <font size = "4">Select player type:</font>
-<select name="playertype"></select>
+<select name="playertype" id = "playertype" onchange = "ajaxFunction();"></select>
 </div>
-<div>
-<font size = "4">Select name:</font>
-<select name="name">
-</select>
-</div>
-<input type="submit" style = "color: green" value="Go">
+<div id='ajaxDiv'>Names will be loaded here</div>
+<input type= "submit" style = "color:green" value="Submit"></input> <!--Button-->
 </form>
 </body>
 </html>
+
