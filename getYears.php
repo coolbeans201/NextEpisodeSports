@@ -37,7 +37,7 @@
 	
 
 	echo "Select beginning year: ";
-	echo '<select name="begYear">';
+	echo '<select name="begYear" id = "year1">';
 	echo '<option value = "-1">Select:</option>';
 	
 	
@@ -48,7 +48,7 @@
 	
 	echo "</select> \n";
 	echo "Select end year: ";	
-	echo '<select name="endYear">';
+	echo '<select name="endYear" id = "year2">';
 	echo '<option value = "-1">Select:</option>';
 	while($row=oci_fetch_assoc($statement2)) {
 		echo '<option>' . $row['YEAR'] .'</option>';
