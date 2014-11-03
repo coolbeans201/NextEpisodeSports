@@ -107,30 +107,26 @@ function setOptions(chosen, selBox){
 	selBox.options.length = 0;
 	if (chosen == "selectasport")
 	{
-		setTimeout(setOptions('', document.myForm.begYear), 5);
 	}
 	if (chosen == "baseball")
 	{
-		selBox.options[selBox.options.length] = new Option('Manager', 'baseballmanager');
-		selBox.options[selBox.options.length] = new Option('Pitcher', 'baseballpitcher');
-		selBox.options[selBox.options.length] = new Option('Position Player', 'baseballplayer');
-		selBox.options[selBox.options.length] = new Option('Team', 'baseballteam');
-		setTimeout(setOptions('', document.myForm.begYear), 5);
+		selBox.options[selBox.options.length] = new Option('Manager', 'manager');
+		selBox.options[selBox.options.length] = new Option('Pitcher', 'pitcher');
+		selBox.options[selBox.options.length] = new Option('Position Player', 'player');
+		selBox.options[selBox.options.length] = new Option('Team', 'team');
 	}
 	if (chosen == "basketball")
 	{
-		selBox.options[selBox.options.length] = new Option('Coach', 'basketballcoach');
-		selBox.options[selBox.options.length] = new Option('Player', 'basketballplayer');
-		selBox.options[selBox.options.length] = new Option('Team', 'basketballteam');
-		setTimeout(setOptions('', document.myForm.begYear), 5);
+		selBox.options[selBox.options.length] = new Option('Coach', 'coach');
+		selBox.options[selBox.options.length] = new Option('Player', 'player');
+		selBox.options[selBox.options.length] = new Option('Team', 'team');
 	}
 	if (chosen == "hockey")
 	{
-		selBox.options[selBox.options.length] = new Option('Coach', 'hockeycoach');
-		selBox.options[selBox.options.length] = new Option('Goalie', 'hockeygoalie');
-		selBox.options[selBox.options.length] = new Option('Player', 'hockeyplayer');
-		selBox.options[selBox.options.length] = new Option('Team', 'hockeyteam');
-		setTimeout(setOptions('', document.myForm.begYear), 5);
+		selBox.options[selBox.options.length] = new Option('Coach', 'coach');
+		selBox.options[selBox.options.length] = new Option('Goalie', 'goalie');
+		selBox.options[selBox.options.length] = new Option('Player', 'player');
+		selBox.options[selBox.options.length] = new Option('Team', 'team');
 	}
 }
 </script>
@@ -145,6 +141,44 @@ for(i=0; i < statistics[idx].length; i++) {
     f.stats.options[i]=new Option(statistics[idx][i], i); 
     }    
 }
+</script>
+<script>
+function ajaxFunction(){
+		 var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		 try{
+		   // Opera 8.0+, Firefox, Safari
+		   ajaxRequest = new XMLHttpRequest();
+		 }catch (e){
+		   // Internet Explorer Browsers
+		   try{
+			  ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		   }catch (e) {
+			  try{
+				 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			  }catch (e){
+				 // Something went wrong
+				 alert("Your browser broke!");
+				 return false;
+			  }
+		   }
+		 }
+		 // Create a function that will receive data 
+		 // sent from the server and will update
+		 // div section in the same page.
+		 ajaxRequest.onreadystatechange = function(){
+		   if(ajaxRequest.readyState == 4){
+			  var ajaxDisplay = document.getElementById('ajaxDiv');
+			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
+		   }
+		 }
+		 // Now get the value from user and pass it to
+		 // server script.
+		 var sport = document.getElementById('sport1').value;
+		 var queryString = "?sport=" + sport ;
+		 ajaxRequest.open("GET", "getYears.php" + queryString, true);
+		 ajaxRequest.send(null); 
+	}
 </script>
 </head>
 <body background="squared_metal.png">
@@ -166,10 +200,10 @@ for(i=0; i < statistics[idx].length; i++) {
 		<li><a href="Inspiration.php">Inspiration</a></li>
 	</ul>
 </nav>
-<form name = "myForm" action = "StatsResult.php" method = "post">
+<form name = "myForm" action = "getYears.php" method = "post">
 <div>
 <font size = "4">Select sport: </font>
-<select name = "sport" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); Statistics(this.selectedIndex);">
+<select name = "sport" id = "sport1" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); Statistics(this.selectedIndex); ajaxFunction();">
 	<option value = "selectasport">-Select a Sport-</option>
 	<option value = "baseball">Baseball</option>
 	<option value = "basketball">Basketball</option>
@@ -178,11 +212,11 @@ for(i=0; i < statistics[idx].length; i++) {
 </div>
 <div>
 <font size = "4">Select player type:</font>
-<select name = "playerType" onChange = "setOptions(document.myForm.playerType.options[document.myForm.playerType.selectedIndex].value, document.myForm.begYear);"></select>
+<select name = "playerType" id = "playerType1"></select>
 </div>
 <div>
 <font size = "4">Select an operation:</font>
-<select name = "operation">
+<select name = "operation" id = "operation1">
 	<option value = "average">Average</option>
 	<option value = "min">Minimum</option>
 	<option value = "max">Maximum</option>
@@ -192,17 +226,11 @@ for(i=0; i < statistics[idx].length; i++) {
 </div>
 <div>
 <font size = "4">Select statistic:</font>
-<select name = "stats"></select>
+<select name = "stats" id = "stats1"></select>
 </div>
 <div>
-<font size = "4">Select beginning year:</font>
-<select name = "begYear"></select>
-</div>
-<div>
-<font size = "4">Select ending year:</font>
-<select name = "endYear"></select>
-</div>
-<input type = "submit" style = "color: green" value = "Compute">
 </form>
+<div id='ajaxDiv'>Your result will display here</div>
+<input type= "submit" style = "color: green" value="Compute"></input>
 </body>
 </html>
