@@ -76,6 +76,10 @@
 	
 	</script>
 	
+	
+	
+	
+ 
     <style style="text/css">
         html {overflow-y: scroll}
         
@@ -88,10 +92,9 @@
 		}
 		
 		body {
-			font-family: 'Shadows Into Light', sans-serif;
-			font-size:20px;
-			font-weight: normal;
-			background-color:#F9F4E1;
+			font-family: 'Open Sans', sans-serif;
+			font-size: 20px;
+			background-color: #F9F4E1;
      	}
 		
 		.chooseoperation {
@@ -102,7 +105,6 @@
             text-align:center;
         }
         
-		
 		nav ul ul {
 			display: none;
 		}
@@ -171,7 +173,7 @@
     </style>
 </head>
 
-<body>
+<body background="squared_metal.png">
 	<h1>Compare Query</h1>
 
 	<hr noshade size=5 width="100%">
@@ -192,32 +194,23 @@
 			<li><a href="Inspiration.php">Inspiration</a></li>
 		</ul>
 	</nav>
-
 	
-		<form name="myform" method="post" action="getname.php">	
-			<div>
-				<!--Box1-->
-				<font size = "4"> Select sport: <select name="box1" id="sport" onchange="Box2(this.selectedIndex), ajaxFunction()"> 
-					<option value="a">-Select a Sport-</option>
-					<option value="Baseball">Baseball</option>
-					<option value="Basketball">Basketball</option>
-					<option value="Hockey">Hockey</option>
-				</select></font>
-			</div>
+
 			
-			<!--Box2-->
-			<div><font size = "4"> Select player type: <select name="box2" id="playertype" onchange='ajaxFunction()'></select></font></div>	
+		<form name="myform" method="post" action="CompareResult.php">
+		<div>
+			<font size = "4"> Select sport: <select name="box1" id="sport" onchange="Box2(this.selectedIndex); ajaxFunction();">
+				<option value="a">-Select a Sport-</option>
+				<option value="Baseball">Baseball</option>
+				<option value="Basketball">Basketball</option>
+				<option value="Hockey">Hockey</option>
+			</select></font></div>
+			<div><font size = "4"> Select player type: <select name="box2" id="playertype" onchange='ajaxFunction()'></select></font></div>
+			<div id='ajaxDiv'>Your result will display here</div>
+			<input type= "submit" style = "color: green" value="Compute"></input>
 		</form>
-		
-		<!--Box3&4-->
-		<div id='ajaxDiv'>Names will be loaded here</div>
-		<input type= "submit" value="Submit"></input> <!--Button-->
-			
 </body>
-
 </html>	
-	
-
 
 
 
