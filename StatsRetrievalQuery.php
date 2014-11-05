@@ -16,7 +16,6 @@
 	["Coach","Player","Team"],
 	["Coach","Goalie","Position Player","Team"]
 	]
-
 	function PlayerType(idx) {
 	var f=document.myform;
 	f.playertype.options.length=null;
@@ -65,7 +64,6 @@
 		 ajaxRequest.open("GET", "getnames2.php" + queryString, true);
 		 ajaxRequest.send(null); 
 	}
-
 	</script>
 
     <style>
@@ -191,7 +189,7 @@
 <div>
 <font size = "4">Select sport:</font>
 <select name="sport" id = "sport" onchange="PlayerType(this.selectedIndex); ajaxFunction();">
-    <option value="a">-Select a Sport-</option>
+    <option value="a" selected = "selected">-Select a Sport-</option>
     <option value="Baseball">Baseball</option>
     <option value="Basketball">Basketball</option>
     <option value="Hockey">Hockey</option>
@@ -206,4 +204,5 @@
 </form>
 </body>
 </html>
+
 
