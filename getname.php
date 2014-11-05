@@ -128,25 +128,25 @@
 	echo '<option value = "-1">Select:</option>';
 	while($row=oci_fetch_assoc($statement)) {
 		if ($playertype == 'Team'){
-			echo '<option>' . $row['NAME'] . ' ' . '</option>';
+			echo '<option value="' . $row['NAME'] . ' ' . '</option>';
 		}
 		else if($sport == 'Baseball'){
 			if($playertype == 'Manager'){
-				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['MANAGERID'] . ')' . '</option>';
+				echo '<option value="' . $row['MANAGERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 			}
 			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['PLAYERID'] . ')' . '</option>';
+				echo '<option value ="' . $row['PLAYERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 			}
 		}
 		else if($sport == 'Basketball'){
-			echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['ID'] . ')' . '</option>';
+			echo '<option value="' . $row['ID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 		}
 		else if($sport == 'Hockey'){
 			if($playertype == 'Coach'){
-				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['COACHID'] . ')' . '</option>';
+				echo '<option value="' . $row['COACHID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 			}
 			if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['PLAYERID'] . ')' . '</option>';
+				echo '<option value="' . $row['PLAYERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 			}
 		}
 	}
@@ -160,25 +160,25 @@
 	
 	while($row=oci_fetch_assoc($statement2)) {
 		if ($playertype == 'Team'){
-			echo '<option>' . $row['NAME'] . ' ' . '</option>';
+			echo '<option value="' . $row['NAME'] . ' ' . '</option>';
 		}
 		else if($sport == 'Baseball'){
 			if($playertype == 'Manager'){
-				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['MANAGERID'] . ')' . '</option>';
+				echo '<option value="' . $row['MANAGERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 			}
 			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['PLAYERID'] . ')' . '</option>';
+				echo '<option value ="' . $row['PLAYERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 			}
 		}
 		else if($sport == 'Basketball'){
-			echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['ID'] . ')' . '</option>';
+			echo '<option value="' . $row['ID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 		}
 		else if($sport == 'Hockey'){
 			if($playertype == 'Coach'){
-				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['COACHID'] . ')' . '</option>';
+				echo '<option value="' . $row['COACHID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 			}
 			if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['PLAYERID'] . ')' . '</option>';
+				echo '<option value="' . $row['PLAYERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
 			}
 		}
 	}
