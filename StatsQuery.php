@@ -203,7 +203,7 @@ function ajaxFunction(){
 <div>
 <font size = "4">Select sport: </font>
 <select name = "sport" id = "sport1" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); Statistics(this.selectedIndex); ajaxFunction();">
-	<option value = "selectasport">-Select a Sport-</option>
+	<option value = "selectasport" selected = "selected">-Select a Sport-</option>
 	<option value = "baseball">Baseball</option>
 	<option value = "basketball">Basketball</option>
 	<option value = "hockey">Hockey</option>
@@ -233,3 +233,4 @@ function ajaxFunction(){
 </form>
 </body>
 </html>
+
