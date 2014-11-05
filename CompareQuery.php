@@ -200,7 +200,7 @@
 		<form name="myform" method="post" action="CompareResult.php">
 		<div>
 			<font size = "4"> Select sport: <select name="box1" id="sport" onchange="Box2(this.selectedIndex); ajaxFunction();">
-				<option value="a">-Select a Sport-</option>
+				<option value="a" selected = "selected">-Select a Sport-</option>
 				<option value="Baseball">Baseball</option>
 				<option value="Basketball">Basketball</option>
 				<option value="Hockey">Hockey</option>
@@ -211,6 +211,7 @@
 		</form>
 </body>
 </html>	
+
 
 
 
