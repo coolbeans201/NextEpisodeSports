@@ -21,13 +21,13 @@
 	if ($sport == 'Baseball')
 	{
 		if ($playertype == 'Manager'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$query = "SELECT DISTINCT firstName, lastName, managerid
 			      FROM BaseballMaster
 				  WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND managerID IS NOT NULL AND managerID IN ((SELECT DISTINCT managerID FROM BaseballManagers))
 				  ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Pitcher'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$query = "SELECT DISTINCT firstName, lastName, playerid
 			      FROM BaseballMaster
 				  WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT pitcherID FROM BaseballPitching)
 																												  UNION
@@ -35,7 +35,7 @@
 				  ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Position Player'){
-			$query = "SELECT DISTINCT firstname, lastname
+			$query = "SELECT DISTINCT firstname, lastname, playerid
 				 FROM BaseballMaster
 				 WHERE firstname IS NOT NULL AND lastname IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID FROM BaseballFielding)
 																											     UNION
@@ -56,14 +56,14 @@
 	else if ($sport == 'Basketball')
 	{
 		if ($playertype == 'Coach'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$query = "SELECT DISTINCT firstName, lastName, id
 					FROM BasketballMaster
 					WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND ID IS NOT NULL AND ID IN ((SELECT DISTINCT coachID
                                                                                     FROM BasketballCoaches))
 					ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Player'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$query = "SELECT DISTINCT firstName, lastName, id
 				   FROM BasketballMaster
 				   WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND ID IS NOT NULL AND ID IN ((SELECT DISTINCT playerID
 																									   FROM BasketballPlayers)
@@ -82,7 +82,7 @@
 	else if ($sport == 'Hockey')
 	{
 		if ($playertype == 'Coach'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$query = "SELECT DISTINCT firstName, lastName, coachid
 			  FROM HockeyMaster
 			  WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND coachID IS NOT NULL AND coachID IN ((SELECT DISTINCT coachID
 																											FROM HockeyCoaches))
@@ -90,7 +90,7 @@
 			  ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Goalie'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$query = "SELECT DISTINCT firstName, lastName, playerid
 			   FROM HockeyMaster
 			   WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT goalieID
 																											   FROM HockeyGoalies)
@@ -100,7 +100,7 @@
 			   ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Position Player'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$query = "SELECT DISTINCT firstName, lastName, playerid
 			   FROM HockeyMaster
 			   WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID
 																											   FROM HockeyScoring)
@@ -127,11 +127,27 @@
 	echo '<select name="personbox1" id = "name1">';
 	echo '<option value = "-1">Select:</option>';
 	while($row=oci_fetch_assoc($statement)) {
-		if ($playertype != 'Team'){
-			echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
-		}
-		else{
+		if ($playertype == 'Team'){
 			echo '<option>' . $row['NAME'] . ' ' . '</option>';
+		}
+		else if($sport == 'Baseball'){
+			if($playertype == 'Manager'){
+				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['MANAGERID'] . ')' . '</option>';
+			}
+			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
+				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['PLAYERID'] . ')' . '</option>';
+			}
+		}
+		else if($sport == 'Basketball'){
+			echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['ID'] . ')' . '</option>';
+		}
+		else if($sport == 'Hockey'){
+			if($playertype == 'Coach'){
+				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['COACHID'] . ')' . '</option>';
+			}
+			if($playertype == 'Goalie' || $playertype == 'Position Player'){
+				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['PLAYERID'] . ')' . '</option>';
+			}
 		}
 	}
 	
@@ -143,11 +159,27 @@
 	echo '<option value = "-1">Select:</option>';
 	
 	while($row=oci_fetch_assoc($statement2)) {
-		if ($playertype != 'Team'){
-			echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
-		}
-		else{
+		if ($playertype == 'Team'){
 			echo '<option>' . $row['NAME'] . ' ' . '</option>';
+		}
+		else if($sport == 'Baseball'){
+			if($playertype == 'Manager'){
+				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['MANAGERID'] . ')' . '</option>';
+			}
+			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
+				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['PLAYERID'] . ')' . '</option>';
+			}
+		}
+		else if($sport == 'Basketball'){
+			echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['ID'] . ')' . '</option>';
+		}
+		else if($sport == 'Hockey'){
+			if($playertype == 'Coach'){
+				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['COACHID'] . ')' . '</option>';
+			}
+			if($playertype == 'Goalie' || $playertype == 'Position Player'){
+				echo '<option>' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' (' . $row['PLAYERID'] . ')' . '</option>';
+			}
 		}
 	}
 	
