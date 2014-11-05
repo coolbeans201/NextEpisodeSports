@@ -99,11 +99,11 @@
 		 // server script.
 		 var sport = document.getElementById('sport').value;
 		 var playertype = document.getElementById('playertype').value;
-		 var playername = document.getElementById('name1').value;
+		 var playerid = document.getElementById('name1').value;
 		 
-		 var queryString = "?sport=" + sport ;
+		 var queryString = "?sport=" + sport;
 		 queryString +=  "&playertype=" + playertype;
-		 queryString += "&playername=" + playername;
+		 queryString += "&playerid=" + playerid;
 		 ajaxRequest.open("GET", "getStatsRetrieval.php" + queryString, true);
 		 ajaxRequest.send(null); 
 	}
@@ -248,7 +248,4 @@
 <div id='textBoxDiv'></div>
 </body>
 </html>
-
-
-
 
