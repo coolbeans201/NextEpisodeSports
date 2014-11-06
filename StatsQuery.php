@@ -107,38 +107,66 @@ function setOptions(chosen, selBox){
 	if (chosen == "selectasport")
 	{
 	}
-	if (chosen == "baseball")
+	if (chosen == "Baseball")
 	{
-		selBox.options[selBox.options.length] = new Option('Manager', 'manager');
-		selBox.options[selBox.options.length] = new Option('Pitcher', 'pitcher');
-		selBox.options[selBox.options.length] = new Option('Position Player', 'player');
-		selBox.options[selBox.options.length] = new Option('Team', 'team');
+		selBox.options[selBox.options.length] = new Option('Manager', 'Manager');
+		selBox.options[selBox.options.length] = new Option('Pitcher', 'Pitcher');
+		selBox.options[selBox.options.length] = new Option('Position Player', 'Position Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
 	}
-	if (chosen == "basketball")
+	if (chosen == "Basketball")
 	{
-		selBox.options[selBox.options.length] = new Option('Coach', 'coach');
-		selBox.options[selBox.options.length] = new Option('Player', 'player');
-		selBox.options[selBox.options.length] = new Option('Team', 'team');
+		selBox.options[selBox.options.length] = new Option('Coach', 'Coach');
+		selBox.options[selBox.options.length] = new Option('Player', 'Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
 	}
-	if (chosen == "hockey")
+	if (chosen == "Hockey")
 	{
-		selBox.options[selBox.options.length] = new Option('Coach', 'coach');
-		selBox.options[selBox.options.length] = new Option('Goalie', 'goalie');
-		selBox.options[selBox.options.length] = new Option('Player', 'player');
-		selBox.options[selBox.options.length] = new Option('Team', 'team');
+		selBox.options[selBox.options.length] = new Option('Coach', 'Coach');
+		selBox.options[selBox.options.length] = new Option('Goalie', 'Goalie');
+		selBox.options[selBox.options.length] = new Option('Position Player', 'Position Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
 	}
 }
 </script>
 <script type = "text/javascript">
-var statistics=[[],["Games","Starts","Atbats","Runs","Hits","Batting average","Doubles", "Triples","Home runs","Slugging","RBI","Stolen bases","Caught stealing","Walks","Strikeouts", "Intentional walks", "Hit by pitch", "OBP", "Sac hits", "Sac flies", "GIDP", "Outs", "Putouts", "Assists", "Errors", "Double plays", "Passed balls", "Wild pitches", "Stolen bases allowed", "Caught stealing allowed", "Fielding percent", "Wins", "Losses", "Winning percentage", "Complete games", "Shutouts", "Saves", "Outs", "Earned runs", "ERA", "Balks", "Batters faced", "Finishes", "H9", "HR9", "BB9", "SO9", "Runs allowed", "Hits allowed", "Home runs allowed", "Walks allowed", "Strikeouts forced"],
-["Wins", "Losses", "Winning percentage", "Postseason wins", "Postseason losses", "Postseason winning percentage", "Minutes", "Points", "Offensive rebounds", "Defensive rebounds", "Rebounds", "Assists", "Steals", "Blocks", "Turnovers", "Fouls", "Field goal attempts", "Field goals made", "Field goal percentage", "Free throw attempts", "Free throws made", "Free throw percentage", "Three point attempts", "Three point percentage", "Points per game", "Rebounds per game", "Assists per game", "Field goals made allowed", "Field goal attempts allowed", "Field goal percentage allowed", "Free throws made allowed", "Free throw attempts allowed", "Three point made allowed", "Three point attempts allowed", "Three point percentage allowed", "Offensive rebounds allowed", "Defensive rebounds allowed", "Rebounds allowed", "Rebounds allowed per game", "Assists allowed", "Assists allowed per game", "Fouls allowed", "Steals allowed", "Turnovers allowed", "Blocks allowed", "Points allowed", "Points allowed per game", "Offensive team rebounds", "Defensive team rebounds", "Home wins", "Home losses", "Home winning percentage", "Away wins", "Away losses", "Away winning percentage", "Neutral wins", "Neutral losses", "Neutral winning percentage", "Conference wins", "Conference losses", "Conference winning percentage", "Division wins", "Division losses", "Division winning percentage", "Games"],
-["Wins", "Losses", "Ties", "Points per game", "Postseason wins", "Postseason losses", "Postseason ties", "Postseason winning percentage", "Games", "Minutes", "Empty net goals", "Shutouts", "Goals allowed", "Shots allowed", "Save percentage", "Shootout wins", "Shootout losses", "Shootout winning percentage", "Shootout shots allowed", "Shootout goals allowed", "Shootout save percentage", "Goals", "Goals per game", "Assists", "Assists per game", "Points", "Points per game", "Penalty minutes", "+/-", "Power play goals", "Power play assists", "Short handed goals", "Short handed assists", "Game winning goals", "Game tying goals", "Shots", "Shot percent", "Shootout shots", "Shootout goals", "Shootout goal deciding goals", "Shootout shot percent", "Overtime losses", "Goal differential", "Bench minutes", "Power play chances", "Short handed goals allowed", "Penalty kill goals", "Penalty kill chances", "Home wins", "Home losses", "Home ties", "Home OT losses", "Home points per game", "Road wins", "Road losses", "Road ties", "Road OT losses", "Road points per game"]];
-function Statistics(idx) {
-var f=document.myForm;
-f.stats.options.length=null;
-for(i=0; i < statistics[idx].length; i++) {
-    f.stats.options[i]=new Option(statistics[idx][i], i); 
-    }    
+function ajaxFunction2(){
+		 var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		 try{
+		   // Opera 8.0+, Firefox, Safari
+		   ajaxRequest = new XMLHttpRequest();
+		 }catch (e){
+		   // Internet Explorer Browsers
+		   try{
+			  ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		   }catch (e) {
+			  try{
+				 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			  }catch (e){
+				 // Something went wrong
+				 alert("Your browser broke!");
+				 return false;
+			  }
+		   }
+		 }
+		 // Create a function that will receive data 
+		 // sent from the server and will update
+		 // div section in the same page.
+		 ajaxRequest.onreadystatechange = function(){
+		   if(ajaxRequest.readyState == 4){
+			  var ajaxDisplay = document.getElementById('ajaxDiv2');
+			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
+		   }
+		 }
+		 // Now get the value from user and pass it to
+		 // server script.
+		 var sport = document.getElementById('sport1').value;
+		 var playertype = document.getElementById('playerType1').value;
+		 var queryString = "?sport=" + sport ;
+		 queryString +=  "&playertype=" + playertype;
+		 ajaxRequest.open("GET", "getcolumns.php" + queryString, true);
+		 ajaxRequest.send(null); 
 }
 </script>
 <script type = "text/javascript">
@@ -202,16 +230,16 @@ function ajaxFunction(){
 <form name = "myForm" action = "StatsResult.php" method = "post">
 <div>
 <font size = "4">Select sport: </font>
-<select name = "sport" id = "sport1" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); Statistics(this.selectedIndex); ajaxFunction();">
+<select name = "sport" id = "sport1" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); ajaxFunction2(); ajaxFunction();">
 	<option value = "selectasport" selected = "selected">-Select a Sport-</option>
-	<option value = "baseball">Baseball</option>
-	<option value = "basketball">Basketball</option>
-	<option value = "hockey">Hockey</option>
+	<option value = "Baseball">Baseball</option>
+	<option value = "Basketball">Basketball</option>
+	<option value = "Hockey">Hockey</option>
 </select>
 </div>
 <div>
 <font size = "4">Select player type:</font>
-<select name = "playerType" id = "playerType1"></select>
+<select name = "playerType" id = "playerType1" onchange = "ajaxFunction2();"></select>
 </div>
 <div>
 <font size = "4">Select an operation:</font>
@@ -223,14 +251,10 @@ function ajaxFunction(){
 	<option value = "standardDeviation">Standard Deviation</option>
 </select>
 </div>
-<div>
-<font size = "4">Select statistic:</font>
-<select name = "stats" id = "stats1"></select>
-</div>
+<div id = "ajaxDiv2">Statistics will be loaded here</div>
 <div>
 <div id='ajaxDiv'>Date ranges will be loaded here</div>
 <input type= "submit" style = "color: green" value="Compute"></input>
 </form>
 </body>
 </html>
-
