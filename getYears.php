@@ -13,17 +13,17 @@
 	// Escape User Input to help prevent SQL Injection
 	//$sport = mysql_real_escape_string($sport);
 	
-	if ($sport == 'baseball')
+	if ($sport == 'Baseball')
 	{
 		$query = "SELECT DISTINCT year FROM BaseballTeams ORDER BY year";
 	}
 	
-	else if ($sport == 'basketball')
+	else if ($sport == 'Basketball')
 	{
 		$query = "SELECT DISTINCT year FROM BasketballTeams ORDER BY year";
 	}
 	
-	else if ($sport == 'hockey')
+	else if ($sport == 'Hockey')
 	{
 		$query = "SELECT DISTINCT year FROM HockeyTeams ORDER BY year";																	  
 	}
@@ -62,3 +62,4 @@
 	oci_free_statement($statement2);
 	oci_close($connection);
 ?>
+
