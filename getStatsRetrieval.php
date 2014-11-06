@@ -19,13 +19,16 @@
 	if ($sport == 'Baseball')
 	{
 		if ($playertype == 'Manager'){
-			$query = "SELECT DISTINCT firstName, lastName
-			      FROM BaseballMaster
-				  WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND managerID IS NOT NULL AND managerID IN ((SELECT DISTINCT managerID FROM BaseballManagers))
-				  ORDER BY firstName, lastName";
+			$querybio = "SELECT firstname, lastname, birthmonth, birthday, birthyear, weight, height
+					FROM Baseballmaster
+					WHERE managerid IS NOT NULL AND managerid = '" . $playerid . "'";
+			$querystats = "SELECT year, team, league, games, wins, loss, winpercent, rank
+						FROM Baseballmanagers
+						WHERE managerid = '" . $playerid . "'
+						ORDER BY year";
 		}
 		if ($playertype == 'Pitcher'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$querybio = "SELECT DISTINCT firstName, lastName
 			      FROM BaseballMaster
 				  WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT pitcherID FROM BaseballPitching)
 																												  UNION
@@ -33,7 +36,7 @@
 				  ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Position Player'){
-			$query = "SELECT DISTINCT firstname, lastname
+			$querybio = "SELECT DISTINCT firstname, lastname
 				 FROM BaseballMaster
 				 WHERE firstname IS NOT NULL AND lastname IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID FROM BaseballFielding)
 																											     UNION
@@ -45,7 +48,7 @@
 				 ORDER BY firstname, lastname";
 		}
 		if ($playertype == 'Team'){
-			$query = "SELECT DISTINCT name 
+			$querybio = "SELECT DISTINCT name 
 				  FROM BaseballTeams 
 				  ORDER BY name";
 		}
@@ -54,14 +57,14 @@
 	else if ($sport == 'Basketball')
 	{
 		if ($playertype == 'Coach'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$querybio = "SELECT DISTINCT firstName, lastName
 					FROM BasketballMaster
 					WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND ID IS NOT NULL AND ID IN ((SELECT DISTINCT coachID
                                                                                     FROM BasketballCoaches))
 					ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Player'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$querybio = "SELECT DISTINCT firstName, lastName
 				   FROM BasketballMaster
 				   WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND ID IS NOT NULL AND ID IN ((SELECT DISTINCT playerID
 																									   FROM BasketballPlayers)
@@ -71,7 +74,7 @@
 				   ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Team'){
-			$query = "SELECT DISTINCT name
+			$querybio = "SELECT DISTINCT name
 				 FROM BasketballTeams
 				 ORDER BY name";
 		}
@@ -80,7 +83,7 @@
 	else if ($sport == 'Hockey')
 	{
 		if ($playertype == 'Coach'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$querybio = "SELECT DISTINCT firstName, lastName
 			  FROM HockeyMaster
 			  WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND coachID IS NOT NULL AND coachID IN ((SELECT DISTINCT coachID
 																											FROM HockeyCoaches))
@@ -88,7 +91,7 @@
 			  ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Goalie'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$querybio = "SELECT DISTINCT firstName, lastName
 			   FROM HockeyMaster
 			   WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT goalieID
 																											   FROM HockeyGoalies)
@@ -98,7 +101,7 @@
 			   ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Position Player'){
-			$query = "SELECT DISTINCT firstName, lastName
+			$querybio = "SELECT DISTINCT firstName, lastName
 			   FROM HockeyMaster
 			   WHERE firstName IS NOT NULL AND lastName IS NOT NULL AND playerID IS NOT NULL AND playerID IN ((SELECT DISTINCT playerID
 																											   FROM HockeyScoring)
@@ -108,26 +111,94 @@
 			   ORDER BY firstName, lastName";
 		}
 		if ($playertype == 'Team'){
-			$query = "SELECT DISTINCT name
+			$querybio = "SELECT DISTINCT name
 			 FROM HockeyTeams
 			 ORDER BY name";
 		}
 	}
 	
 	
-	$statement = oci_parse($connection, $query);
-	oci_execute($statement);
+	$statementbio = oci_parse($connection, $querybio);
+	oci_execute($statementbio);
 	
-	echo '<textarea disabled id = "statsRetrievalTextBox" name="statsRetrievalTextBox" cols="150" rows="40">';
-	while($row=oci_fetch_assoc($statement)) {
-			echo $row['FIRSTNAME'] . ' ' . $row['LASTNAME'];
+	while($row=oci_fetch_assoc($statementbio)) {
+		if ($playertype == 'Team'){
+		}
+		else if($sport == 'Baseball'){
+			if($playertype == 'Manager'){
+				echo '<font size = "4">';
+				echo "<b> Biographical Information </b> <br>";
+				echo 'Name: ' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . "<br>";
+				echo 'Date of Birth: ' . $row['BIRTHMONTH'] . '/' . $row['BIRTHDAY'] . '/' . $row['BIRTHYEAR'] . "<br>";
+				echo 'Height: ' . $row['HEIGHT'] . " inches <br>";
+				echo 'Weight: ' . $row['WEIGHT'] . " pounds <br>";
+				echo '<br>';
+				echo '<b> Statistical Information </b> </font>';
+			}
+			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
+				
+			}
+		}
+		else if($sport == 'Basketball'){
+
+		}
+		else if($sport == 'Hockey'){
+			if($playertype == 'Coach'){
+				
+			}
+			if($playertype == 'Goalie' || $playertype == 'Position Player'){
+				
+			}
+		}
 	}
 	
-	echo "</textarea> \n";
+	$statementstats = oci_parse($connection, $querystats);
+	oci_execute($statementstats);
 	
+	echo "<table border='1'>\n";
+		if ($playertype == 'Team'){
+		}
+		else if($sport == 'Baseball'){
+			if($playertype == 'Manager'){
+				echo '<tr>';
+				echo '<th>Year</th>';
+				echo '<th>Team</th>';
+				echo '<th>League</th>';
+				echo '<th>Games Played</th>';
+				echo '<th>Wins</th>';
+				echo '<th>Losses</th>';
+				echo '<th>Win Percent</th>';
+				echo '<th>Rank</th>';
+				echo '</tr>';
+			}
+			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
+				
+			}
+		}
+		else if($sport == 'Basketball'){
+
+		}
+		else if($sport == 'Hockey'){
+			if($playertype == 'Coach'){
+				
+			}
+			if($playertype == 'Goalie' || $playertype == 'Position Player'){
+				
+			}
+		}
+	while ($row = oci_fetch_array($statementstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
+		echo "<tr>\n";
+		foreach ($row as $item) {
+			echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+		}
+		echo "</tr>\n";
+	}
+	echo "</table>\n";
+
 	//
 	// VERY important to close Oracle Database Connections and free statements!
 	//
-	oci_free_statement($statement);
+	oci_free_statement($statementbio);
+	oci_free_statement($statementstats);
 	oci_close($connection);
 ?>
