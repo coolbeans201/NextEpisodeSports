@@ -21,7 +21,7 @@
 	var f=document.myform;
 	f.playertype.options.length=null;
 	for(i=0; i<varieties[idx].length; i++) {
-    	f.playertype.options[i]=new Option(varieties[idx][i], i); 
+    	f.playertype.options[i]=new Option(varieties[idx][i], varieties[idx][i]); 
     		}    
 	}
 	var stats=[
@@ -39,6 +39,44 @@
 		}    
 	}
 	onload=function() {playertype(0); Box3(0);};
+	function ajaxFunction(){
+		 var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		 try{
+		   // Opera 8.0+, Firefox, Safari
+		   ajaxRequest = new XMLHttpRequest();
+		 }catch (e){
+		   // Internet Explorer Browsers
+		   try{
+			  ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		   }catch (e) {
+			  try{
+				 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			  }catch (e){
+				 // Something went wrong
+				 alert("Your browser broke!");
+				 return false;
+			  }
+		   }
+		 }
+		 // Create a function that will receive data 
+		 // sent from the server and will update
+		 // div section in the same page.
+		 ajaxRequest.onreadystatechange = function(){
+		   if(ajaxRequest.readyState == 4){
+			  var ajaxDisplay = document.getElementById('ajaxDiv');
+			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
+		   }
+		 }
+		 // Now get the value from user and pass it to
+		 // server script.
+		 var sport = document.getElementById('sport').value;
+		 var playertype = document.getElementById('playertype').value;
+		 var queryString = "?sport=" + sport ;
+		 queryString +=  "&playertype=" + playertype;
+		 ajaxRequest.open("GET", "getcolumns.php" + queryString, true);
+		 ajaxRequest.send(null); 
+	}
 	</script>
 	
     <style>
@@ -155,13 +193,10 @@
 			<li><a href="Inspiration.php">Inspiration</a></li>
 		</ul>
 	</nav>
-
-
-
 <form name="myform" method="post" action="SortResult.php">
 <div>
 <font size="4">Select sport: </font>
-<select name="box1" id = "sport" onchange="playerType(this.selectedIndex), Box3(this.selectedIndex)">
+<select name="box1" id = "sport" onchange="playerType(this.selectedIndex); ajaxFunction();">
 	<option value = "a" selected = "selected">-Select a Sport-</option>
 	<option value = "Baseball">Baseball</option>
 	<option value = "Basketball">Basketball</option>
@@ -170,12 +205,9 @@
 </div>
 <div>
 <font size="4">Select player type: </font>
-<select name="playertype" id = "playertype"></select>
+<select name="playertype" id = "playertype" onchange = "ajaxFunction();"></select>
 </div>
-<div>
-<font size="4">Select statistic: </font>
-<select name="box3" id = "stat"></select>
-</div>
+<div id = "ajaxDiv">Column names will be loaded here</div>
 <div>
 <font size="4">Select data range: </font>
 <select name="datarange" id = "range">
