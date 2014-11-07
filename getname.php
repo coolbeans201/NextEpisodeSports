@@ -117,72 +117,69 @@
 	}
 	
 	
+	
 	$statement = oci_parse($connection, $query);
-	$statement2 = oci_parse($connection, $query);
-	
 	oci_execute($statement);
-	oci_execute($statement2);
-	
 	echo "Select name: ";
 	echo '<select name="personbox1" id = "name1">';
 	echo '<option value = "-1">Select:</option>';
 	while($row=oci_fetch_assoc($statement)) {
 		if ($playertype == 'Team'){
-			echo '<option value="' . $row['NAME'] . ' ' . '</option>';
+			echo '<option value="'.$row['NAME'].'">' . $row['NAME'] . ' ' . '</option>';
 		}
 		else if($sport == 'Baseball'){
 			if($playertype == 'Manager'){
-				echo '<option value="' . $row['MANAGERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+				echo '<option value="'.$row['MANAGERID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 			}
 			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-				echo '<option value ="' . $row['PLAYERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+				echo '<option value="'.$row['PLAYERID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 			}
 		}
 		else if($sport == 'Basketball'){
-			echo '<option value="' . $row['ID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+			echo '<option value="'.$row['ID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 		}
 		else if($sport == 'Hockey'){
 			if($playertype == 'Coach'){
-				echo '<option value="' . $row['COACHID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+				echo '<option value="'.$row['COACHID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 			}
 			if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				echo '<option value="' . $row['PLAYERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+				echo '<option value="'.$row['PLAYERID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 			}
 		}
 	}
-	
 	echo "</select> \n";
 	
 	echo "vs.\n";
 	
+	$statement2 = oci_parse($connection, $query);
+	oci_execute($statement2);
+	echo "Select name: ";
 	echo '<select name="personbox2" id = "name2">';
 	echo '<option value = "-1">Select:</option>';
-	
 	while($row=oci_fetch_assoc($statement2)) {
 		if ($playertype == 'Team'){
-			echo '<option value="' . $row['NAME'] . ' ' . '</option>';
+			echo '<option value="'.$row['NAME'].'">' . $row['NAME'] . ' ' . '</option>';
 		}
 		else if($sport == 'Baseball'){
 			if($playertype == 'Manager'){
-				echo '<option value="' . $row['MANAGERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+				echo '<option value="'.$row['MANAGERID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 			}
 			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-				echo '<option value ="' . $row['PLAYERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+				echo '<option value="'.$row['PLAYERID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 			}
 		}
 		else if($sport == 'Basketball'){
-			echo '<option value="' . $row['ID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+			echo '<option value="'.$row['ID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 		}
 		else if($sport == 'Hockey'){
 			if($playertype == 'Coach'){
-				echo '<option value="' . $row['COACHID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+				echo '<option value="'.$row['COACHID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 			}
 			if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				echo '<option value="' . $row['PLAYERID'] . '">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . ' ' . '</option>';
+				echo '<option value="'.$row['PLAYERID'].'">' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . '</option>';
 			}
 		}
 	}
-	
 	echo "</select> \n";
 	
 	//
