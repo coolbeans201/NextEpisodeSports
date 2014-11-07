@@ -118,9 +118,9 @@
 	
 		$statement = oci_parse($connection, $query);	//1
 		oci_execute($statement);
-		
-		
-		if($row=oci_fetch_assoc($statement)) {
+
+		if(true) {   
+			echo "cocks";
 			if ($playertype == 'Team'){
 				echo "<table border='1'>\n";
 					echo '<tr>';
@@ -174,7 +174,8 @@
 		$statement2 = oci_parse($connection, $query2); 	//2
 		oci_execute($statement2);
 		
-		if($row=oci_fetch_assoc($statement2)) {
+		if(true) {   
+			echo "cocks";
 			if ($playertype == 'Team'){
 				echo "<table border='1'>\n";
 					echo '<tr>';
@@ -188,7 +189,7 @@
 						echo '<th>Win Percent</th>';
 						echo '<th>Rank</th>';
 					echo '</tr>';
-					while($row=oci_fetch_assoc($statement2)){
+					while($row=oci_fetch_assoc($statement)){
 						echo '<tr>';
 							echo '<td>'. $row['NAME'] .'</td>';
 							echo '<td>'. $row['YEAR'] .'</td>';
@@ -201,6 +202,8 @@
 							echo '<td>'. $row['RANK'] .'</td>';
 						echo '</tr>';
 					}
+				echo "</table>";
+			}
 				echo "</table>";
 			}
 			else if($sport == 'Baseball'){
