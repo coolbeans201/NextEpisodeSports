@@ -12,7 +12,8 @@
 	$playertype = $_GET['playertype'];
 	$playerid = $_GET['playerid'];
 	$playerid2 = $_GET['playerid2'];
-
+	
+	
 	if ($sport == 'Baseball')
 	{
 		if ($playertype == 'Manager'){
@@ -43,13 +44,12 @@
 		if ($playertype == 'Team'){
 			$query = "SELECT *
 				  FROM BaseballTeams 
-				  WHERE name = '" . $playerid1 . "'";
-			$query = "SELECT *
+				  WHERE name = '" . $playerid . "'";
+			$query2 = "SELECT *
 				  FROM BaseballTeams 
 				  WHERE name = '" . $playerid2 . "'";	  
 		}
 	}
-	
 	else if ($sport == 'Basketball')
 	{
 		if ($playertype == 'Coach'){
@@ -112,61 +112,119 @@
 					WHERE name = '" . $playerid2 . "'"; 
 		}
 	}
-
 	
-	$statement = oci_parse($connection, $query);
-	oci_execute($statement);
+	echo "Comparison:";
+	echo "<br/>";
 	
-	while($row=oci_fetch_assoc($statement)) {
+		$statement = oci_parse($connection, $query);	//1
+		oci_execute($statement);
 		
-	}
-	
-	$statement2 = oci_parse($connection, $query2);
-	oci_execute($statement2);
-
-	while($row=oci_fetch_assoc($statement2)) {
 		
-	}
-	
-	echo "<table border='1'>\n";
-		if ($playertype == 'Team'){
-		}
-		else if($sport == 'Baseball'){
-			if($playertype == 'Manager'){
-				echo '<tr>';
-				echo '<th>Year</th>';
-				echo '<th>Team</th>';
-				echo '<th>League</th>';
-				echo '<th>Games Played</th>';
-				echo '<th>Wins</th>';
-				echo '<th>Losses</th>';
-				echo '<th>Win Percent</th>';
-				echo '<th>Rank</th>';
-				echo '</tr>';
+		if($row=oci_fetch_assoc($statement)) {
+			if ($playertype == 'Team'){
+				echo "<table border='1'>\n";
+					echo '<tr>';
+						echo '<th>Name</th>';
+						echo '<th>Year</th>';
+						echo '<th>Team</th>';
+						echo '<th>League</th>';
+						echo '<th>Games Played</th>';
+						echo '<th>Wins</th>';
+						echo '<th>Losses</th>';
+						echo '<th>Win Percent</th>';
+						echo '<th>Rank</th>';
+					echo '</tr>';
+					while($row=oci_fetch_assoc($statement)){
+						echo '<tr>';
+							echo '<td>'. $row['NAME'] .'</td>';
+							echo '<td>'. $row['YEAR'] .'</td>';
+							echo '<td>'. $row['TEAM'] .'</td>';
+							echo '<td>'. $row['LEAGUE'] .'</td>';
+							echo '<td>'. $row['GAMES'] .'</td>';
+							echo '<td>'. $row['WIN'] .'</td>';
+							echo '<td>'. $row['LOSS'] .'</td>';
+							echo '<td>'. $row['WINPERCENT'] .'</td>';
+							echo '<td>'. $row['RANK'] .'</td>';
+						echo '</tr>';
+					}
+				echo "</table>";
 			}
-			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-				
+			else if($sport == 'Baseball'){
+				if($playertype == 'Manager'){
+					
+				}
+				if($playertype == 'Pitcher' || $playertype == 'Position Player'){
+					
+				}
 			}
-		}
-		else if($sport == 'Basketball'){
+			else if($sport == 'Basketball'){
 
-		}
-		else if($sport == 'Hockey'){
-			if($playertype == 'Coach'){
-				
 			}
-			if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				
+			else if($sport == 'Hockey'){
+				if($playertype == 'Coach'){
+					
+				}
+				if($playertype == 'Goalie' || $playertype == 'Position Player'){
+					
+				}
 			}
 		}
-	while ($row = oci_fetch_array($statementstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
-		echo "<tr>\n";
-		foreach ($row as $item) {
-			echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+		
+		
+		$statement2 = oci_parse($connection, $query2); 	//2
+		oci_execute($statement2);
+		
+		if($row=oci_fetch_assoc($statement2)) {
+			if ($playertype == 'Team'){
+				echo "<table border='1'>\n";
+					echo '<tr>';
+						echo '<th>Name</th>';
+						echo '<th>Year</th>';
+						echo '<th>Team</th>';
+						echo '<th>League</th>';
+						echo '<th>Games Played</th>';
+						echo '<th>Wins</th>';
+						echo '<th>Losses</th>';
+						echo '<th>Win Percent</th>';
+						echo '<th>Rank</th>';
+					echo '</tr>';
+					while($row=oci_fetch_assoc($statement2)){
+						echo '<tr>';
+							echo '<td>'. $row['NAME'] .'</td>';
+							echo '<td>'. $row['YEAR'] .'</td>';
+							echo '<td>'. $row['TEAM'] .'</td>';
+							echo '<td>'. $row['LEAGUE'] .'</td>';
+							echo '<td>'. $row['GAMES'] .'</td>';
+							echo '<td>'. $row['WIN'] .'</td>';
+							echo '<td>'. $row['LOSS'] .'</td>';
+							echo '<td>'. $row['WINPERCENT'] .'</td>';
+							echo '<td>'. $row['RANK'] .'</td>';
+						echo '</tr>';
+					}
+				echo "</table>";
+			}
+			else if($sport == 'Baseball'){
+				if($playertype == 'Manager'){
+					
+				}
+				if($playertype == 'Pitcher' || $playertype == 'Position Player'){
+					
+				}
+			}
+			else if($sport == 'Basketball'){
+
+			}
+			else if($sport == 'Hockey'){
+				if($playertype == 'Coach'){
+					
+				}
+				if($playertype == 'Goalie' || $playertype == 'Position Player'){
+					
+				}
+			}
 		}
-		echo "</tr>\n";
-	}
-	echo "</table>\n";
+	
+	///////////////////////////////////////////////
 	
 	//
 	// VERY important to close Oracle Database Connections and free statements!
