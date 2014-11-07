@@ -247,7 +247,6 @@ function ajaxFunction(){
 	<option value = "average">Average</option>
 	<option value = "min">Minimum</option>
 	<option value = "max">Maximum</option>
-	<option value = "count">Count</option>
 	<option value = "standardDeviation">Standard Deviation</option>
 </select>
 </div>
@@ -258,3 +257,4 @@ function ajaxFunction(){
 </form>
 </body>
 </html>
+
