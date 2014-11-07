@@ -73,7 +73,49 @@
 		 ajaxRequest.send(null); 
 	}
 	
-	
+	function ajaxCompareQuery(){
+		 var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		 try{
+		   // Opera 8.0+, Firefox, Safari
+		   ajaxRequest = new XMLHttpRequest();
+		 }catch (e){
+		   // Internet Explorer Browsers
+		   try{
+			  ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		   }catch (e) {
+			  try{
+				 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			  }catch (e){
+				 // Something went wrong
+				 alert("Your browser broke!");
+				 return false;
+			  }
+		   }
+		 }
+		 // Create a function that will receive data 
+		 // sent from the server and will update
+		 // div section in the same page.
+		 ajaxRequest.onreadystatechange = function(){
+		   if(ajaxRequest.readyState == 4){
+			  var ajaxDisplay = document.getElementById('textBoxDiv');
+			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
+		   }
+		 }
+		 // Now get the value from user and pass it to
+		 // server script.
+		 var sport = document.getElementById('sport').value;
+		 var playertype = document.getElementById('playertype').value;
+		 var playerid = document.getElementById('name1').value;
+		 var playerid2 = document.getElementById('name2').value;
+		 
+		 var queryString = "?sport=" + sport;
+		 queryString +=  "&playertype=" + playertype;
+		 queryString += "&playerid=" + playerid;
+		 queryString += "&playerid2=" + playerid2;
+		 ajaxRequest.open("GET", "getStatsRetrieval.php" + queryString, true);
+		 ajaxRequest.send(null); 
+	}
 	</script>
 	
 	
@@ -207,8 +249,12 @@
 			</select></font></div>
 			<div><font size = "4"> Select player type: <select name="box2" id="playertype" onchange='ajaxFunction()'></select></font></div>
 			<div id='ajaxDiv'>Your result will display here</div>
-			<input type= "submit" style = "color: green" value="Compute"></input>
-		</form>
+			
+			<input type= "button" style = "color:green" value="Compute" onclick="ajaxCompareQuery();"></input> <!--Button-->
+			</form>
+			
+		<div id='textBoxDiv'></div>
+
 </body>
 </html>	
 
