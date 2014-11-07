@@ -29,8 +29,6 @@
 	
 	onload=function() {Box2(0);};
 	
-	
-	
 	function ajaxFunction(){
 		 var ajaxRequest;  // The variable that makes Ajax possible!
 			
@@ -98,7 +96,7 @@
 		 // div section in the same page.
 		 ajaxRequest.onreadystatechange = function(){
 		   if(ajaxRequest.readyState == 4){
-			  var ajaxDisplay = document.getElementById('textBoxDiv');
+			  var ajaxDisplay = document.getElementById('compareDiv');
 			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
 		   }
 		 }
@@ -113,15 +111,12 @@
 		 queryString +=  "&playertype=" + playertype;
 		 queryString += "&playerid=" + playerid;
 		 queryString += "&playerid2=" + playerid2;
-		 ajaxRequest.open("GET", "getStatsRetrieval.php" + queryString, true);
+		 ajaxRequest.open("GET", "getCompareQuery.php" + queryString, true);
 		 ajaxRequest.send(null); 
 	}
 	</script>
 	
-	
-	
-	
- 
+
     <style style="text/css">
         html {overflow-y: scroll}
         
@@ -238,8 +233,7 @@
 	</nav>
 	
 
-			
-		<form name="myform" method="post" action="CompareResult.php">
+		<form name="myform" method="post">
 		<div>
 			<font size = "4"> Select sport: <select name="box1" id="sport" onchange="Box2(this.selectedIndex); ajaxFunction();">
 				<option value="a" selected = "selected">-Select a Sport-</option>
@@ -253,7 +247,7 @@
 			<input type= "button" style = "color:green" value="Compute" onclick="ajaxCompareQuery();"></input> <!--Button-->
 			</form>
 			
-		<div id='textBoxDiv'></div>
+		<div id='compareDiv'></div>
 
 </body>
 </html>	
