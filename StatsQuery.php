@@ -236,7 +236,7 @@ function ajaxStats(){
 		 // div section in the same page.
 		 ajaxRequest.onreadystatechange = function(){
 		   if(ajaxRequest.readyState == 4){
-			  var ajaxDisplay = document.getElementById('ajaxDiv');
+			  var ajaxDisplay = document.getElementById('ResultDiv');
 			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
 		   }
 		 }
@@ -248,7 +248,7 @@ function ajaxStats(){
 		 var stats = document.getElementById('stats').value;
 		 var begYear = document.getElementById('year1').value;
 		 var endYear = document.getElementById('year2').value;
-		 var queryString = "?sport=" + sport ;
+		 var queryString = "?sport=" + sport;
 		 queryString += "&playertype=" + playertype;
 		 queryString += "&operation=" + operation;
 		 queryString += "&stats=" + stats;
@@ -305,6 +305,7 @@ function ajaxStats(){
 <div id='ajaxDiv'>Date ranges will be loaded here</div>
 <input type= "button" style = "color:green" value="Compute" onclick="ajaxStats();"></input>
 </form>
+<div id = "ResultDiv"></div>
 </body>
 </html>
 
