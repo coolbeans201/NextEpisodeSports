@@ -203,7 +203,9 @@ function ajaxFunction(){
 		 // Now get the value from user and pass it to
 		 // server script.
 		 var sport = document.getElementById('sport1').value;
+		 var playertype = document.getElementById('playerType1').value;
 		 var queryString = "?sport=" + sport ;
+		 queryString += "&playertype=" + playertype;
 		 ajaxRequest.open("GET", "getYears.php" + queryString, true);
 		 ajaxRequest.send(null); 
 }
@@ -240,7 +242,7 @@ function ajaxFunction(){
 </div>
 <div>
 <font size = "4">Select player type:</font>
-<select name = "playerType" id = "playerType1" onchange = "ajaxFunction2();"></select>
+<select name = "playerType" id = "playerType1" onchange = "ajaxFunction2(); ajaxFunction();"></select>
 </div>
 <div>
 <font size = "4">Select an operation:</font>
