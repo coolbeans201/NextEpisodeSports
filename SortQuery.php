@@ -12,7 +12,7 @@
 	<script type="text/javascript">
 	var varieties=[
 	[""],
-	["Manager","Pitcher","Position Player","Team"],
+	["Manager","Pitcher","Position Player Batting", "Position Player Fielding","Team"],
 	["Coach","Player","Team"],
 	["Coach","Goalie","Position Player","Team"]
 	];
@@ -75,8 +75,53 @@
 		 var queryString = "?sport=" + sport ;
 		 queryString +=  "&playertype=" + playertype;
 		 ajaxRequest.open("GET", "getcolumns.php" + queryString, true);
+		 ajaxRequest.send(null);  
+	}
+	
+		function ajaxSortRetrieval(){
+		 var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		 try{
+		   // Opera 8.0+, Firefox, Safari
+		   ajaxRequest = new XMLHttpRequest();
+		 }catch (e){
+		   // Internet Explorer Browsers
+		   try{
+			  ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		   }catch (e) {
+			  try{
+				 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			  }catch (e){
+				 // Something went wrong
+				 alert("Your browser broke!");
+				 return false;
+			  }
+		   }
+		 }
+		 // Create a function that will receive data 
+		 // sent from the server and will update
+		 // div section in the same page.
+		 ajaxRequest.onreadystatechange = function(){
+		   if(ajaxRequest.readyState == 4){
+			  var ajaxDisplay = document.getElementById('textBoxDiv');
+			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
+		   }
+		 }
+		 // Now get the value from user and pass it to
+		 // server script.
+		 var sport = document.getElementById('sport').value;
+		 var playertype = document.getElementById('playertype').value;
+		 var stats = document.getElementById('stats').value;
+		 var range = document.getElementById('range').value;
+		 
+		 var queryString = "?sport=" + sport;
+		 queryString +=  "&playertype=" + playertype;
+		 queryString += "&stats=" + stats;
+		 queryString += "&range=" + range;
+		 ajaxRequest.open("GET", "getSortRetrieval.php" + queryString, true);
 		 ajaxRequest.send(null); 
 	}
+	
 	</script>
 	
     <style>
@@ -193,7 +238,7 @@
 			<li><a href="Inspiration.php">Inspiration</a></li>
 		</ul>
 	</nav>
-<form name="myform" method="post" action="SortResult.php">
+<form name="myform" method="post">
 <div>
 <font size="4">Select sport: </font>
 <select name="box1" id = "sport" onchange="playerType(this.selectedIndex); ajaxFunction();">
@@ -218,7 +263,8 @@
   <option value = "100">Top 100</option>
 </select>
 </div>
-<input type="submit" style = "color: green" value="Compute">
+<input type= "button" style = "color:green" value="Compute" onclick="ajaxSortRetrieval();"></input>
 </form>
+<div id='textBoxDiv'></div>
 </body>
 </html>
