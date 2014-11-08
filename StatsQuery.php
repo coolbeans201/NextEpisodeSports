@@ -111,7 +111,8 @@ function setOptions(chosen, selBox){
 	{
 		selBox.options[selBox.options.length] = new Option('Manager', 'Manager');
 		selBox.options[selBox.options.length] = new Option('Pitcher', 'Pitcher');
-		selBox.options[selBox.options.length] = new Option('Position Player', 'Position Player');
+		selBox.options[selBox.options.length] = new Option('Position Player Batting', 'Position Player Batting');
+		selBox.options[selBox.options.length] = new Option('Position Player Fielding', 'Position Player Fielding');
 		selBox.options[selBox.options.length] = new Option('Team', 'Team');
 	}
 	if (chosen == "Basketball")
