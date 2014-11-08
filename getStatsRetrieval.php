@@ -111,10 +111,8 @@
 					 FROM BASKETBALLCoaches
 					 WHERE coachid = '" . $playerid . "'
 					 order by year";
-			$querycareerstats = "SELECT SUM(WINS) / COUNT(DISTINCT YEAR), (SUM(LOSSES) / COUNT(DISTINCT YEAR)), ROUND((SUM(WINS) / (SUM(LOSSES) + SUM(WINS))), 3), ROUND(AVG(A.zScore), 3)
-						FROM (SELECT ROUND((WINNINGPERCENTAGE - (SELECT AVG(WINNINGPERCENTAGE) FROM BASKETBALLCOACHES)) / 
-     						(SELECT STDDEV(WINNINGPERCENTAGE) FROM BASKETBALLCOACHES), 3) 
-      						zScore FROM BasketballCoaches WHERE coachID = '" . $playerid . "')A, BasketballCoaches
+			$querycareerstats = "SELECT SUM(WINS), (SUM(LOSSES)), ROUND((SUM(WINS) / (SUM(LOSSES) + SUM(WINS))), 3)
+						from BasketballCoaches
 						WHERE BasketballCoaches.CoachID = '" . $playerid . "'";
 			$querypostseasonstats = "SELECT distinct year, team, league, POSTSEASONWINS, POSTSEASONLOSSES, POSTSEASONWINNINGPERCENTAGE, ROUND((POSTSEASONWINNINGPERCENTAGE - (SELECT AVG(POSTSEASONWINNINGPERCENTAGE) FROM BASKETBALLCOACHES)) / (SELECT STDDEV(POSTSEASONWINNINGPERCENTAGE) FROM BASKETBALLCOACHES), 3) zScore
 						    FROM BASKETBALLCOACHES
@@ -279,7 +277,7 @@
 			}
 			else if($sport == 'Basketball')
 			{
-				if($playertype = 'Coach')
+				if($playertype == 'Coach')
 				{
 					echo '<font size = "4">';
 					echo "<b> Biographical Information </b> <br>";
@@ -288,6 +286,16 @@
 					echo 'Weight: ' . $row['WEIGHT'] . " pounds <br>";
 					echo '<br>';
 					echo '<b> Coach Regular Season Stats </b> </font>';
+				}
+				if($playertype == 'Player')
+				{
+					echo '<font size = "4">';
+					echo "<b> Biographical Information </b> <br>";
+					echo 'Name: ' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . "<br>";
+					echo 'Height: ' . $row['HEIGHT'] . " inches <br>";
+					echo 'Weight: ' . $row['WEIGHT'] . " pounds <br>";
+					echo '<br>';
+					echo '<b> Player Regular Season Stats </b> </font>';
 				}
 			}
 			else if($sport == 'Hockey')
@@ -693,7 +701,6 @@
 				echo '<th>Total Wins</th>';
 				echo '<th>Total Losses</th>';
 				echo '<th>Total Win Percent</th>';
-				echo '<th>Average Win Percent z-Score</th>';
 				echo '</tr>';
 			}
 			if($playertype == 'Team')
@@ -1116,3 +1123,4 @@
 	oci_free_statement($statementcareersplitstats);
 	oci_close($connection);
 ?>
+
