@@ -10,22 +10,68 @@
 
 	// Retrieve data from Query String
 	$sport = $_GET['sport'];
+	$playertype = $_GET['playertype'];
 	// Escape User Input to help prevent SQL Injection
 	//$sport = mysql_real_escape_string($sport);
 	
 	if ($sport == 'Baseball')
 	{
-		$query = "SELECT DISTINCT year FROM BaseballTeams ORDER BY year";
+		if($playertype == 'Team')
+		{
+			$query = "SELECT DISTINCT year FROM BaseballTeams ORDER BY year";
+		}
+		if($playertype == 'Pitcher')
+		{
+			$query = "SELECT DISTINCT year FROM BaseballPitching ORDER BY year";
+		}
+		if($playertype == 'Position Player Batting')
+		{
+			$query = "SELECT DISTINCT year FROM BasebalBatting ORDER BY year";
+		}
+		if($playertype == 'Position Player Fielding')
+		{
+			$query = "SELECT DISTINCT year FROM BaseballFielding ORDER BY year";
+		}
+		if($playertype == 'Manager')
+		{
+			$query = "SELECT DISTINCT year FROM BaseballManagers ORDER BY year";
+		}
 	}
 	
 	else if ($sport == 'Basketball')
 	{
-		$query = "SELECT DISTINCT year FROM BasketballTeams ORDER BY year";
+		if($playertype == 'Team')
+		{
+			$query = "SELECT DISTINCT year FROM BasketballTeams ORDER BY year";
+		}
+		if($playertype == 'Coach')
+		{
+			$query = "SELECT DISTINCT year FROM BasketballCoaches ORDER BY year";
+		}
+		if($playertype == 'Player')
+		{
+			$query = "SELECT DISTINCT year FROM BasketballPlayers ORDER BY year";
+		}
 	}
 	
 	else if ($sport == 'Hockey')
 	{
-		$query = "SELECT DISTINCT year FROM HockeyTeams ORDER BY year";																	  
+		if($playertype == 'Team')
+		{
+			$query = "SELECT DISTINCT year FROM HockeyTeams ORDER BY year";
+		}
+		if($playertype == 'Coach')
+		{
+			$query = "SELECT DISTINCT year FROM HockeyCoaches ORDER BY year";
+		}
+		if($playertype == 'Position Player')
+		{
+			$query = "SELECT DISTINCT year FROM HockeyScoring ORDER BY year";
+		}
+		if($playertype == 'Goalie')
+		{
+			$query = "SELECT DISTINCT year FROM HockeyGoalies ORDER BY year";
+		}	
 	}
 	
 	
