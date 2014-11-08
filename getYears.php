@@ -88,7 +88,7 @@
 	
 	
 	while($row=oci_fetch_assoc($statement)) {
-			echo '<option>' . $row['YEAR'] . ' ' . '</option>';
+			echo '<option value="' . $row['YEAR'] . '">' . $row['YEAR'] .'</option>';
 	}
 	
 	
@@ -97,7 +97,7 @@
 	echo '<select name="endYear" id = "year2">';
 	echo '<option value = "-1">Select:</option>';
 	while($row=oci_fetch_assoc($statement2)) {
-		echo '<option>' . $row['YEAR'] .'</option>';
+		echo '<option value="' . $row['YEAR'] . '">' . $row['YEAR'] .'</option>';
 	}
 	
 	echo "</select> \n";
@@ -108,4 +108,5 @@
 	oci_free_statement($statement2);
 	oci_close($connection);
 ?>
+
 
