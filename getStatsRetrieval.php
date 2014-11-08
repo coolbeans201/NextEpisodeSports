@@ -25,13 +25,43 @@
 						FROM Baseballmanagers
 						WHERE managerid = '" . $playerid . "'
 						ORDER BY year";
-		       $querycareerstats = "SELECT SUM(BaseballManagers.WINS) , SUM(BaseballManagers.LOSS), ROUND((SUM(BaseballManagers.WINS) / (SUM(BaseballManagers.WINS) + SUM(BaseballManagers.LOSS))),3)
-						 FROM BaseballManagers
+		    $querycareerstats = "SELECT SUM(BaseballManagers.WINS) , SUM(BaseballManagers.LOSS), ROUND((SUM(BaseballManagers.WINS) / (SUM(BaseballManagers.WINS) + SUM(BaseballManagers.LOSS))),3)
+						FROM BaseballManagers
 						WHERE BaseballManagers.MANAGERID = '" . $playerid . "'";
 		}
 		if ($playertype == 'Pitcher'){
+			$querybio = "SELECT firstname, lastname, birthmonth, birthday, birthyear, weight, height
+			FROM Baseballmaster
+			WHERE playerid = '" . $playerid . "'";
+			$querystats = "SELECT distinct year, team, league, wins, losses, ROUND(wins/(wins + losses),3) winpercent, 
+			games, starts, completegames, shutouts, saves, outs, hits, earnedruns, homeruns,
+			walks, strikeouts, bavg, 
+			ROUND(((bavg - (select avg(bavg) from baseballpitching))/(select stddev(bavg) from baseballpitching)),3) bavgZSCORE,
+			era, ROUND(((era - (select avg(era) from baseballpitching))/(select stddev(era) from baseballpitching)),3) eraZSCORE,
+			intentionalwalks, wildpitches, hitbypitches, balks, battersfaced, finishes, pitcherruns, whip, h9, hr9, bb9, so9
+			FROM BaseballPitching
+			WHERE pitcherid = '" . $playerid . "'
+			ORDER BY year";
+			$querycareerstats = "SELECT SUM(BaseballPitching.WINS) , SUM(BaseballPitching.LOSSES), ROUND((SUM(BaseballPitching.WINS) / (SUM(BaseballPitching.WINS) + SUM(BaseballPitching.LOSSES))),3)
+			FROM BaseballPitching
+			WHERE BaseballPitching.pitcherid = '" . $playerid . "'";
+			$querypostseasonstats = "SELECT distinct year, round, team, league, wins, losses, ROUND(wins/(wins + losses+0.000000000000000000000000000000000000001),3) winpercent,
+			games, starts, completegames, shutouts, saves, outs, hits, earnedruns, homeruns, walks, strikeouts,
+			battingaverage, 
+			ROUND(((battingaverage - (select avg(battingaverage) from baseballpitchingpostseason))/(select stddev(battingaverage) from baseballpitchingpostseason)),3) bavgZSCORE,
+			era, ROUND(((era - (select avg(era) from baseballpitchingpostseason))/(select stddev(era) from baseballpitchingpostseason)),3) eraZSCORE,
+			intentionalwalks, wildpitches, hitbypitches, balks, battersfaced, finishes, runs, whip, h9, hr9, bb9, so9
+			FROM BaseballPitchingPostSeason
+			WHERE playerid = '" . $playerid . "'
+			ORDER BY year";
+			$querycareerpostseasonstats = "SELECT SUM(Wins), SUM(losses), ROUND((SUM(wins) / (SUM(losses) + SUM(wins))), 3)
+			FROM baseballpitchingpostseason
+			WHERE playerid = '" . $playerid . "'";
 		}
 		if ($playertype == 'Position Player'){
+			$querybio = "SELECT firstname, lastname, birthmonth, birthday, birthyear, weight, height
+			FROM Baseballmaster
+			WHERE playerid = '" . $playerid . "'";
 		}
 		if ($playertype == 'Team'){
 			$querystats = "select distinct year, team, league, division, rank, games, homegames, win, loss, winpercent, 
@@ -95,6 +125,15 @@
 						          WHERE BasketballCoaches.CoachID = '" . $playerid . "'";
 		}
 		if ($playertype == 'Player'){
+			$querybio = "SELECT firstName, lastName, height, weight
+				      FROM BASKETBALLMASTER
+				      WHERE id = '" . $playerid . "'";
+			$querystats = "SELECT distinct year, team, league, games, minutes, points, pointspergame, offensiverebounds, defensiverebounds, rebounds, 
+						reboundspergame,assists, assistspergame, steals, blocks, turnovers, fouls, fieldgoalattempts, fieldgoalmade, fieldgoalpercent, 
+						freethrowattempts, freethrowmade, freethrowpercent, threeattempts, threemade, threepercent
+						FROM BASKETBALLplayers
+						WHERE playerid = '" . $playerid . "'
+						order by year";
 		}
 		if ($playertype == 'Team'){
 			$querystats = "select distinct year, team, league, conference, division, rank, conferencerank, fieldgoalmade, fieldgoalattempts, fieldgoalpercent,
@@ -228,7 +267,14 @@
 					echo '<b> Manager Regular Season Stats </b> </font>';
 				}
 				if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-				
+					echo '<font size = "4">';
+					echo "<b> Biographical Information </b> <br>";
+					echo 'Name: ' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . "<br>";
+					echo 'Date of Birth: ' . $row['BIRTHMONTH'] . '/' . $row['BIRTHDAY'] . '/' . $row['BIRTHYEAR'] . "<br>";
+					echo 'Height: ' . $row['HEIGHT'] . " inches <br>";
+					echo 'Weight: ' . $row['WEIGHT'] . " pounds <br>";
+					echo '<br>';
+					echo '<b> Pitcher Regular Season Stats </b> </font>';
 				}
 			}
 			else if($sport == 'Basketball')
@@ -289,7 +335,41 @@
 			}
 			if($playertype == 'Pitcher' || $playertype == 'Position Player')
 			{
-				
+				echo '<tr>';
+				echo '<th>Year</th>';
+				echo '<th>Team</th>';
+				echo '<th>League</th>';
+				echo '<th>Wins</th>';
+				echo '<th>Losses</th>';
+				echo '<th>Win Percent</th>';
+				echo '<th>Games</th>';
+				echo '<th>Starts</th>';
+				echo '<th>Complete Games</th>';
+				echo '<th>Shutouts</th>';
+				echo '<th>Saves</th>';
+				echo '<th>Outs</th>';
+				echo '<th>Hits</th>';
+				echo '<th>Earned Runs</th>';
+				echo '<th>Home Runs</th>';
+				echo '<th>Walks</th>';
+				echo '<th>Strikeouts</th>';
+				echo '<th>BAVG</th>';
+				echo '<th>BAVG Z-Score</th>';
+				echo '<th>ERA</th>';
+				echo '<th>ERA Z-Score</th>';
+				echo '<th>Intentional Walks</th>';
+				echo '<th>Wild Pitches</th>';
+				echo '<th>Hits By Pitches</th>';
+				echo '<th>Balks</th>';
+				echo '<th>Batters Faced</th>';
+				echo '<th>Finishes</th>';
+				echo '<th>Pitcher Runs</th>';
+				echo '<th>Whip</th>';
+				echo '<th>H9</th>';
+				echo '<th>HR9</th>';
+				echo '<th>BB9</th>';
+				echo '<th>SO9</th>';
+				echo '</tr>';
 			}
 			if($playertype == 'Team')
 			{
@@ -511,9 +591,11 @@
 		{
 			echo '<font size = "4"><b>Manager Career Stats</b></font><br>';
 		}
-		if($playertype == 'Pitcher' || $playertype == 'Position Player')
+		if($playertype == 'Pitcher')
 		{
-				
+			echo '<font size = "4"><b>Pitcher Career Stats</b></font><br>';
+		}
+		if($playertype == 'Position Player'){
 		}
 		if ($playertype == 'Team')
 		{
@@ -558,7 +640,11 @@
 			}
 			if($playertype == 'Pitcher' || $playertype == 'Position Player')
 			{
-				
+				echo '<tr>';
+				echo '<th>Total Wins</th>';
+				echo '<th>Total Losses</th>';
+				echo '<th>Total Win Percent</th>';
+				echo '</tr>';
 			}
 			if($playertype == 'Team')
 			{
@@ -722,8 +808,10 @@
 			if($playertype == 'Manager'){
 				
 			}
-			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-				
+			if($playertype == 'Pitcher'){
+				echo '<font size = "4"><b>Pitcher Postseason Stats</b></font><br>';
+			}
+			if($playertype == 'Position Player'){
 			}
 		}
 		else if($sport == 'Basketball'){
@@ -744,15 +832,52 @@
 			}
 		}
 	$statementpostseasonstats = oci_parse($connection, $querypostseasonstats);
-	if(($sport == 'Basketball' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype == 'Team'))
+	if(($sport == 'Baseball' && $playertype == 'Pitcher') ||($sport == 'Basketball' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype == 'Team'))
 	{
 		oci_execute($statementpostseasonstats);
 		echo "<table border='1'>\n";
 		if($sport == 'Baseball'){
 			if($playertype == 'Manager'){
 			}
-			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-				
+			if($playertype == 'Pitcher'){
+				echo '<tr>';
+				echo '<th>Year</th>';
+				echo '<th>Round</th>';
+				echo '<th>Team</th>';
+				echo '<th>League</th>';
+				echo '<th>Wins</th>';
+				echo '<th>Losses</th>';
+				echo '<th>Win Percent</th>';
+				echo '<th>Games</th>';
+				echo '<th>Starts</th>';
+				echo '<th>Complete Games</th>';
+				echo '<th>Shutouts</th>';
+				echo '<th>Saves</th>';
+				echo '<th>Outs</th>';
+				echo '<th>Hits</th>';
+				echo '<th>Earned Runs</th>';
+				echo '<th>Home Runs</th>';
+				echo '<th>Walks</th>';
+				echo '<th>Strikeouts</th>';
+				echo '<th>BAVG</th>';
+				echo '<th>BAVG Z-Score</th>';
+				echo '<th>ERA</th>';
+				echo '<th>ERA Z-Score</th>';
+				echo '<th>Intentional Walks</th>';
+				echo '<th>Wild Pitches</th>';
+				echo '<th>Hit By Pitches</th>';
+				echo '<th>Balks</th>';
+				echo '<th>Batters Faced</th>';
+				echo '<th>Finishes</th>';
+				echo '<th>Runs</th>';
+				echo '<th>Whip</th>';
+				echo '<th>H9</th>';
+				echo '<th>HR9</th>';
+				echo '<th>BB9</th>';
+				echo '<th>SO9</th>';
+				echo '</tr>';
+			}
+			if($playertype == 'Position Player'){
 			}
 		}
 		else if($sport == 'Basketball'){
@@ -828,8 +953,10 @@
 			if($playertype == 'Manager'){
 				
 			}
-			if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-				
+			if($playertype == 'Pitcher'){
+				echo '<font size = "4"><b>Pitcher Career Postseason Stats</b></font><br>';
+			}
+			if($playertype == 'Position Player'){
 			}
 		}
 		else if($sport == 'Basketball'){
@@ -849,7 +976,7 @@
 	$statementcareerpostseasonstats = oci_parse($connection, $querycareerpostseasonstats);
 	if($playertype != 'Team')
 	{
-		if(($sport == 'Basketball' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype = 'Coach'))
+		if(($sport == 'Baseball' && $playertype == 'Pitcher') || ($sport == 'Basketball' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype = 'Coach'))
 		{
 			oci_execute($statementcareerpostseasonstats);
 			echo "<table border='1'>\n";
@@ -859,7 +986,11 @@
 					
 				}
 				if($playertype == 'Pitcher' || $playertype == 'Position Player'){
-					
+					echo '<tr>';
+					echo '<th>Total Wins</th>';
+					echo '<th>Total Losses</th>';
+					echo '<th>Total Win Percent</th>';
+					echo '</tr>';
 				}
 			}
 			else if($sport == 'Basketball')
