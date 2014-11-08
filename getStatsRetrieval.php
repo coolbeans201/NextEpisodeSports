@@ -237,6 +237,52 @@
 							FROM BASKETBALLplayers
 							WHERE playerid = '" . $playerid . "'
 							order by year";
+			$querycareerstats = "SELECT sum(games), sum(minutes), sum(points), ROUND((sum(points)/sum(games)),3), 
+							sum(offensiverebounds), sum(defensiverebounds), sum(rebounds), ROUND((sum(rebounds)/sum(games)),3), 
+							sum(assists), ROUND((sum(assists)/sum(games)),3), 
+							sum(steals), sum(blocks), sum(turnovers), sum(fouls), sum(fieldgoalattempts), sum(fieldgoalmade), ROUND((sum(fieldgoalmade)/sum(fieldgoalattempts)),3), 	
+							sum(freethrowattempts), sum(freethrowmade), ROUND((sum(freethrowmade)/sum(freethrowattempts)),3),
+							sum(threeattempts), sum(threemade), ROUND((sum(threemade)/sum(threeattempts)),3)
+							FROM BASKETBALLplayers
+							WHERE playerid = '" . $playerid . "'";
+			$querypostseasonstats = "SELECT distinct year, team, league, postseasongames, postseasonminutes, postseasonpoints, postseasonpointspergame, 
+							ROUND(((postseasonpointspergame - (select avg(postseasonpointspergame) from basketballplayers))/(select stddev(postseasonpointspergame) from basketballplayers)),3) bavgZSCORE,
+							postseasonoffensiverebounds, postseasondefensiverebounds, postseasonrebounds, postseasonreboundspergame,
+							ROUND(((postseasonreboundspergame - (select avg(postseasonreboundspergame) from basketballplayers))/(select stddev(postseasonreboundspergame) from basketballplayers)),3),
+							postseasonassists, postseasonassistspergame, 
+							ROUND(((postseasonassistspergame - (select avg(postseasonassistspergame) from basketballplayers))/(select stddev(postseasonassistspergame) from basketballplayers)),3),
+							postseasonsteals, postseasonblocks, postseasonturnovers, postseasonfouls, postfieldgoalattempts, postseasonfieldgoalmade, postseasonfieldgoalpercent,
+							ROUND(((postseasonfieldgoalpercent - (select avg(postseasonfieldgoalpercent) from basketballplayers))/(select stddev(postseasonfieldgoalpercent) from basketballplayers)),3),
+							postseasonfreethrowattempts, postseasonfreethrowmade, postseasonfreethrowpercent, 
+							ROUND(((postseasonfreethrowpercent - (select avg(postseasonfreethrowpercent) from basketballplayers))/(select stddev(postseasonfreethrowpercent) from basketballplayers)),3),
+							postseasonthreeattempts, postseasonthreemade, postseasonthreepercent,
+							ROUND(((postseasonthreepercent - (select avg(postseasonthreepercent) from basketballplayers))/(select stddev(postseasonthreepercent) from basketballplayers)),3)
+							FROM basketballplayers
+							WHERE basketballplayers.playerid = '" . $playerid . "' and postseasonpointspergame != -1
+							order by year";
+			$querycareerpostseasonstats = "SELECT sum(postseasongames), sum(postseasonminutes), sum(postseasonpoints), ROUND((sum(postseasonpoints)/sum(postseasongames)),3), 
+							sum(postseasonoffensiverebounds), sum(postseasondefensiverebounds), sum(postseasonrebounds), ROUND((sum(postseasonrebounds)/sum(postseasongames)),3), 
+							sum(postseasonassists), ROUND((sum(postseasonassists)/sum(postseasongames)),3), 
+							sum(postseasonsteals), sum(postseasonblocks), sum(postseasonturnovers), sum(postseasonfouls), sum(postfieldgoalattempts), sum(postseasonfieldgoalmade),
+							ROUND((sum(postseasonfieldgoalmade)/sum(postfieldgoalattempts)),3), 
+							sum(postseasonfreethrowattempts), sum(postseasonfreethrowmade), ROUND((sum(postseasonfreethrowmade)/sum(postseasonfreethrowattempts)),3), 	
+							sum(postseasonthreeattempts), sum(postseasonthreemade), ROUND((sum(postseasonthreemade)/sum(postseasonthreeattempts)),3)
+							FROM basketballplayers
+							WHERE playerid = '" . $playerid . "'";
+			$queryallstarstats = "select distinct year, conference, league, minutes, points, offensiverebounds, defensiverebounds, rebounds, assists, steals,
+									blocks, turnovers, fouls, fieldgoalattempts, fieldgoalmade,
+									freethrowattempts, freethrowmade, 
+									threeattempts, threemade
+									from basketballplayerallstar
+									where basketballplayerallstar.player_id = '" . $playerid . "'
+									order by year";
+			$querycareerallstarstats = "select sum(minutes), sum(points), sum(offensiverebounds), sum(defensiverebounds), sum(rebounds), sum(assists), sum(steals),
+										sum(blocks), sum(turnovers), sum(fouls), sum(fieldgoalattempts), sum(fieldgoalmade),
+										sum(freethrowattempts), sum(freethrowmade), 
+										sum(threeattempts), sum(threemade)
+										from basketballplayerallstar
+										where basketballplayerallstar.player_id = '" . $playerid . "'";
+			
 		}
 		if ($playertype == 'Team'){
 			$querystats = "select distinct year, team, league, conference, division, rank, conferencerank, fieldgoalmade, fieldgoalattempts, fieldgoalpercent,
@@ -304,8 +350,112 @@
 							   WHERE COACHID = '" . $playerid . "'";
 		}
 		if ($playertype == 'Goalie'){
+			$querybio = "SELECT firstname, lastname, birthmonth, birthday, birthyear, weight, height
+					FROM Hockeymaster
+					WHERE playerid IS NOT NULL AND playerid = '" . $playerid . "'";
+			$querystats = "select distinct year, team, league, games, minutes, wins, loss, ties, pointspergame, ROUND(((pointspergame - (select avg(pointspergame) from hockeygoalies))/(select stddev(pointspergame) from hockeygoalies)),3) bavgZSCORE,
+							emptynetgoals, shutouts, goalsallowed, shotsallowed, savepercent, ROUND(((savepercent - (select avg(savepercent) from hockeygoalies))/(select stddev(savepercent) from hockeygoalies)),3) bavgZSCORE2
+							from hockeygoalies
+							where hockeygoalies.goalieid = '" . $playerid . "'
+							order by year";
+			$querycareerstats = "select sum(games), sum(minutes), sum(wins), sum(loss), sum(ties), 
+								sum(emptynetgoals), sum(shutouts), sum(goalsallowed), sum(shotsallowed),ROUND(((1 - (SUM(GOALSALLOWED)/SUM(SHOTSALLOWED)))),3)
+								from hockeygoalies
+								where hockeygoalies.goalieid = '" . $playerid . "'";
+			$querypostseasonstats = "select distinct year, team, league, postseasongames, postseasonminutes, postseasonwins, postseasonloss, postseasonwinpercent,
+									ROUND(((postseasonwinpercent - (select avg(postseasonwinpercent) from hockeygoalies))/(select stddev(postseasonwinpercent) from hockeygoalies)),3),
+									postseasonemptynetgoals, postseasonshutouts, postseasongoalsallowed, postseasonshotsallowed, postseasonsavepercent,
+									ROUND(((postseasonsavepercent - (select avg(postseasonsavepercent) from hockeygoalies))/(select stddev(postseasonsavepercent) from hockeygoalies)),3)
+									from hockeygoalies
+									where hockeygoalies.goalieid = '" . $playerid . "' and postseasongames != 0
+									order by year";
+			$querycareerpostseasonstats1 = "select sum(postseasongames), sum(postseasonminutes), sum(postseasonwins), sum(postseasonloss),
+											ROUND((sum(postseasonwins)/(sum(postseasonwins) + sum(postseasonloss))),3),
+											sum(postseasonemptynetgoals), sum(postseasonshutouts), sum(postseasongoalsallowed), sum(postseasonshotsallowed), 
+											ROUND((1 - (sum(postseasongoalsallowed)/(sum(postseasonshotsallowed)))),3)
+											from hockeygoalies
+											where hockeygoalies.goalieid = '" . $playerid . "'";
+			$queryshootoutstats = "select distinct year, team, wins, loss, winpercent, 
+									ROUND(((winpercent - (select avg(winpercent) from hockeygoaliesshootout))/(select stddev(winpercent) from hockeygoaliesshootout)),3),
+									goalsallowed, shotsallowed, savepercent,
+									ROUND(((savepercent - (select avg(savepercent) from hockeygoaliesshootout))/(select stddev(savepercent) from hockeygoaliesshootout)),3)
+									from hockeygoaliesshootout
+									where hockeygoaliesshootout.goalieid = '" . $playerid . "'
+									order by year";
+			$querycareershootoutstats = "select sum(wins), sum(loss), ROUND((sum(wins)/(sum(wins) + sum(loss))),3),
+										sum(goalsallowed), sum(shotsallowed), ROUND((1 - (sum(goalsallowed)/(sum(shotsallowed)))),3)
+										from hockeygoaliesshootout
+										where hockeygoaliesshootout.goalieid = '" . $playerid . "'";
+			$queryscoringstats = "select distinct year, team, league, games, goals, goalspergame, assists, assistspergame,
+								  points, pointspergame, 
+									ROUND(((pointspergame - (SELECT AVG(pointspergame) FROM hockeyscoring))/(SELECT STDDEV(pointspergame) + 0.0000001 FROM hockeyscoring)), 3), 
+									penaltyminutes, plusminus, powerplaygoals, powerplayassists, shorthandedgoals, shorthandedassists,
+									gamewinninggoals, gametyinggoals, shots, shotpercent,
+									ROUND(((shotpercent - (SELECT AVG(shotpercent) FROM hockeyscoring))/(SELECT STDDEV(shotpercent) + 0.000001 FROM hockeyscoring)), 3)
+									from hockeyscoring
+									where hockeyscoring.playerid = '" . $playerid . "' and shotpercent != -1
+									order by year";
+			$querycareerscoringstats = "select sum(games), sum(goals), ROUND((sum(goals)/(sum(games))),3), sum(assists), ROUND((sum(assists)/(sum(games))),3),
+									sum(points), ROUND((sum(points)/(sum(games))),3), 
+									sum(penaltyminutes), sum(plusminus), sum(powerplaygoals), sum(powerplayassists), sum(shorthandedgoals), sum(shorthandedassists),
+									sum(gamewinninggoals), sum(gametyinggoals), sum(shots), ROUND((sum(goals)/(sum(shots))),3)
+									from hockeyscoring
+									where hockeyscoring.playerid = '" . $playerid . "'";
+			$querypostseasonscoringstats = "select distinct year, team, league, postseasongames, postseasongoals, postseasongoalspergame, postseasonassists, postseasonassistspergame,
+											postseasonpoints, postseasonpointspergame, 
+											postseasonpenaltyminutes, postseasonplusminus, postseasonpowerplaygoals, postseasonpowerplayassists, postseasonshorthandedgoals, postseasonshorthandedassists,
+											postseasongamewinninggoals, postseasonshots, postseasonshotpercent
+											from hockeyscoring
+											where hockeyscoring.playerid = '" . $playerid . "' and postseasonshotpercent != -1
+											order by year";
+			$querycareerpostseasonscoringstats = "select sum(postseasongames), sum(postseasongoals), ROUND((sum(postseasongoals)/(sum(postseasongames))),3), sum(postseasonassists), ROUND((sum(postseasonassists)/(sum(postseasongames))),3),
+													sum(postseasonpoints), ROUND((sum(postseasonpoints)/(sum(postseasongames))),3), 
+													sum(postseasonpenaltyminutes), sum(postseasonplusminus), sum(postseasonpowerplaygoals), sum(postseasonpowerplayassists), sum(postseasonshorthandedgoals), sum(postseasonshorthandedassists),
+													sum(postseasongamewinninggoals), sum(postseasonshots), ROUND((sum(postseasongoals)/(sum(postseasonshots))),3)
+													from hockeyscoring
+													where hockeyscoring.playerid = '" . $playerid . "'";
 		}
 		if ($playertype == 'Position Player'){
+			$querybio = "SELECT firstname, lastname, birthmonth, birthday, birthyear, weight, height
+					FROM Hockeymaster
+					WHERE playerid IS NOT NULL AND playerid = '" . $playerid . "'";
+		    $queryscoringstats = "select distinct year, team, league, games, goals, goalspergame, assists, assistspergame,
+								  points, pointspergame, 
+									ROUND(((pointspergame - (SELECT AVG(pointspergame) FROM hockeyscoring))/(SELECT STDDEV(pointspergame) + 0.0000001 FROM hockeyscoring)), 3), 
+									penaltyminutes, plusminus, powerplaygoals, powerplayassists, shorthandedgoals, shorthandedassists,
+									gamewinninggoals, gametyinggoals, shots, shotpercent,
+									ROUND(((shotpercent - (SELECT AVG(shotpercent) FROM hockeyscoring))/(SELECT STDDEV(shotpercent) + 0.000001 FROM hockeyscoring)), 3)
+									from hockeyscoring
+									where hockeyscoring.playerid = '" . $playerid . "' and shotpercent != -1
+									order by year";
+			$querycareerscoringstats = "select sum(games), sum(goals), ROUND((sum(goals)/(sum(games))),3), sum(assists), ROUND((sum(assists)/(sum(games))),3),
+									sum(points), ROUND((sum(points)/(sum(games))),3), 
+									sum(penaltyminutes), sum(plusminus), sum(powerplaygoals), sum(powerplayassists), sum(shorthandedgoals), sum(shorthandedassists),
+									sum(gamewinninggoals), sum(gametyinggoals), sum(shots), ROUND((sum(goals)/(sum(shots))),3)
+									from hockeyscoring
+									where hockeyscoring.playerid = '" . $playerid . "'";
+			$querypostseasonscoringstats = "select distinct year, team, league, postseasongames, postseasongoals, postseasongoalspergame, postseasonassists, postseasonassistspergame,
+											postseasonpoints, postseasonpointspergame, 
+											postseasonpenaltyminutes, postseasonplusminus, postseasonpowerplaygoals, postseasonpowerplayassists, postseasonshorthandedgoals, postseasonshorthandedassists,
+											postseasongamewinninggoals, postseasonshots, postseasonshotpercent
+											from hockeyscoring
+											where hockeyscoring.playerid = '" . $playerid . "' and postseasonshotpercent != -1
+											order by year";
+			$querycareerpostseasonscoringstats = "select sum(postseasongames), sum(postseasongoals), ROUND((sum(postseasongoals)/(sum(postseasongames))),3), sum(postseasonassists), ROUND((sum(postseasonassists)/(sum(postseasongames))),3),
+													sum(postseasonpoints), ROUND((sum(postseasonpoints)/(sum(postseasongames))),3), 
+													sum(postseasonpenaltyminutes), sum(postseasonplusminus), sum(postseasonpowerplaygoals), sum(postseasonpowerplayassists), sum(postseasonshorthandedgoals), sum(postseasonshorthandedassists),
+													sum(postseasongamewinninggoals), sum(postseasonshots), ROUND((sum(postseasongoals)/(sum(postseasonshots))),3)
+													from hockeyscoring
+													where hockeyscoring.playerid = '" . $playerid . "'";
+			$queryshootoutstats1 = "select distinct year, team, shots, goals, gamedecidinggoals, shotpercent,
+									ROUND(((shotpercent - (SELECT AVG(shotpercent) FROM hockeyscoringshootout))/(SELECT STDDEV(shotpercent) + 0.000001 FROM hockeyscoringshootout)), 3)
+									from hockeyscoringshootout
+									where hockeyscoringshootout.playerid = '" . $playerid . "' and shotpercent != -1
+									order by year";
+			$querycareershootoutstats1 = "select sum(shots), sum(goals), sum(gamedecidinggoals), ROUND((sum(goals)/(sum(shots))),3)
+									from hockeyscoringshootout
+									where hockeyscoringshootout.playerid = '" . $playerid . "'
+									order by year";
 		}
 		if ($playertype == 'Team'){
 			$querystats = "select distinct year, team, league, conference, division, rank, games, win, loss, points,  goals, ROUND(((goals - (select avg(goals) from hockeyteams))/(select stddev(goals) from hockeyteams)),3) zScore,
@@ -426,8 +576,25 @@
 					echo '<br>';
 					echo '<b>Regular Season Stats</b> </font>';
 				}
-				if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				
+				if($playertype == 'Goalie'){
+					echo '<font size = "4">';
+					echo "<b> Biographical Information </b> <br>";
+					echo 'Name: ' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . "<br>";
+					echo 'Date of Birth: ' . $row['BIRTHMONTH'] . '/' . $row['BIRTHDAY'] . '/' . $row['BIRTHYEAR'] . "<br>";
+					echo 'Height: ' . $row['HEIGHT'] . " inches <br>";
+					echo 'Weight: ' . $row['WEIGHT'] . " pounds <br>";
+					echo '<br>';
+					echo '<b>Regular Season Goaltending Stats</b> </font>';
+				}
+				if($playertype == 'Position Player')
+				{
+					echo '<font size = "4">';
+					echo "<b> Biographical Information </b> <br>";
+					echo 'Name: ' . $row['FIRSTNAME'] . ' ' . $row['LASTNAME'] . "<br>";
+					echo 'Date of Birth: ' . $row['BIRTHMONTH'] . '/' . $row['BIRTHDAY'] . '/' . $row['BIRTHYEAR'] . "<br>";
+					echo 'Height: ' . $row['HEIGHT'] . " inches <br>";
+					echo 'Weight: ' . $row['WEIGHT'] . " pounds <br>";
+					echo '<br>';
 				}
 			}
 		}
@@ -436,7 +603,7 @@
 	{
 		echo '<fontsize = "4"><b>Team Regular Season Stats</b></font><br>';
 	}
-	if($sport == 'Baseball' && $playertype == 'Position Player')
+	if(($sport == 'Baseball' && $playertype == 'Position Player') || ($sport == 'Hockey' && $playertype == 'Position Player'))
 	{
 		
 	}
@@ -703,9 +870,26 @@
 				echo '<th>Points Per Game z-Score</th>';
 				echo '</tr>';
 			}
-			if($playertype == 'Goalie' || $playertype == 'Position Player')
+			if($playertype == 'Goalie')
 			{
-				
+				echo '<tr>';
+				echo '<th>Year</th>';
+				echo '<th>Team</th>';
+				echo '<th>League</th>';
+				echo '<th>Games</th>';
+				echo '<th>Minutes</th>';
+				echo '<th>Wins</th>';
+				echo '<th>Losses</th>';
+				echo '<th>Ties</th>';
+				echo '<th>Points Per Game</th>';
+				echo '<th>Points Per Game z-Score</th>';
+				echo '<th>Empty Net Goals</th>';
+				echo '<th>Shutouts</th>';
+				echo '<th>Goals Allowed</th>';
+				echo '<th>Shots Allowed</th>';
+				echo '<th>Save Percent</th>';
+				echo '<th>Save Percent z-Score</th>';
+				echo '</tr>';
 			}
 			if($playertype == 'Team')
 			{
@@ -773,6 +957,10 @@
 		{
 				echo '<font size = "4"><b>Career Regular Season Stats</b></font><br>';
 		}
+		if($playertype == 'Player')
+		{
+				echo '<font size = "4"><b>Career Regular Season Stats</b></font><br>';
+		}
 	}
 	else if($sport == 'Hockey')
 	{
@@ -780,16 +968,16 @@
 		{
 			echo '<font size = "4"><b>Career Regular Season Stats</b></font><br>';
 		}
-		if($playertype == 'Goalie' || $playertype == 'Position Player')
+		if($playertype == 'Goalie')
 		{
-				
+			echo '<font size = "4"><b>Career Regular Season Goaltending Stats</b></font><br>';
 		}
 		if($playertype == 'Team')
 		{
 			echo '<font size = "4"><b>Career Regular Season Stats</b></font><br>';
 		}
 	}
-	if($sport == 'Baseball' && $playertype == 'Position Player')
+	if(($sport == 'Baseball' && $playertype == 'Position Player') || ($sport == 'Hockey' && $playertype == 'Position Player'))
 	{
 		
 	}
@@ -854,6 +1042,7 @@
 				echo '<th>Total Double Plays</th>';
 				echo '</tr>';
 			}
+			
 		}
 		else if($sport == 'Basketball')
 		{
@@ -867,6 +1056,7 @@
 			}
 			if($playertype == 'Team')
 			{
+				echo '<tr>';
 				echo '<th>Total Games</th>';
 				echo '<th>Total Field Goals Made</th>';
 				echo '<th>Total Field Goal Attempts</th>';
@@ -927,6 +1117,34 @@
 				echo '<th>Total Minutes</th>';
 				echo '</tr>';
 			}
+			if($playertype == 'Player')
+			{
+				echo '<tr>';
+				echo '<th>Total Games</th>';
+				echo '<th>Total Minutes</th>';
+				echo '<th>Total Points</th>';
+				echo '<th>Total Points Per Game</th>';
+				echo '<th>Total Offensive Rebounds</th>';
+				echo '<th>Total Defensive Rebounds</th>';
+				echo '<th>Total Rebounds</th>';
+				echo '<th>Total Rebounds Per Game</th>';
+				echo '<th>Total Assists</th>';
+				echo '<th>Total Assists Per Game</th>';
+				echo '<th>Total Steals</th>';
+				echo '<th>Total Blocks</th>';
+				echo '<th>Total Turnovers</th>';
+				echo '<th>Total Fouls</th>';
+				echo '<th>Total Field Goal Attempts</th>';
+				echo '<th>Total Field Goals Made</th>';
+				echo '<th>Total Field Goal Percent</th>';
+				echo '<th>Total Free Throw Attempts</th>';
+				echo '<th>Total Free Throws Made</th>';
+				echo '<th>Total Free Throw Percent</th>';
+				echo '<th>Total Three Point Attempts</th>';
+				echo '<th>Total Three Pointers Made</th>';
+				echo '<th>Total Three Point Percent</th>';
+				echo '</tr>';
+			}
 		}
 		else if($sport == 'Hockey')
 		{
@@ -939,8 +1157,19 @@
 				echo '<th>Total Points Per Game z-Score</th>';
 				echo '</tr>';
 			}
-			if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				
+			if($playertype == 'Goalie'){
+				echo '<tr>';
+				echo '<th>Total Games</th>';
+				echo '<th>Total Minutes</th>';
+				echo '<th>Total Wins</th>';
+				echo '<th>Total Losses</th>';
+				echo '<th>Total Ties</th>';
+				echo '<th>Total Empty Net Goals</th>';
+				echo '<th>Total Shutouts</th>';
+				echo '<th>Total Goals Allowed</th>';
+				echo '<th>Total Shots Allowed</th>';
+				echo '<th>Total Save Percent</th>';
+				echo '</tr>';
 			}
 			if($playertype == 'Team')
 			{
@@ -989,6 +1218,10 @@
 			if($playertype == 'Coach'){
 				echo '<font size = "4"><b>Postseason Stats</b></font><br>';
 			}
+			if($playertype == 'Player')
+			{
+				echo '<font size = "4"><b>Postseason Stats</b></font><br>';
+			}
 		}
 		else if($sport == 'Hockey'){
 			if($playertype == 'Coach'){
@@ -998,18 +1231,16 @@
 			{
 				echo '<font size = "4"><b>Postseason Stats</b></font><br>';
 			}
-			if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				
+			if($playertype == 'Goalie'){
+				echo '<font size = "4"><b>Postseason Goaltending Stats</b></font><br>';
 			}
 		}
 	$statementpostseasonstats = oci_parse($connection, $querypostseasonstats);
-	if(($sport == 'Baseball' && $playertype == 'Pitcher') ||($sport == 'Basketball' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype == 'Team'))
+	if(($sport == 'Baseball' && $playertype == 'Pitcher') ||($sport == 'Basketball' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype == 'Team') || ($sport == 'Basketball' && $playertype == 'Player') || ($sport == 'Hockey' && $playertype == 'Goalie'))
 	{
 		oci_execute($statementpostseasonstats);
 		echo "<table border='1'>\n";
 		if($sport == 'Baseball'){
-			if($playertype == 'Manager'){
-			}
 			if($playertype == 'Pitcher'){
 				echo '<tr>';
 				echo '<th>Year</th>';
@@ -1048,8 +1279,6 @@
 				echo '<th>SO9</th>';
 				echo '</tr>';
 			}
-			if($playertype == 'Position Player'){
-			}
 		}
 		else if($sport == 'Basketball'){
 			if($playertype == 'Coach')
@@ -1062,6 +1291,43 @@
 				echo '<th>Losses</th>';
 				echo '<th>Win Percent</th>';
 				echo '<th>Win Percent z-Score</th>';
+				echo '</tr>';
+			}
+			if($playertype == 'Player')
+			{
+				echo '<tr>';
+				echo '<th>Year</th>';
+				echo '<th>Team</th>';
+				echo '<th>League</th>';
+				echo '<th>Games</th>';
+				echo '<th>Minutes</th>';
+				echo '<th>Points</th>';
+				echo '<th>Points Per Game</th>';
+				echo '<th>Points Per Game z-Score</th>';
+				echo '<th>Offensive Rebounds</th>';
+				echo '<th>Defensive Rebounds</th>';
+				echo '<th>Rebounds</th>';
+				echo '<th>Rebounds Per Game</th>';
+				echo '<th>Rebounds Per Game z-Score</th>';
+				echo '<th>Assists</th>';
+				echo '<th>Assists Per Game</th>';
+				echo '<th>Assists Per Game z-Score</th>';
+				echo '<th>Steals</th>';
+				echo '<th>Blocks</th>';
+				echo '<th>Turnovers</th>';
+				echo '<th>Fouls</th>';
+				echo '<th>Field Goal Attempts</th>';
+				echo '<th>Field Goals Made</th>';
+				echo '<th>Field Goal Percent</th>';
+				echo '<th>Field Goal Percent z-Score</th>';
+				echo '<th>Free Throw Attempts</th>';
+				echo '<th>Free Throws Made</th>';
+				echo '<th>Free Throw Percent</th>';
+				echo '<th>Free Throw Percent z-Score</th>';
+				echo '<th>Three Point Attempts</th>';
+				echo '<th>Three Pointers Made</th>';
+				echo '<th>Three Point Percent</th>';
+				echo '<th>Three Point Percent z-Score</th>';
 				echo '</tr>';
 			}
 		}
@@ -1105,8 +1371,24 @@
 				echo '<th>Goals Allowed z-Score</th>';
 				echo '</tr>';
 			}
-			if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				
+			if($playertype == 'Goalie'){
+					echo '<tr>';
+					echo '<th>Year</th>';
+					echo '<th>Team</th>';
+					echo '<th>League</th>';
+					echo '<th>Games</th>';
+					echo '<th>Minutes</th>';
+					echo '<th>Wins</th>';
+					echo '<th>Losses</th>';
+					echo '<th>Win Percent</th>';
+					echo '<th>Win Percent z-Score</th>';
+					echo '<th>Empty Net Goals</th>';
+					echo '<th>Shutouts</th>';
+					echo '<th>Goals Allowed</th>';
+					echo '<th>Shots Allowed</th>';
+					echo '<th>Save Percent</th>';
+					echo '<th>Save Percent z-Score</th>';
+					echo '</tr>';
 			}
 		}
 		while ($row = oci_fetch_array($statementpostseasonstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
@@ -1118,9 +1400,8 @@
 		}
 		echo "</table><br>";
 	}
-	if ($playertype == 'Team'){
-		}
-		else if($sport == 'Baseball'){
+	
+		if($sport == 'Baseball'){
 			if($playertype == 'Manager'){
 				
 			}
@@ -1134,20 +1415,24 @@
 			if($playertype == 'Coach'){
 				echo '<font size = "4"><b>Career Postseason Stats</b></font><br>';
 			}
+			if($playertype == 'Player')
+			{
+				echo '<font size = "4"><b>Career Postseason Stats</b></font><br>';
+			}
 		}
 		else if($sport == 'Hockey'){
 			if($playertype == 'Coach'){
 				echo '<font size = "4"><b>Career Postseason Stats</b></font><br>';
 			}
-			if($playertype == 'Goalie' || $playertype == 'Position Player'){
-				
-			}
 		}
-
 	$statementcareerpostseasonstats = oci_parse($connection, $querycareerpostseasonstats);
-	if($playertype != 'Team')
+	if($playertype == 'Team' || ($sport == 'Hockey' && $playertype == 'Goalie') || ($sport == 'Hockey' && $playertype == 'Position Player'))
 	{
-		if(($sport == 'Baseball' && $playertype == 'Pitcher') || ($sport == 'Basketball' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype = 'Coach'))
+		
+	}
+	else
+	{
+		if(($sport == 'Baseball' && $playertype == 'Pitcher') || ($sport == 'Basketball' && $playertype == 'Coach') || ($sport == 'Hockey' && $playertype = 'Coach') || ($sport == 'Basketball' && $playertype == 'Player'))
 		{
 			oci_execute($statementcareerpostseasonstats);
 			echo "<table border='1'>\n";
@@ -1174,22 +1459,44 @@
 					echo '<th>Total Win Percent</th>';
 					echo '</tr>';
 				}
+				if($playertype == 'Player')
+				{
+					echo '<tr>';
+					echo '<th>Total Games</th>';
+					echo '<th>Total Minutes</th>';
+					echo '<th>Total Points</th>';
+					echo '<th>Total Points Per Game</th>';
+					echo '<th>Total Offensive Rebounds</th>';
+					echo '<th>Total Defensive Rebounds</th>';
+					echo '<th>Total Rebounds</th>';
+					echo '<th>Total Rebounds Per Game</th>';
+					echo '<th>Total Assists</th>';
+					echo '<th>Total Assists Per Game</th>';
+					echo '<th>Total Steals</th>';
+					echo '<th>Total Blocks</th>';
+					echo '<th>Total Turnovers</th>';
+					echo '<th>Total Fouls</th>';
+					echo '<th>Total Field Goal Attempts</th>';
+					echo '<th>Total Field Goals Made</th>';
+					echo '<th>Total Field Goal Percent</th>';
+					echo '<th>Total Free Throw Attempts</th>';
+					echo '<th>Total Free Throws Made</th>';
+					echo '<th>Total Free Throw Percent</th>';
+					echo '<th>Total Three Point Attempts</th>';
+					echo '<th>Total Three Pointers Made</th>';
+					echo '<th>Total Three Point Percent</th>';
+					echo '</tr>';
+				}
 			}
 			else if($sport == 'Hockey')
 			{
-				if($playertype == 'Coach' && $playertype != 'Team'){
+				if($playertype != 'Goalie'){
 					echo '<tr>';
 					echo '<th>Total Wins</th>';
 					echo '<th>Total Losses</th>';
 					echo '<th>Total Ties</th>';
 					echo '<th>Total Win Percent</th>';
 					echo '</tr>';	
-				}
-				if($playertype == 'Goalie' || $playertype == 'Position Player'){
-					
-				}
-				if($playertype == 'Team'){
-					
 				}
 			}
 			while ($row = oci_fetch_array($statementcareerpostseasonstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
@@ -1555,6 +1862,337 @@
 			}
 			echo "</table><br>";
 	}
+	$statementallstarstats = oci_parse($connection, $queryallstarstats);
+	if($sport == 'Basketball' && $playertype == 'Player')
+	{
+		echo '<font size = "4"><b>All-Star Game Stats</b></font><br>';
+		oci_execute($statementallstarstats);
+		echo "<table border='1'>\n";
+		echo "<tr>\n";
+		echo '<th>Year</th>';
+		echo '<th>Conference</th>';
+		echo '<th>League</th>';
+		echo '<th>Minutes</th>';
+		echo '<th>Points</th>';
+		echo '<th>Offensive Rebounds</th>';
+		echo '<th>Defensive Rebounds</th>';
+		echo '<th>Rebounds</th>';
+		echo '<th>Assists</th>';
+		echo '<th>Steals</th>';
+		echo '<th>Blocks</th>';
+		echo '<th>Turnovers</th>';
+		echo '<th>Fouls</th>';
+		echo '<th>Field Goal Attempts</th>';
+		echo '<th>Field Goals Made</th>';
+		echo '<th>Free Throw Attempts</th>';
+		echo '<th>Free Throws Made</th>';
+		echo '<th>Three Point Attempts</th>';
+		echo '<th>Three Pointers Made</th>';
+		echo '</tr>';	   
+		while ($row = oci_fetch_array($statementallstarstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
+			
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+	$statementcareerallstarstats = oci_parse($connection, $querycareerallstarstats);
+	if($sport == 'Basketball' && $playertype == 'Player')
+	{
+		echo '<font size = "4"><b>Career All-Star Game Stats</b></font><br>';
+		oci_execute($statementcareerallstarstats);
+		echo "<table border='1'>\n";
+		echo "<tr>\n";
+		echo '<th>Total Minutes</th>';
+		echo '<th>Total Points</th>';
+		echo '<th>Total Offensive Rebounds</th>';
+		echo '<th>Total Defensive Rebounds</th>';
+		echo '<th>Total Rebounds</th>';
+		echo '<th>Total Assists</th>';
+		echo '<th>Total Steals</th>';
+		echo '<th>Total Blocks</th>';
+		echo '<th>Total Turnovers</th>';
+		echo '<th>Total Fouls</th>';
+		echo '<th>Total Field Goal Attempts</th>';
+		echo '<th>Total Field Goals Made</th>';
+		echo '<th>Total Free Throw Attempts</th>';
+		echo '<th>Total Free Throws Made</th>';
+		echo '<th>Total Three Point Attempts</th>';
+		echo '<th>Total Three Pointers Made</th>';
+		echo '</tr>';	   
+		while ($row = oci_fetch_array($statementcareerallstarstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
+			
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+	$statementcareerpostseasonstats1 = oci_parse($connection, $querycareerpostseasonstats1);
+	if($sport == 'Hockey' && $playertype == 'Goalie')
+	{
+		echo '<font size = "4"><b>Career Postseason Goaltending Stats</b></font><br>';
+		oci_execute($statementcareerpostseasonstats1);
+		echo "<table border='1'>\n";
+		echo '<tr>';
+					echo '<th>Total Games</th>';
+					echo '<th>Total Minutes</th>';
+					echo '<th>Total Wins</th>';
+					echo '<th>Total Losses</th>';
+					echo '<th>Total Win Percent</th>';
+					echo '<th>Total Empty Net Goals</th>';
+					echo '<th>Total Shutouts</th>';
+					echo '<th>Total Goals Allowed</th>';
+					echo '<th>Total Shots Allowed</th>';
+					echo '<th>Total Save Percent</th>';
+					echo '</tr>';   
+		while ($row = oci_fetch_array($statementcareerpostseasonstats1, OCI_ASSOC+OCI_RETURN_NULLS)) {
+			
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+    $statementshootoutstats = oci_parse($connection, $queryshootoutstats);
+	if($sport == 'Hockey' && $playertype == 'Goalie')
+	{
+		oci_execute($statementshootoutstats);
+				echo '<font size = "4"><b>Shootout Goaltending Stats</b></font><br>';
+				echo "<table border='1'>\n";
+				echo '<tr>';
+				echo '<th>Year</th>';
+				echo '<th>Team</th>';
+				echo '<th>Wins</th>';
+				echo '<th>Lossses</th>';
+				echo '<th>Win Percent</th>';
+				echo '<th>Win Percent z-Score</th>';
+				echo '<th>Goals Allowed</th>';
+				echo '<th>Shots Allowed</th>';
+				echo '<th>Save Percent</th>';
+				echo '<th>Save Percent z-Score</th>';
+				echo '</tr>';
+		while ($row = oci_fetch_array($statementshootoutstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
+			
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+	$statementcareershootoutstats = oci_parse($connection, $querycareershootoutstats);
+	if($sport == 'Hockey' && $playertype == 'Goalie')
+	{
+		oci_execute($statementcareershootoutstats);
+				echo '<font size = "4"><b>Career Shootout Goaltending Stats</b></font><br>';
+				echo "<table border='1'>\n";
+				echo '<tr>';
+				echo '<th>Total Wins</th>';
+				echo '<th>Total Lossses</th>';
+				echo '<th>Total Win Percent</th>';
+				echo '<th>Total Goals Allowed</th>';
+				echo '<th>Total Shots Allowed</th>';
+				echo '<th>Total Save Percent</th>';
+				echo '</tr>'; 
+		while ($row = oci_fetch_array($statementcareershootoutstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
+			
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+	$statementscoringstats = oci_parse($connection, $queryscoringstats);
+	if(($sport == 'Hockey' && $playertype == 'Goalie') || ($sport == 'Hockey' && $playertype == 'Position Player'))
+	{
+		oci_execute($statementscoringstats);
+		echo '<font size = "4"><b>Regular Season Scoring Stats</b></font><br>';
+		echo "<table border='1'>\n";
+		echo '<tr>';
+		echo '<th>Year</th>';
+		echo '<th>Team</th>';
+		echo '<th>League</th>';
+		echo '<th>Games</th>';
+		echo '<th>Goals</th>';
+		echo '<th>Goals Per Game</th>';
+		echo '<th>Assists</th>';
+		echo '<th>Assists Per Game</th>';
+		echo '<th>Points</th>';
+		echo '<th>Points Per Game</th>';
+		echo '<th>Points Per Game z-Score</th>';
+		echo '<th>Penalty Minutes</th>';
+		echo '<th>+/-</th>';
+		echo '<th>Power Play Goals</th>';
+		echo '<th>Power Play Assists</th>';
+		echo '<th>Short Handed Goals</th>';
+		echo '<th>Short Handed Assists</th>';
+		echo '<th>Game Winning Goals</th>';
+		echo '<th>Game Tying Goals</th>';
+		echo '<th>Shots</th>';
+		echo '<th>Shot Percent</th>';
+		echo '<th>Shot Percent z-Score</th>';
+		echo '</tr>';
+		while ($row = oci_fetch_array($statementscoringstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
+			
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+	$statementcareerscoringstats = oci_parse($connection, $querycareerscoringstats);
+	if(($sport == 'Hockey' && $playertype == 'Goalie') || ($sport == 'Hockey' && $playertype == 'Position Player'))
+	{
+		oci_execute($statementcareerscoringstats);
+		echo '<font size = "4"><b>Career Regular Season Scoring Stats</b></font><br>';
+		echo "<table border='1'>\n";
+		echo '<tr>';
+		echo '<th>Total Games</th>';
+		echo '<th>Total Goals</th>';
+		echo '<th>Total Goals Per Game</th>';
+		echo '<th>Total Assists</th>';
+		echo '<th>Total Assists Per Game</th>';
+		echo '<th>Total Points</th>';
+		echo '<th>Total Points Per Game</th>';
+		echo '<th>Total Penalty Minutes</th>';
+		echo '<th>Total +/-</th>';
+		echo '<th>Total Power Play Goals</th>';
+		echo '<th>Total Power Play Assists</th>';
+		echo '<th>Total Short Handed Goals</th>';
+		echo '<th>Total Short Handed Assists</th>';
+		echo '<th>Total Game Winning Goals</th>';
+		echo '<th>Total Game Tying Goals</th>';
+		echo '<th>Total Shots</th>';
+		echo '<th>Total Shot Percent</th>';
+		echo '</tr>';
+		while ($row = oci_fetch_array($statementcareerscoringstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
+			
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+	$statementpostseasonscoringstats = oci_parse($connection, $querypostseasonscoringstats);
+	if(($sport == 'Hockey' && $playertype == 'Goalie') || ($sport == 'Hockey' && $playertype == 'Position Player'))
+	{
+		oci_execute($statementpostseasonscoringstats);
+		echo '<font size = "4"><b>Postseason Scoring Stats</b></font><br>';
+		echo "<table border='1'>\n";
+		echo '<tr>';
+		echo '<th>Year</th>';
+		echo '<th>Team</th>';
+		echo '<th>League</th>';
+		echo '<th>Games</th>';
+		echo '<th>Goals</th>';
+		echo '<th>Goals Per Game</th>';
+		echo '<th>Assists</th>';
+		echo '<th>Assists Per Game</th>';
+		echo '<th>Points</th>';
+		echo '<th>Points Per Game</th>';
+		echo '<th>Penalty Minutes</th>';
+		echo '<th>+/-</th>';
+		echo '<th>Power Play Goals</th>';
+		echo '<th>Power Play Assists</th>';
+		echo '<th>Short Handed Goals</th>';
+		echo '<th>Short Handed Assists</th>';
+		echo '<th>Game Winning Goals</th>';
+		echo '<th>Shots</th>';
+		echo '<th>Shot Percent</th>';
+		echo '</tr>';
+		while ($row = oci_fetch_array($statementpostseasonscoringstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
+			
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+	$statementcareerpostseasonscoringstats = oci_parse($connection, $querycareerpostseasonscoringstats);
+	if(($sport == 'Hockey' && $playertype == 'Goalie') || ($sport == 'Hockey' && $playertype == 'Position Player'))
+	{
+		oci_execute($statementcareerpostseasonscoringstats);
+		echo '<font size = "4"><b>Career Postseason Scoring Stats</b></font><br>';
+		echo "<table border='1'>\n";
+		echo '<tr>';
+		echo '<th>Total Games</th>';
+		echo '<th>Total Goals</th>';
+		echo '<th>Total Goals Per Game</th>';
+		echo '<th>Total Assists</th>';
+		echo '<th>Total Assists Per Game</th>';
+		echo '<th>Total Points</th>';
+		echo '<th>Total Points Per Game</th>';
+		echo '<th>Total Penalty Minutes</th>';
+		echo '<th>Total +/-</th>';
+		echo '<th>Total Power Play Goals</th>';
+		echo '<th>Total Power Play Assists</th>';
+		echo '<th>Total Short Handed Goals</th>';
+		echo '<th>Total Short Handed Assists</th>';
+		echo '<th>Total Game Winning Goals</th>';
+		echo '<th>Total Shots</th>';
+		echo '<th>Total Shot Percent</th>';
+		echo '</tr>';
+		while ($row = oci_fetch_array($statementcareerpostseasonscoringstats, OCI_ASSOC+OCI_RETURN_NULLS)) {
+			
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+	$statementshootoutstats1 = oci_parse($connection, $queryshootoutstats1);
+	if($sport == 'Hockey' && $playertype == 'Position Player')
+	{
+				oci_execute($statementshootoutstats1);
+				echo '<font size = "4"><b>Shootout Scoring Stats</b></font><br>';
+				echo "<table border='1'>\n";
+				echo '<tr>';
+				echo '<th>Year</th>';
+				echo '<th>Team</th>';
+				echo '<th>Shots</th>';
+				echo '<th>Goals</th>';
+				echo '<th>Game Deciding Goals</th>';
+				echo '<th>Shot Percent</th>';
+				echo '<th>Shot Percent z-Score</th>';
+				echo '</tr>'; 
+		while ($row = oci_fetch_array($statementshootoutstats1, OCI_ASSOC+OCI_RETURN_NULLS)) {
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
+	$statementcareershootoutstats1 = oci_parse($connection, $querycareershootoutstats1);
+	if($sport == 'Hockey' && $playertype == 'Position Player')
+	{
+				oci_execute($statementcareershootoutstats1);
+				echo '<font size = "4"><b>Career Shootout Scoring Stats</b></font><br>';
+				echo "<table border='1'>\n";
+				echo '<tr>';
+				echo '<th>Total Shots</th>';
+				echo '<th>Total Goals</th>';
+				echo '<th>Total Game Deciding Goals</th>';
+				echo '<th>Total Shot Percent</th>';
+				echo '</tr>'; 
+		while ($row = oci_fetch_array($statementcareershootoutstats1, OCI_ASSOC+OCI_RETURN_NULLS)) {
+				foreach ($row as $item) {
+					echo "    <td>" . ($item !== null ? htmlentities($item, ENT_QUOTES) : "&nbsp;") . "</td>\n";
+				}
+				echo "</tr>\n";
+			}
+			echo "</table><br>";
+	}
 	//
 	// VERY important to close Oracle Database Connections and free statements!
 	//
@@ -1573,5 +2211,17 @@
 	oci_free_statement($statementcareerfieldingstats);
 	oci_free_statement($statementpostseasonfieldingstats);
 	oci_free_statement($statementcareerpostseasonfieldingstats);
+	oci_free_statement($statementallstarstats);
+	oci_free_statement($statementcareerallstarstats);
+	oci_free_statement($statementcareerpostseasonstats1);
+	oci_free_statement($statementshootoutstats);
+	oci_free_statement($statementcareershootoutstats);
+	oci_free_statement($statementscoringstats);
+	oci_free_statement($statementcareerscoringstats);
+	oci_free_statement($statementpostseasonscoringstats);
+	oci_free_statement($statementcareerpostseasonscoringstats);
+	oci_free_statement($statementshootoutstats1);
+	oci_free_statement($statementcareershootoutstats1);
 	oci_close($connection);
 ?>
+
