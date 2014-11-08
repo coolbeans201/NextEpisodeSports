@@ -232,7 +232,7 @@
 		</ul>
 	</nav>
 	
-
+	<div>
 		<form name="myform" method="post">
 		<div>
 			<font size = "4"> Select sport: <select name="box1" id="sport" onchange="Box2(this.selectedIndex); ajaxFunction();">
@@ -244,11 +244,11 @@
 			<div><font size = "4"> Select player type: <select name="box2" id="playertype" onchange='ajaxFunction()'></select></font></div>
 			<div id='ajaxDiv'>Your result will display here</div>
 			
-			<input type= "button" style = "color:green" value="Compute" onclick="ajaxCompareQuery();"></input> <!--Button-->
+			<input type= "button" style = "color:green" value="Show Stats" onclick="ajaxCompareQuery();"></input> <!--Button-->
 			</form>
 			
 		<div id='compareDiv'></div>
-
+	</div>
 </body>
 </html>	
 
