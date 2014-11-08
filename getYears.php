@@ -26,7 +26,7 @@
 		}
 		if($playertype == 'Position Player Batting')
 		{
-			$query = "SELECT DISTINCT year FROM BasebalBatting ORDER BY year";
+			$query = "SELECT DISTINCT year FROM BaseballBatting ORDER BY year";
 		}
 		if($playertype == 'Position Player Fielding')
 		{
@@ -108,5 +108,7 @@
 	oci_free_statement($statement2);
 	oci_close($connection);
 ?>
+
+
 
 
