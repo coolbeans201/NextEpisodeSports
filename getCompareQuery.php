@@ -18,11 +18,11 @@
 	{
 		if ($playertype == 'Manager'){
 			$query = "SELECT *
-					FROM baseballmanagers
+					FROM baseballmanagers NATURAL JOIN baseballmaster
 					WHERE managerid IS NOT NULL AND managerid = '" . $playerid . "'";
 			
 			$query2 = "SELECT *
-					FROM baseballmanagers
+					FROM baseballmanagers NATURAL JOIN baseballmaster
 					WHERE managerid IS NOT NULL AND managerid = '" . $playerid2 . "'";
 		}
 		if ($playertype == 'Pitcher'){
@@ -120,9 +120,9 @@
 		oci_execute($statement);
 
 		if(true) {   
-			echo "cocks";
-			if ($playertype == 'Team'){
-				echo "<table border='1'>\n";
+			if($sport == 'Baseball'){
+				if ($playertype == 'Team'){
+				echo "<table border='1' float:left>\n";
 					echo '<tr>';
 						echo '<th>Name</th>';
 						echo '<th>Year</th>';
@@ -149,9 +149,33 @@
 					}
 				echo "</table>";
 			}
-			else if($sport == 'Baseball'){
-				if($playertype == 'Manager'){
-					
+				else if($playertype == 'Manager'){
+					echo "<table border='1'  width='1000'>\n";
+					echo '<tr>';
+						echo '<th>Name</th>';
+						echo '<th>Year</th>';
+						echo '<th>Team</th>';
+						echo '<th>League</th>';
+						echo '<th>Games Played</th>';
+						echo '<th>Wins</th>';
+						echo '<th>Losses</th>';
+						echo '<th>Win Percent</th>';
+						echo '<th>Rank</th>';
+					echo '</tr>';
+					while($row=oci_fetch_assoc($statement)){
+						echo '<tr>';
+							echo '<td>'. $row['FIRSTNAME'] .' '. $row['LASTNAME'] .'</td>';
+							echo '<td>'. $row['YEAR'] .'</td>';
+							echo '<td>'. $row['TEAM'] .'</td>';
+							echo '<td>'. $row['LEAGUE'] .'</td>';
+							echo '<td>'. $row['GAMES'] .'</td>';
+							echo '<td>'. $row['WIN'] .'</td>';
+							echo '<td>'. $row['LOSS'] .'</td>';
+							echo '<td>'. $row['WINPERCENT'] .'</td>';
+							echo '<td>'. $row['RANK'] .'</td>';
+						echo '</tr>';
+					}
+				echo "</table>";
 				}
 				if($playertype == 'Pitcher' || $playertype == 'Position Player'){
 					
@@ -175,9 +199,37 @@
 		oci_execute($statement2);
 		
 		if(true) {   
-			echo "cocks";
-			if ($playertype == 'Team'){
-				echo "<table border='1'>\n";
+			if($sport == 'Baseball'){
+				if ($playertype == 'Team'){
+					echo "<table border='1' float:right>\n";
+						echo '<tr>';
+							echo '<th>Name</th>';
+							echo '<th>Year</th>';
+							echo '<th>Team</th>';
+							echo '<th>League</th>';
+							echo '<th>Games Played</th>';
+							echo '<th>Wins</th>';
+							echo '<th>Losses</th>';
+							echo '<th>Win Percent</th>';
+							echo '<th>Rank</th>';
+						echo '</tr>';
+						while($row=oci_fetch_assoc($statement2)){
+							echo '<tr>';
+								echo '<td>'. $row['NAME'] .'</td>';
+								echo '<td>'. $row['YEAR'] .'</td>';
+								echo '<td>'. $row['TEAM'] .'</td>';
+								echo '<td>'. $row['LEAGUE'] .'</td>';
+								echo '<td>'. $row['GAMES'] .'</td>';
+								echo '<td>'. $row['WIN'] .'</td>';
+								echo '<td>'. $row['LOSS'] .'</td>';
+								echo '<td>'. $row['WINPERCENT'] .'</td>';
+								echo '<td>'. $row['RANK'] .'</td>';
+							echo '</tr>';
+						}
+					echo "</table>";
+				}
+				else if($playertype == 'Manager'){
+					echo "<table border='1' width='1000'>\n";
 					echo '<tr>';
 						echo '<th>Name</th>';
 						echo '<th>Year</th>';
@@ -189,9 +241,9 @@
 						echo '<th>Win Percent</th>';
 						echo '<th>Rank</th>';
 					echo '</tr>';
-					while($row=oci_fetch_assoc($statement)){
+					while($row=oci_fetch_assoc($statement2)){
 						echo '<tr>';
-							echo '<td>'. $row['NAME'] .'</td>';
+							echo '<td>'. $row['FIRSTNAME'] .' '. $row['LASTNAME'] .'</td>';
 							echo '<td>'. $row['YEAR'] .'</td>';
 							echo '<td>'. $row['TEAM'] .'</td>';
 							echo '<td>'. $row['LEAGUE'] .'</td>';
@@ -202,13 +254,7 @@
 							echo '<td>'. $row['RANK'] .'</td>';
 						echo '</tr>';
 					}
-				echo "</table>";
-			}
-				echo "</table>";
-			}
-			else if($sport == 'Baseball'){
-				if($playertype == 'Manager'){
-					
+					echo "</table>";
 				}
 				if($playertype == 'Pitcher' || $playertype == 'Position Player'){
 					
