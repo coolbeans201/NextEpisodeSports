@@ -119,6 +119,50 @@
 		 queryString += "&stats=" + stats;
 		 queryString += "&range=" + range;
 		 ajaxRequest.open("GET", "getSortRetrieval.php" + queryString, true);
+		 ajaxRequest.send(null);
+		 }
+		 
+		 function ajaxSortLifetimeRetrieval(){
+		 var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		 try{
+		   // Opera 8.0+, Firefox, Safari
+		   ajaxRequest = new XMLHttpRequest();
+		 }catch (e){
+		   // Internet Explorer Browsers
+		   try{
+			  ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		   }catch (e) {
+			  try{
+				 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			  }catch (e){
+				 // Something went wrong
+				 alert("Your browser broke!");
+				 return false;
+			  }
+		   }
+		 }
+		 // Create a function that will receive data 
+		 // sent from the server and will update
+		 // div section in the same page.
+		 ajaxRequest.onreadystatechange = function(){
+		   if(ajaxRequest.readyState == 4){
+			  var ajaxDisplay = document.getElementById('textBoxDiv');
+			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
+		   }
+		 }
+		 // Now get the value from user and pass it to
+		 // server script.
+		 var sport = document.getElementById('sport').value;
+		 var playertype = document.getElementById('playertype').value;
+		 var stats = document.getElementById('stats').value;
+		 var range = document.getElementById('range').value;
+		 
+		 var queryString = "?sport=" + sport;
+		 queryString +=  "&playertype=" + playertype;
+		 queryString += "&stats=" + stats;
+		 queryString += "&range=" + range;
+		 ajaxRequest.open("GET", "getSortLifetimeRetrieval.php" + queryString, true);
 		 ajaxRequest.send(null); 
 	}
 	
@@ -263,7 +307,8 @@
   <option value = "100">Top 100</option>
 </select>
 </div>
-<input type= "button" style = "color:green" value="Compute" onclick="ajaxSortRetrieval();"></input>
+<input type= "button" style = "color:green" value="Compute Per Year" onclick="ajaxSortRetrieval();"></input>
+<input type= "button" style = "color:blue" value="Compute Lifetime" onclick="ajaxSortLifetimeRetrieval();"></input>
 </form>
 <div id='textBoxDiv'></div>
 </body>
