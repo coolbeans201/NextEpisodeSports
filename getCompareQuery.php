@@ -2219,10 +2219,11 @@
 						FROM BaseballManagers
 						WHERE BaseballManagers.MANAGERID = '" . $playerid2 . "'";
 		}
-		if ($playertype2 == 'Pitcher'){
+		if ($playertype == 'Pitcher'){
+			echo "echo this bitch right here";
 			$querybio2 = "SELECT firstname, lastname, birthmonth, birthday, birthyear, weight, height
 			FROM Baseballmaster
-			WHERE playerid2 = '" . $playerid2 . "'";
+			WHERE playerid = '" . $playerid2 . "'";
 			$querystats2 = "SELECT distinct year, team, league, wins, losses, ROUND(wins/(wins + losses),3) winpercent, 
 			games, starts, completegames, shutouts, saves, outs, hits, earnedruns, homeruns,
 			walks, strikeouts, bavg, 
@@ -2242,112 +2243,112 @@
 			era, ROUND(((era - (select avg(era) from baseballpitchingpostseason))/(select stddev(era) from baseballpitchingpostseason)),3) eraZSCORE,
 			intentionalwalks, wildpitches, hitbypitches, balks, battersfaced, finishes, runs, whip, h9, hr9, bb9, so9
 			FROM BaseballPitchingPostSeason
-			WHERE playerid2 = '" . $playerid2 . "'
+			WHERE playerid = '" . $playerid2 . "'
 			ORDER BY year";
 			$querycareerpostseasonstats2 = "SELECT SUM(Wins), SUM(losses), ROUND((SUM(wins) / (SUM(losses) + SUM(wins))), 3)
 			FROM baseballpitchingpostseason
-			WHERE playerid2 = '" . $playerid2 . "'";
+			WHERE playerid = '" . $playerid2 . "'";
 			$querybattingstats2 = "select distinct year, team, league, games, starts, atbats, runs, hits, battingaverage, ROUND(((battingaverage - (select avg(battingaverage) from baseballbatting))/(select stddev(battingaverage) from baseballbatting)),3) zScore,
 								  doubles, triples, homeruns, slugging, ROUND(((slugging - (select avg(slugging) from baseballbatting))/(select stddev(slugging) from baseballbatting)),3) zScore2,
 								  rbi, stolenbases, caughtstealing, walks, strikeouts, intentionalwalks, hitbypitch, onbasepercent,
 								  ROUND(((onbasepercent - (select avg(onbasepercent) from baseballbatting))/(select stddev(onbasepercent) from baseballbatting)),3) zScore3,
 								  sachits, sacflies, gidp
 								  from baseballbatting
-								  where baseballbatting.playerid2 = '" . $playerid2 . "' AND slugging != -1
+								  where baseballbatting.playerid = '" . $playerid2 . "' AND slugging != -1
 								  order by year";
 			$querycareerbattingstats2 = "select sum(games), sum(starts), sum(atbats), sum(runs), sum(hits), ROUND((sum(hits)/sum(atbats)),3)bAvg, 
 								  sum(doubles), sum(triples), sum(homeruns), ROUND(((sum(triples) * 3 + sum(homeruns) * 4 + sum(doubles) * 2 + (sum(hits)-sum(homeruns)-sum(triples)-sum(doubles)))/sum(atbats)),3) slugging,
 								  sum(rbi), sum(stolenbases), sum(caughtstealing), sum(walks), sum(strikeouts), sum(intentionalwalks), sum(hitbypitch),
 								  sum(sachits), sum(sacflies), sum(gidp)
 								  from baseballbatting
-								  where baseballbatting.playerid2 = '" . $playerid2 . "' AND slugging != -1";
+								  where baseballbatting.playerid = '" . $playerid2 . "' AND slugging != -1";
 			$querypostseasonbattingstats2 = "select distinct year, round, team, league, games, atbats, runs, hits, battingaverage, ROUND(((battingaverage - (select avg(battingaverage) from baseballbattingpostseason))/(select stddev(battingaverage) from baseballbattingpostseason)),3) zScore,
 								  doubles, triples, homeruns, slugging, ROUND(((slugging - (select avg(slugging) from baseballbattingpostseason))/(select stddev(slugging) from baseballbattingpostseason)),3) zScore2,
 								  rbi, stolenbases, caughtstealing, walks, strikeout, intentionalwalk, hitbypitch, onbasepercent,
 								  ROUND(((onbasepercent - (select avg(onbasepercent) from baseballbattingpostseason))/(select stddev(onbasepercent) from baseballbattingpostseason)),3) zScore3,
 								  sachits, sacflies, gidp
 								  from baseballbattingpostseason
-								  where baseballbattingpostseason.playerid2 = '" . $playerid2 . "'  AND slugging != -1
+								  where baseballbattingpostseason.playerid = '" . $playerid2 . "'  AND slugging != -1
 								  order by year";
 			$querycareerpostseasonbattingstats2 = "select sum(games), sum(atbats), sum(runs), sum(hits), ROUND((sum(hits)/sum(atbats)),3)bAvg, 
 								  sum(doubles), sum(triples), sum(homeruns), ROUND(((sum(triples) * 3 + sum(homeruns) * 4 + sum(doubles) * 2 + (sum(hits)-sum(homeruns)-sum(triples)-sum(doubles)))/sum(atbats)),3) slugging,
 								  sum(rbi), sum(stolenbases), sum(caughtstealing), sum(walks), sum(strikeout), sum(intentionalwalk), sum(hitbypitch),
 								  sum(sachits), sum(sacflies), sum(gidp)
 								  from baseballbattingpostseason
-								  where baseballbattingpostseason.playerid2 = '" . $playerid2 . "' AND slugging != -1";
+								  where baseballbattingpostseason.playerid = '" . $playerid2 . "' AND slugging != -1";
 			$queryfieldingstats2 = "select distinct year, team, league, position, games, starts, outs, putouts, errors, doubleplays, passedballs, stolenbasesallowed,
 									caughtstealingallowed, fieldingpercent, 
 									ROUND(((fieldingpercent - (select avg(fieldingpercent) from baseballfielding))/(select stddev(fieldingpercent) from baseballfielding)),3) zScore
 									from baseballfielding
-									where baseballfielding.playerid2 = '" . $playerid2 . "'
+									where baseballfielding.playerid = '" . $playerid2 . "'
 									order by year";
 			$querycareerfieldingstats2 = "select  sum(games), sum(starts), sum(outs), sum(putouts), sum(errors), sum(doubleplays), sum(passedballs), sum(stolenbasesallowed),
 										sum(caughtstealingallowed), ROUND(((sum(assists) + sum(putouts))/(sum(putouts) + sum(assists) + sum(errors))),3) fieldingPercent 
 										from baseballfielding
-										where baseballfielding.playerid2 = '" . $playerid2 . "'";
+										where baseballfielding.playerid = '" . $playerid2 . "'";
 			$querypostseasonfieldingstats2 = "select distinct year, round, team, league, position, games, starts, outs, putouts, errors, doubleplays, passedballs, stolenbasesallowed,
 											caughtstealingallowed, fieldingpercent, 
 											ROUND(((fieldingpercent - (select avg(fieldingpercent) from baseballfieldingpostseason))/(select stddev(fieldingpercent) from baseballfieldingpostseason)),3) zScore
 											from baseballfieldingpostseason
-											where baseballfieldingpostseason.playerid2 = '" . $playerid2 . "' and baseballfieldingpostseason.fieldingpercent != -1
+											where baseballfieldingpostseason.playerid = '" . $playerid2 . "' and baseballfieldingpostseason.fieldingpercent != -1
 											order by year";
 			$querycareerpostseasonfieldingstats2 = "select  sum(games), sum(starts), sum(outs), sum(putouts), sum(errors), sum(doubleplays), sum(passedballs), sum(stolenbasesallowed),
 													sum(caughtstealingallowed), ROUND(((sum(assists) + sum(putouts))/(sum(putouts) + sum(assists) + sum(errors))),3) fieldingPercent 
 													from baseballfieldingpostseason
-													where baseballfieldingpostseason.playerid2 = '" . $playerid2 . "'";
+													where baseballfieldingpostseason.playerid = '" . $playerid2 . "'";
 		}
 		if ($playertype == 'Position Player'){
 			$querybio2 = "SELECT firstname, lastname, birthmonth, birthday, birthyear, weight, height
 			FROM Baseballmaster
-			WHERE playerid2 = '" . $playerid2 . "'";
+			WHERE playerid = '" . $playerid2 . "'";
 			$querybattingstats2 = "select distinct year, team, league, games, starts, atbats, runs, hits, battingaverage, ROUND(((battingaverage - (select avg(battingaverage) from baseballbatting))/(select stddev(battingaverage) from baseballbatting)),3) zScore,
 								  doubles, triples, homeruns, slugging, ROUND(((slugging - (select avg(slugging) from baseballbatting))/(select stddev(slugging) from baseballbatting)),3) zScore2,
 								  rbi, stolenbases, caughtstealing, walks, strikeouts, intentionalwalks, hitbypitch, onbasepercent,
 								  ROUND(((onbasepercent - (select avg(onbasepercent) from baseballbatting))/(select stddev(onbasepercent) from baseballbatting)),3) zScore3,
 								  sachits, sacflies, gidp
 								  from baseballbatting
-								  where baseballbatting.playerid2 = '" . $playerid2 . "' AND slugging != -1
+								  where baseballbatting.playerid = '" . $playerid2 . "' AND slugging != -1
 								  order by year";
 			$querycareerbattingstats2 = "select sum(games), sum(starts), sum(atbats), sum(runs), sum(hits), ROUND((sum(hits)/sum(atbats)),3)bAvg, 
 								  sum(doubles), sum(triples), sum(homeruns), ROUND(((sum(triples) * 3 + sum(homeruns) * 4 + sum(doubles) * 2 + (sum(hits)-sum(homeruns)-sum(triples)-sum(doubles)))/sum(atbats)),3) slugging,
 								  sum(rbi), sum(stolenbases), sum(caughtstealing), sum(walks), sum(strikeouts), sum(intentionalwalks), sum(hitbypitch),
 								  sum(sachits), sum(sacflies), sum(gidp)
 								  from baseballbatting 
-								  where baseballbatting.playerid2 = '" . $playerid2 . "' AND slugging != -1";
+								  where baseballbatting.playerid = '" . $playerid2 . "' AND slugging != -1";
 			$querypostseasonbattingstats2 = "select distinct year, round, team, league, games, atbats, runs, hits, battingaverage, ROUND(((battingaverage - (select avg(battingaverage) from baseballbattingpostseason))/(select stddev(battingaverage) from baseballbattingpostseason)),3) zScore,
 								  doubles, triples, homeruns, slugging, ROUND(((slugging - (select avg(slugging) from baseballbattingpostseason))/(select stddev(slugging) from baseballbattingpostseason)),3) zScore2,
 								  rbi, stolenbases, caughtstealing, walks, strikeout, intentionalwalk, hitbypitch, onbasepercent,
 								  ROUND(((onbasepercent - (select avg(onbasepercent) from baseballbattingpostseason))/(select stddev(onbasepercent) from baseballbattingpostseason)),3) zScore3,
 								  sachits, sacflies, gidp
 								  from baseballbattingpostseason
-								  where baseballbattingpostseason.playerid2 = '" . $playerid2 . "'  AND slugging != -1
+								  where baseballbattingpostseason.playerid = '" . $playerid2 . "'  AND slugging != -1
 								  order by year";
 			$querycareerpostseasonbattingstats2 = "select sum(games), sum(atbats), sum(runs), sum(hits), ROUND((sum(hits)/sum(atbats)),3)bAvg, 
 								  sum(doubles), sum(triples), sum(homeruns), ROUND(((sum(triples) * 3 + sum(homeruns) * 4 + sum(doubles) * 2 + (sum(hits)-sum(homeruns)-sum(triples)-sum(doubles)))/sum(atbats)),3) slugging,
 								  sum(rbi), sum(stolenbases), sum(caughtstealing), sum(walks), sum(strikeout), sum(intentionalwalk), sum(hitbypitch),
 								  sum(sachits), sum(sacflies), sum(gidp)
 								  from baseballbattingpostseason
-								  where baseballbattingpostseason.playerid2 = '" . $playerid2 . "' AND slugging != -1";
+								  where baseballbattingpostseason.playerid = '" . $playerid2 . "' AND slugging != -1";
 			$queryfieldingstats2 = "select distinct year, team, league, position, games, starts, outs, putouts, errors, doubleplays, passedballs, stolenbasesallowed,
 									caughtstealingallowed, fieldingpercent, 
 									ROUND(((fieldingpercent - (select avg(fieldingpercent) from baseballfielding))/(select stddev(fieldingpercent) from baseballfielding)),3) zScore
 									from baseballfielding
-									where baseballfielding.playerid2 = '" . $playerid2 . "'
+									where baseballfielding.playerid = '" . $playerid2 . "'
 									order by year";
 			$querycareerfieldingstats2 = "select  sum(games), sum(starts), sum(outs), sum(putouts), sum(errors), sum(doubleplays), sum(passedballs), sum(stolenbasesallowed),
 										sum(caughtstealingallowed), ROUND(((sum(assists) + sum(putouts))/(sum(putouts) + sum(assists) + sum(errors))),3) fieldingPercent 
 										from baseballfielding
-										where baseballfielding.playerid2 = '" . $playerid2 . "'";
+										where baseballfielding.playerid = '" . $playerid2 . "'";
 			$querypostseasonfieldingstats2 = "select distinct year, round, team, league, position, games, starts, outs, putouts, errors, doubleplays, passedballs, stolenbasesallowed,
 											caughtstealingallowed, fieldingpercent, 
 											ROUND(((fieldingpercent - (select avg(fieldingpercent) from baseballfieldingpostseason))/(select stddev(fieldingpercent) from baseballfieldingpostseason)),3) zScore
 											from baseballfieldingpostseason
-											where baseballfieldingpostseason.playerid2 = '" . $playerid2 . "' and baseballfieldingpostseason.fieldingpercent != -1
+											where baseballfieldingpostseason.playerid = '" . $playerid2 . "' and baseballfieldingpostseason.fieldingpercent != -1
 											order by year";
 			$querycareerpostseasonfieldingstats2 = "select  sum(games), sum(starts), sum(outs), sum(putouts), sum(errors), sum(doubleplays), sum(passedballs), sum(stolenbasesallowed),
 													sum(caughtstealingallowed), ROUND(((sum(assists) + sum(putouts))/(sum(putouts) + sum(assists) + sum(errors))),3) fieldingPercent 
 													from baseballfieldingpostseason
-													where baseballfieldingpostseason.playerid2 = '" . $playerid2 . "'";
+													where baseballfieldingpostseason.playerid = '" . $playerid2 . "'";
 		}
 		if ($playertype == 'Team'){
 			$querystats2 = "select distinct year, team, league, division, rank, games, homegames, win, loss, winpercent, 
@@ -2425,7 +2426,7 @@
 							threeattempts, threemade, threepercent,
 							ROUND(((threepercent - (select avg(threepercent) from basketballplayers))/(select stddev(threepercent) from basketballplayers)),3)
 							FROM BASKETBALLplayers
-							WHERE playerid2 = '" . $playerid2 . "'
+							WHERE playerid = '" . $playerid2 . "'
 							order by year";
 			$querycareerstats2 = "SELECT sum(games), sum(minutes), sum(points), ROUND((sum(points)/sum(games)),3), 
 							sum(offensiverebounds), sum(defensiverebounds), sum(rebounds), ROUND((sum(rebounds)/sum(games)),3), 
@@ -2434,7 +2435,7 @@
 							sum(freethrowattempts), sum(freethrowmade), ROUND((sum(freethrowmade)/sum(freethrowattempts)),3),
 							sum(threeattempts), sum(threemade), ROUND((sum(threemade)/sum(threeattempts)),3)
 							FROM BASKETBALLplayers
-							WHERE playerid2 = '" . $playerid2 . "'";
+							WHERE playerid = '" . $playerid2 . "'";
 			$querypostseasonstats2 = "SELECT distinct year, team, league, postseasongames, postseasonminutes, postseasonpoints, postseasonpointspergame, 
 							ROUND(((postseasonpointspergame - (select avg(postseasonpointspergame) from basketballplayers))/(select stddev(postseasonpointspergame) from basketballplayers)),3) bavgZSCORE,
 							postseasonoffensiverebounds, postseasondefensiverebounds, postseasonrebounds, postseasonreboundspergame,
@@ -2448,7 +2449,7 @@
 							postseasonthreeattempts, postseasonthreemade, postseasonthreepercent,
 							ROUND(((postseasonthreepercent - (select avg(postseasonthreepercent) from basketballplayers))/(select stddev(postseasonthreepercent) from basketballplayers)),3)
 							FROM basketballplayers
-							WHERE basketballplayers.playerid2 = '" . $playerid2 . "' and postseasonpointspergame != -1
+							WHERE basketballplayers.playerid = '" . $playerid2 . "' and postseasonpointspergame != -1
 							order by year";
 			$querycareerpostseasonstats2 = "SELECT sum(postseasongames), sum(postseasonminutes), sum(postseasonpoints), ROUND((sum(postseasonpoints)/sum(postseasongames)),3), 
 							sum(postseasonoffensiverebounds), sum(postseasondefensiverebounds), sum(postseasonrebounds), ROUND((sum(postseasonrebounds)/sum(postseasongames)),3), 
@@ -2458,7 +2459,7 @@
 							sum(postseasonfreethrowattempts), sum(postseasonfreethrowmade), ROUND((sum(postseasonfreethrowmade)/sum(postseasonfreethrowattempts)),3), 	
 							sum(postseasonthreeattempts), sum(postseasonthreemade), ROUND((sum(postseasonthreemade)/sum(postseasonthreeattempts)),3)
 							FROM basketballplayers
-							WHERE playerid2 = '" . $playerid2 . "'";
+							WHERE playerid = '" . $playerid2 . "'";
 			$queryallstarstats2 = "select distinct year, conference, league, minutes, points, offensiverebounds, defensiverebounds, rebounds, assists, steals,
 									blocks, turnovers, fouls, fieldgoalattempts, fieldgoalmade,
 									freethrowattempts, freethrowmade, 
@@ -2542,7 +2543,7 @@
 		if ($playertype == 'Goalie'){
 			$querybio2 = "SELECT firstname, lastname, birthmonth, birthday, birthyear, weight, height
 					FROM Hockeymaster
-					WHERE playerid2 IS NOT NULL AND playerid2 = '" . $playerid2 . "'";
+					WHERE playerid IS NOT NULL AND playerid = '" . $playerid2 . "'";
 			$querystats2 = "select distinct year, team, league, games, minutes, wins, loss, ties, pointspergame, ROUND(((pointspergame - (select avg(pointspergame) from hockeygoalies))/(select stddev(pointspergame) from hockeygoalies)),3) bavgZSCORE,
 							emptynetgoals, shutouts, goalsallowed, shotsallowed, savepercent, ROUND(((savepercent - (select avg(savepercent) from hockeygoalies))/(select stddev(savepercent) from hockeygoalies)),3) bavgZSCORE2
 							from hockeygoalies
@@ -2583,32 +2584,32 @@
 									gamewinninggoals, gametyinggoals, shots, shotpercent,
 									ROUND(((shotpercent - (SELECT AVG(shotpercent) FROM hockeyscoring))/(SELECT STDDEV(shotpercent) + 0.000001 FROM hockeyscoring)), 3)
 									from hockeyscoring
-									where hockeyscoring.playerid2 = '" . $playerid2 . "' and shotpercent != -1
+									where hockeyscoring.playerid = '" . $playerid2 . "' and shotpercent != -1
 									order by year";
 			$querycareerscoringstats2 = "select sum(games), sum(goals), ROUND((sum(goals)/(sum(games))),3), sum(assists), ROUND((sum(assists)/(sum(games))),3),
 									sum(points), ROUND((sum(points)/(sum(games))),3), 
 									sum(penaltyminutes), sum(plusminus), sum(powerplaygoals), sum(powerplayassists), sum(shorthandedgoals), sum(shorthandedassists),
 									sum(gamewinninggoals), sum(gametyinggoals), sum(shots), ROUND((sum(goals)/(sum(shots))),3)
 									from hockeyscoring
-									where hockeyscoring.playerid2 = '" . $playerid2 . "'";
+									where hockeyscoring.playerid = '" . $playerid2 . "'";
 			$querypostseasonscoringstats2 = "select distinct year, team, league, postseasongames, postseasongoals, postseasongoalspergame, postseasonassists, postseasonassistspergame,
 											postseasonpoints, postseasonpointspergame, 
 											postseasonpenaltyminutes, postseasonplusminus, postseasonpowerplaygoals, postseasonpowerplayassists, postseasonshorthandedgoals, postseasonshorthandedassists,
 											postseasongamewinninggoals, postseasonshots, postseasonshotpercent
 											from hockeyscoring
-											where hockeyscoring.playerid2 = '" . $playerid2 . "' and postseasonshotpercent != -1
+											where hockeyscoring.playerid = '" . $playerid2 . "' and postseasonshotpercent != -1
 											order by year";
 			$querycareerpostseasonscoringstats2 = "select sum(postseasongames), sum(postseasongoals), ROUND((sum(postseasongoals)/(sum(postseasongames))),3), sum(postseasonassists), ROUND((sum(postseasonassists)/(sum(postseasongames))),3),
 													sum(postseasonpoints), ROUND((sum(postseasonpoints)/(sum(postseasongames))),3), 
 													sum(postseasonpenaltyminutes), sum(postseasonplusminus), sum(postseasonpowerplaygoals), sum(postseasonpowerplayassists), sum(postseasonshorthandedgoals), sum(postseasonshorthandedassists),
 													sum(postseasongamewinninggoals), sum(postseasonshots), ROUND((sum(postseasongoals)/(sum(postseasonshots))),3)
 													from hockeyscoring
-													where hockeyscoring.playerid2 = '" . $playerid2 . "'";
+													where hockeyscoring.playerid = '" . $playerid2 . "'";
 		}
 		if ($playertype == 'Position Player'){
 			$querybio2 = "SELECT firstname, lastname, birthmonth, birthday, birthyear, weight, height
 					FROM Hockeymaster
-					WHERE playerid2 IS NOT NULL AND playerid2 = '" . $playerid2 . "'";
+					WHERE playerid IS NOT NULL AND playerid = '" . $playerid2 . "'";
 		    $queryscoringstats2 = "select distinct year, team, league, games, goals, goalspergame, assists, assistspergame,
 								  points, pointspergame, 
 									ROUND(((pointspergame - (SELECT AVG(pointspergame) FROM hockeyscoring))/(SELECT STDDEV(pointspergame) + 0.0000001 FROM hockeyscoring)), 3), 
@@ -2616,35 +2617,35 @@
 									gamewinninggoals, gametyinggoals, shots, shotpercent,
 									ROUND(((shotpercent - (SELECT AVG(shotpercent) FROM hockeyscoring))/(SELECT STDDEV(shotpercent) + 0.000001 FROM hockeyscoring)), 3)
 									from hockeyscoring
-									where hockeyscoring.playerid2 = '" . $playerid2 . "' and shotpercent != -1
+									where hockeyscoring.playerid = '" . $playerid2 . "' and shotpercent != -1
 									order by year";
 			$querycareerscoringstats2 = "select sum(games), sum(goals), ROUND((sum(goals)/(sum(games))),3), sum(assists), ROUND((sum(assists)/(sum(games))),3),
 									sum(points), ROUND((sum(points)/(sum(games))),3), 
 									sum(penaltyminutes), sum(plusminus), sum(powerplaygoals), sum(powerplayassists), sum(shorthandedgoals), sum(shorthandedassists),
 									sum(gamewinninggoals), sum(gametyinggoals), sum(shots), ROUND((sum(goals)/(sum(shots))),3)
 									from hockeyscoring
-									where hockeyscoring.playerid2 = '" . $playerid2 . "'";
+									where hockeyscoring.playerid = '" . $playerid2 . "'";
 			$querypostseasonscoringstats2 = "select distinct year, team, league, postseasongames, postseasongoals, postseasongoalspergame, postseasonassists, postseasonassistspergame,
 											postseasonpoints, postseasonpointspergame, 
 											postseasonpenaltyminutes, postseasonplusminus, postseasonpowerplaygoals, postseasonpowerplayassists, postseasonshorthandedgoals, postseasonshorthandedassists,
 											postseasongamewinninggoals, postseasonshots, postseasonshotpercent
 											from hockeyscoring
-											where hockeyscoring.playerid2 = '" . $playerid2 . "' and postseasonshotpercent != -1
+											where hockeyscoring.playerid = '" . $playerid2 . "' and postseasonshotpercent != -1
 											order by year";
 			$querycareerpostseasonscoringstats2 = "select sum(postseasongames), sum(postseasongoals), ROUND((sum(postseasongoals)/(sum(postseasongames))),3), sum(postseasonassists), ROUND((sum(postseasonassists)/(sum(postseasongames))),3),
 													sum(postseasonpoints), ROUND((sum(postseasonpoints)/(sum(postseasongames))),3), 
 													sum(postseasonpenaltyminutes), sum(postseasonplusminus), sum(postseasonpowerplaygoals), sum(postseasonpowerplayassists), sum(postseasonshorthandedgoals), sum(postseasonshorthandedassists),
 													sum(postseasongamewinninggoals), sum(postseasonshots), ROUND((sum(postseasongoals)/(sum(postseasonshots))),3)
 													from hockeyscoring
-													where hockeyscoring.playerid2 = '" . $playerid2 . "'";
+													where hockeyscoring.playerid = '" . $playerid2 . "'";
 			$queryshootoutstats12 = "select distinct year, team, shots, goals, gamedecidinggoals, shotpercent,
 									ROUND(((shotpercent - (SELECT AVG(shotpercent) FROM hockeyscoringshootout))/(SELECT STDDEV(shotpercent) + 0.000001 FROM hockeyscoringshootout)), 3)
 									from hockeyscoringshootout
-									where hockeyscoringshootout.playerid2 = '" . $playerid2 . "' and shotpercent != -1
+									where hockeyscoringshootout.playerid = '" . $playerid2 . "' and shotpercent != -1
 									order by year";
 			$querycareershootoutstats12 = "select sum(shots), sum(goals), sum(gamedecidinggoals), ROUND((sum(goals)/(sum(shots))),3)
 									from hockeyscoringshootout
-									where hockeyscoringshootout.playerid2 = '" . $playerid2 . "'
+									where hockeyscoringshootout.playerid = '" . $playerid2 . "'
 									order by year";
 		}
 		if ($playertype == 'Team'){
