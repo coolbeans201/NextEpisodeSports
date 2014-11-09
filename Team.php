@@ -143,7 +143,7 @@
 		</tr>	
 		<tr> 
 			<td> <p><b><u>Xin He</u></b></p> </td>
-			<td> PIC </td>
+			<td> <img src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpf1/v/t1.0-9/304095_2413614714151_327036085_n.jpg?oh=751118a2b7f9fd35c471e1327713e4ac&oe=54F47EA7&__gda__=1423248366_b69ff1e3a905b0174196f83c7390a541"/> </td>
 		</tr>
 		<tr> 
 			<td> <p><b><u>Derek Hua</u></b><br/>My name is Derek Hua and I'm a 3rd year Computer Science & Engineering student at the University of Florida. I am currently seeking opportunities to apply myself in the form of a technical Co-Op or an internship. I am not only seeking opportunities that will test my technical knowledge, but ones that will also encourage me to step out of my comfort zone, actively learn, and connect with others.</p> </td>
