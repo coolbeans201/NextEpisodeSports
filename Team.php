@@ -101,10 +101,16 @@
 		nav ul ul ul {
 			position: absolute; left: 100%; top:0;
 		}
+		
+		#main {
+			margin-left: 500px;
+			margin-right: 500px;
+		}
+		
     </style>
 
 </head>
-<body background="squared_metal.png">
+<body>
 <h1>Team</h1>
 <hr noshade size=5 width="100%">
 <nav class="buttoncenter">
@@ -123,13 +129,30 @@
 			<li><a href="Inspiration.php">Inspiration</a></li>
 		</ul>
 	</nav>
-<p align = "center"><b><u>Jesse Chau</u></b></p>
-<hr noshade size=5 width="100%">
-<p align = "center"><b><u>Xin He</u></b></p>
-<hr noshade size=5 width="100%">
-<p align = "center"><b><u>Derek Hua</u></b></p>
-<hr noshade size=5 width="100%">
-<p align = "center"><b><u>Matt Weingarten</u></b></p>
-<p>Matt is a third-year Computer Science major with minors in Mathematics and Statistics from Safety Harbor, FL. In his free time, he likes to watch and play sports (hence, the inspiration for this website), play video games, and play Bridge. He never regrets being a Computer Science major, even though the projects that it entails can be time-consuming.</p>
-<hr noshade size=5 width="100%">
+	
+	
+<div id=main>
+	<table >
+		<colgroup>
+			<col span="1" style="width: 75%;">
+			<col span="1" style="width: 25%;">
+		</colgroup>
+		<tr> 
+			<td> <p><b><u>Jesse Chau</u></b></p> </td>
+			<td> PIC </td>
+		</tr>	
+		<tr> 
+			<td> <p><b><u>Xin He</u></b></p> </td>
+			<td> PIC </td>
+		</tr>
+		<tr> 
+			<td> <p><b><u>Derek Hua</u></b><br/>My name is Derek Hua and I'm a 3rd year Computer Science & Engineering student at the University of Florida. I am currently seeking opportunities to apply myself in the form of a technical Co-Op or an internship. I am not only seeking opportunities that will test my technical knowledge, but ones that will also encourage me to step out of my comfort zone, actively learn, and connect with others.</p> </td>
+			<td> PIC </td>
+		</tr>
+		<tr> 
+			<td> <p><b><u>Matt Weingarten</u></b><br/>Matt is a third-year Computer Science major with minors in Mathematics and Statistics from Safety Harbor, FL. In his free time, he likes to watch and play sports (hence, the inspiration for this website), play video games, and play Bridge. He never regrets being a Computer Science major, even though the projects that it entails can be time-consuming.</p> </td>
+			<td> PIC </td>
+		</tr>
+	</table>
+</div>
 </body></html>
