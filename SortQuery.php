@@ -10,35 +10,33 @@
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
 
 	<script type="text/javascript">
-	var varieties=[
-	[""],
-	["Manager","Pitcher","Position Player Batting", "Position Player Fielding","Team"],
-	["Coach","Player","Team"],
-	["Coach","Goalie","Position Player","Team"]
-	];
-	
-	function playerType(idx) {
-	var f=document.myform;
-	f.playertype.options.length=null;
-	for(i=0; i<varieties[idx].length; i++) {
-    	f.playertype.options[i]=new Option(varieties[idx][i], varieties[idx][i]); 
-    		}    
+	function setOptions(chosen, selBox){
+	selBox.options.length = 0;
+	if (chosen == "selectasport")
+	{
 	}
-	var stats=[
-	[],
-	["Games","Starts","Atbats","Runs","Hits","Batting average","Doubles", "Triples","Home runs","Slugging","RBI","Stolen bases","Caught stealing","Walks","Strikeouts", "Intentional walks", "Hit by pitch", "OBP", "Sac hits", "Sac flies", "GIDP", "Outs", "Putouts", "Assists", "Errors", "Double plays", "Passed balls", "Wild pitches", "Stolen bases allowed", "Caught stealing allowed", "Fielding percent", "Wins", "Losses", "Winning percentage", "Complete games", "Shutouts", "Saves", "Outs", "Earned runs", "ERA", "Balks", "Batters faced", "Finishes", "H9", "HR9", "BB9", "SO9", "Runs allowed", "Hits allowed", "Home runs allowed", "Walks allowed", "Strikeouts forced"],
-	["Wins", "Losses", "Winning percentage", "Postseason wins", "Postseason losses", "Postseason winning percentage", "Minutes", "Points", "Offensive rebounds", "Defensive rebounds", "Rebounds", "Assists", "Steals", "Blocks", "Turnovers", "Fouls", "Field goal attempts", "Field goals made", "Field goal percentage", "Free throw attempts", "Free throws made", "Free throw percentage", "Three point attempts", "Three point percentage", "Points per game", "Rebounds per game", "Assists per game", "Field goals made allowed", "Field goal attempts allowed", "Field goal percentage allowed", "Free throws made allowed", "Free throw attempts allowed", "Three point made allowed", "Three point attempts allowed", "Three point percentage allowed", "Offensive rebounds allowed", "Defensive rebounds allowed", "Rebounds allowed", "Rebounds allowed per game", "Assists allowed", "Assists allowed per game", "Fouls allowed", "Steals allowed", "Turnovers allowed", "Blocks allowed", "Points allowed", "Points allowed per game", "Offensive team rebounds", "Defensive team rebounds", "Home wins", "Home losses", "Home winning percentage", "Away wins", "Away losses", "Away winning percentage", "Neutral wins", "Neutral losses", "Neutral winning percentage", "Conference wins", "Conference losses", "Conference winning percentage", "Division wins", "Division losses", "Division winning percentage", "Games"],
-	["Wins", "Losses", "Ties", "Points per game", "Postseason wins", "Postseason losses", "Postseason ties", "Postseason winning percentage", "Games", "Minutes", "Empty net goals", "Shutouts", "Goals allowed", "Shots allowed", "Save percentage", "Shootout wins", "Shootout losses", "Shootout winning percentage", "Shootout shots allowed", "Shootout goals allowed", "Shootout save percentage", "Goals", "Goals per game", "Assists", "Assists per game", "Points", "Points per game", "Penalty minutes", "+/-", "Power play goals", "Power play assists", "Short handed goals", "Short handed assists", "Game winning goals", "Game tying goals", "Shots", "Shot percent", "Shootout shots", "Shootout goals", "Shootout goal deciding goals", "Shootout shot percent", "Overtime losses", "Goal differential", "Bench minutes", "Power play chances", "Short handed goals allowed", "Penalty kill goals", "Penalty kill chances", "Home wins", "Home losses", "Home ties", "Home OT losses", "Home points per game", "Road wins", "Road losses", "Road ties", "Road OT losses", "Road points per game"]
-	];
-	
-	function Box3(idx) {
-	var f=document.myform;
-	f.box3.options.length=null;
-	for(i=0; i<stats[idx].length; i++) {
-		f.box3.options[i]=new Option(stats[idx][i], i); 
-		}    
+	if (chosen == "Baseball")
+	{
+		selBox.options[selBox.options.length] = new Option('Manager', 'Manager');
+		selBox.options[selBox.options.length] = new Option('Pitcher', 'Pitcher');
+		selBox.options[selBox.options.length] = new Option('Position Player Batting', 'Position Player Batting');
+		selBox.options[selBox.options.length] = new Option('Position Player Fielding', 'Position Player Fielding');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
 	}
-	onload=function() {playertype(0); Box3(0);};
+	if (chosen == "Basketball")
+	{
+		selBox.options[selBox.options.length] = new Option('Coach', 'Coach');
+		selBox.options[selBox.options.length] = new Option('Player', 'Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
+	}
+	if (chosen == "Hockey")
+	{
+		selBox.options[selBox.options.length] = new Option('Coach', 'Coach');
+		selBox.options[selBox.options.length] = new Option('Goalie', 'Goalie');
+		selBox.options[selBox.options.length] = new Option('Position Player', 'Position Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
+	}
+	}
 	function ajaxFunction(){
 		 var ajaxRequest;  // The variable that makes Ajax possible!
 			
@@ -285,7 +283,7 @@
 <form name="myform" method="post">
 <div>
 <font size="4">Select sport: </font>
-<select name="box1" id = "sport" onchange="playerType(this.selectedIndex); ajaxFunction();">
+<select name="box1" id = "sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.playertype); ajaxFunction();">
 	<option value = "a" selected = "selected">-Select a Sport-</option>
 	<option value = "Baseball">Baseball</option>
 	<option value = "Basketball">Basketball</option>
