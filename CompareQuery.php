@@ -12,23 +12,34 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	
 	<script type="text/javascript">
-	var varieties=[
-	[],
-	["Manager","Pitcher","Position Player","Team"],
-	["Coach","Player","Team"],
-	["Coach","Goalie","Position Player","Team"]
-	];
-	
-	function Box2(idx) {
-	var f=document.myform;
-	f.box2.options.length=null;
-	for(i=0; i<varieties[idx].length; i++) {
-		f.box2.options[i]=new Option(varieties[idx][i], varieties[idx][i]); 
-		}    
+	function setOptions(chosen, selBox){
+	selBox.options.length = 0;
+	if (chosen == "selectasport")
+	{
 	}
-	
+	if (chosen == "Baseball")
+	{
+		selBox.options[selBox.options.length] = new Option('Manager', 'Manager');
+		selBox.options[selBox.options.length] = new Option('Pitcher', 'Pitcher');
+		selBox.options[selBox.options.length] = new Option('Position Player Batting', 'Position Player Batting');
+		selBox.options[selBox.options.length] = new Option('Position Player Fielding', 'Position Player Fielding');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
+	}
+	if (chosen == "Basketball")
+	{
+		selBox.options[selBox.options.length] = new Option('Coach', 'Coach');
+		selBox.options[selBox.options.length] = new Option('Player', 'Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
+	}
+	if (chosen == "Hockey")
+	{
+		selBox.options[selBox.options.length] = new Option('Coach', 'Coach');
+		selBox.options[selBox.options.length] = new Option('Goalie', 'Goalie');
+		selBox.options[selBox.options.length] = new Option('Position Player', 'Position Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
+	}
+	}
 	onload=function() {Box2(0);};
-	
 	function ajaxFunction(){
 		 var ajaxRequest;  // The variable that makes Ajax possible!
 			
@@ -232,10 +243,10 @@
 		</ul>
 	</nav>
 	
-	<div>
+
 		<form name="myform" method="post">
 		<div>
-			<font size = "4"> Select sport: <select name="box1" id="sport" onchange="Box2(this.selectedIndex); ajaxFunction();">
+			<font size = "4"> Select sport: <select name="box1" id="sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.box2); ajaxFunction();">
 				<option value="a" selected = "selected">-Select a Sport-</option>
 				<option value="Baseball">Baseball</option>
 				<option value="Basketball">Basketball</option>
@@ -244,13 +255,20 @@
 			<div><font size = "4"> Select player type: <select name="box2" id="playertype" onchange='ajaxFunction()'></select></font></div>
 			<div id='ajaxDiv'>Your result will display here</div>
 			
-			<input type= "button" style = "color:green" value="Show Stats" onclick="ajaxCompareQuery();"></input> <!--Button-->
+			<input type= "button" style = "color:green" value="Compute" onclick="ajaxCompareQuery();"></input> <!--Button-->
 			</form>
 			
 		<div id='compareDiv'></div>
-	</div>
+
 </body>
 </html>	
+
+
+
+
+
+
+
 
 
 
