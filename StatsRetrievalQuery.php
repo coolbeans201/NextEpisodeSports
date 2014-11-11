@@ -10,19 +10,31 @@
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
 	
 	<script type="text/javascript">
-	var players =[
-	[],
-	["Manager","Pitcher","Position Player","Team"],
-	["Coach","Player","Team"],
-	["Coach","Goalie","Position Player","Team"]
-	]
-
-	function PlayerType(idx) {
-	var f=document.myform;
-	f.playertype.options.length=null;
-	for(i=0; i<players[idx].length; i++) {
-		f.playertype.options[i]=new Option(players[idx][i], players[idx][i]); 
-		}    
+	function setOptions(chosen, selBox){
+	selBox.options.length = 0;
+	if (chosen == "selectasport")
+	{
+	}
+	if (chosen == "Baseball")
+	{
+		selBox.options[selBox.options.length] = new Option('Manager', 'Manager');
+		selBox.options[selBox.options.length] = new Option('Pitcher', 'Pitcher');
+		selBox.options[selBox.options.length] = new Option('Position Player', 'Position Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
+	}
+	if (chosen == "Basketball")
+	{
+		selBox.options[selBox.options.length] = new Option('Coach', 'Coach');
+		selBox.options[selBox.options.length] = new Option('Player', 'Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
+	}
+	if (chosen == "Hockey")
+	{
+		selBox.options[selBox.options.length] = new Option('Coach', 'Coach');
+		selBox.options[selBox.options.length] = new Option('Goalie', 'Goalie');
+		selBox.options[selBox.options.length] = new Option('Position Player', 'Position Player');
+		selBox.options[selBox.options.length] = new Option('Team', 'Team');
+	}
 	}
 	onload=function() {PlayerType(0);};
 	function ajaxFunction(){
@@ -231,7 +243,7 @@
 <form name="myform" method="post">
 <div>
 <font size = "4">Select sport:</font>
-<select name="sport" id = "sport" onchange="PlayerType(this.selectedIndex); ajaxFunction();">
+<select name="sport" id = "sport" onchange="setOptions(document.myform.sport.options[document.myform.sport.selectedIndex].value, document.myform.playertype); ajaxFunction();">
     <option value="a">-Select a Sport-</option>
     <option value="Baseball">Baseball</option>
     <option value="Basketball">Basketball</option>
@@ -248,4 +260,5 @@
 <div id='textBoxDiv'></div>
 </body>
 </html>
+
 
