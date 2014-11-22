@@ -252,7 +252,7 @@
 
 <form name="myform" method="post">
 <div>
-<font size = "4">&nbsp;Select sport:</font>
+<font size = "4">Select sport:</font>
 <select name="sport" id = "sport" onchange="setOptions(document.myform.sport.options[document.myform.sport.selectedIndex].value, document.myform.playertype); ajaxFunction();">
     <option value="a">-Select a Sport-</option>
     <option value="Baseball">Baseball</option>
@@ -261,10 +261,10 @@
 </select>
 </div>
 <div>
-<font size = "4">&nbsp;Select player type:</font>
+<font size = "4">Select player type:</font>
 <select name="playertype" id = "playertype" onchange = "ajaxFunction();"></select>
 </div>
-<div id='ajaxDiv'>&nbsp;Names will be loaded here</div>
+<div id='ajaxDiv'>Names will be loaded here</div>
 <div id = 'buttonDiv'>&nbsp;
 <input type= "button" class="btn btn-success" style = "color:white" value="Compute" onclick="ajaxStatsRetrieval();"></input> <!--Button-->
 </div>
