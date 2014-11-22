@@ -272,8 +272,7 @@
 </head>
 <body background="squared_metal.png">
 <h1>Sort Query</h1>
-<hr noshade size=5 width="100%">
-
+<hr>
 	<nav class="buttoncenter">
 		<ul>
 			<li><a href="HomePage.php">Home</a></li>
