@@ -7,6 +7,7 @@
 	<meta name="author" content="Derek Hua, Matt Weingarten, Xin He, Jesse Chau">
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	
     <style>
         <style style="text/css">
@@ -100,12 +101,21 @@
 		nav ul ul ul {
 			position: absolute; left: 100%; top:0;
 		}
+		
+		hr{
+			border: 0;
+			color: #9E9E9E;
+			background-color: #9E9E9E;
+			height: 5px;
+			width: 100%;
+			text-align: left;
+		}
     </style>
 
 </head>
 <body background="squared_metal.png">
 <h1>Inspiration</h1>
-<hr noshade size=5 width="100%">
+<hr>
 <nav class="buttoncenter">
 		<ul>
 			<li><a href="HomePage.php">Home</a></li>
