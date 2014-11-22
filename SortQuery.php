@@ -8,6 +8,7 @@
 	<meta name="author" content="Derek Hua, Matt Weingarten, Xin He, Jesse Chau">
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
 	<script type="text/javascript">
 	function setOptions(chosen, selBox){
@@ -258,6 +259,15 @@
 		nav ul ul ul {
 			position: absolute; left: 100%; top:0;
 		}
+		
+		hr{
+			border: 0;
+			color: #9E9E9E;
+			background-color: #9E9E9E;
+			height: 5px;
+			width: 100%;
+			text-align: left;
+		}
     </style>
 </head>
 <body background="squared_metal.png">
@@ -305,8 +315,10 @@
   <option value = "100">Top 100</option>
 </select>
 </div>
-<input type= "button" style = "color:green" value="Compute Per Year" onclick="ajaxSortRetrieval();"></input>
-<input type= "button" style = "color:blue" value="Compute Lifetime" onclick="ajaxSortLifetimeRetrieval();"></input>
+<div>&nbsp;
+<input type= "button" class="btn btn-success" style = "color:white" value="Compute Per Year" onclick="ajaxSortRetrieval();"></input>
+<input type= "button" class="btn btn-primary" style = "color:white" value="Compute Lifetime" onclick="ajaxSortLifetimeRetrieval();"></input>
+</div>
 </form>
 <div id='textBoxDiv'></div>
 </body>
