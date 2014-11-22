@@ -8,7 +8,7 @@
 	<meta name="author" content="Derek Hua, Matt Weingarten, Xin He, Jesse Chau">
 	<meta name="copyright" content="Copyright &copy 2014, All Rights Reserved">
 	<link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Open+Sans|Shadows+Into+Light|Rock+Salt">
-	
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	
 	<script type="text/javascript">
@@ -217,13 +217,22 @@
 		nav ul ul ul {
 			position: absolute; left: 100%; top:0;
 		}
+		
+		hr{
+			border: 0;
+			color: #9E9E9E;
+			background-color: #9E9E9E;
+			height: 5px;
+			width: 100%;
+			text-align: left;
+		}
     </style>
 </head>
 
 <body background="squared_metal.png">
 	<h1>Compare Query</h1>
 
-	<hr noshade size=5 width="100%">
+	<hr>
 	
 	<nav class="buttoncenter">
 		<ul>
@@ -245,35 +254,20 @@
 
 		<form name="myform" method="post">
 		<div>
-			<font size = "4"> Select sport: <select name="box1" id="sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.box2); ajaxFunction();">
+			<font size = "4">&nbsp;Select sport: <select name="box1" id="sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.box2); ajaxFunction();">
 				<option value="a" selected = "selected">-Select a Sport-</option>
 				<option value="Baseball">Baseball</option>
 				<option value="Basketball">Basketball</option>
 				<option value="Hockey">Hockey</option>
 			</select></font></div>
-			<div><font size = "4"> Select player type: <select name="box2" id="playertype" onchange='ajaxFunction()'></select></font></div>
-			<div id='ajaxDiv'>Your result will display here</div>
-			
-			<input type= "button" style = "color:green" value="Compute" onclick="ajaxCompareQuery();"></input> <!--Button-->
+			<div><font size = "4">&nbsp;Select player type: <select name="box2" id="playertype" onchange='ajaxFunction()'></select></font></div>
+			<div id='ajaxDiv'>&nbsp;Your result will display here</div>
+			<div id = 'buttonDiv'>&nbsp;
+			<input type= "button" class="btn btn-success" style = "color:white" value="Compute" onclick="ajaxCompareQuery();"></input> <!--Button-->
+			</div>
 			</form>
 			
 		<div id='compareDiv'></div>
 
 </body>
 </html>	
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
