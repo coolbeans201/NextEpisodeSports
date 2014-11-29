@@ -113,6 +113,43 @@
     </style>
 
 </head>
+<script type = "text/javascript">
+function ajaxFunction(){
+		 var ajaxRequest;  // The variable that makes Ajax possible!
+			
+		 try{
+		   // Opera 8.0+, Firefox, Safari
+		   ajaxRequest = new XMLHttpRequest();
+		 }catch (e){
+		   // Internet Explorer Browsers
+		   try{
+			  ajaxRequest = new ActiveXObject("Msxml2.XMLHTTP");
+		   }catch (e) {
+			  try{
+				 ajaxRequest = new ActiveXObject("Microsoft.XMLHTTP");
+			  }catch (e){
+				 // Something went wrong
+				 alert("Your browser broke!");
+				 return false;
+			  }
+		   }
+		 }
+		 // Create a function that will receive data 
+		 // sent from the server and will update
+		 // div section in the same page.
+		 ajaxRequest.onreadystatechange = function(){
+		   if(ajaxRequest.readyState == 4){
+			  var ajaxDisplay = document.getElementById('resultDiv');
+			  ajaxDisplay.innerHTML = ajaxRequest.responseText;
+		   }
+		 }
+		 // Now get the value from user and pass it to
+		 // server script.
+		
+		 ajaxRequest.open("GET", "getTuples.php", true);
+		 ajaxRequest.send(null); 
+	}
+</script>
 <body background="squared_metal.png">
 <h1>Inspiration</h1>
 <hr>
@@ -132,6 +169,10 @@
 			<li><a href="Inspiration.php">Inspiration</a></li>
 		</ul>
 	</nav>
+<form name="myform" method="post">
 <p>The Internet contains many databases covering each sport, such as basketball-reference.com, hockey-reference.com, or baseball-reference.com. However, there are no comprehensive sports database webpages out there. Since it seems more useful for all the sports information a user could want to lie in one website rather than a bunch of different websites, we combined the stats for teams, players, and coaches from baseball, basketball, and hockey into this database. We hope you enjoy!</p>
+<input type= "button" class="btn btn-success" style = "color:white" value="Calculate Tuples" onclick="ajaxFunction();"></input> <!--Button-->
+<div id='resultDiv'></div>
+</form>
 </body></html>
 
