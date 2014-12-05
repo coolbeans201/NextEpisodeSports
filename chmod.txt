@@ -1,0 +1,37 @@
+chmod 711 Compare.php
+chmod 711 CompareQuery.php
+chmod 711 getcolumns.php
+chmod 711 getCompareQuery.php
+chmod 711 getname.php
+chmod 711 getnames2.php
+chmod 711 getSortLifetimeRetrieval.php
+chmod 711 getSortRetrieval.php
+chmod 711 getSortRetrieval.php
+chmod 711 getStats.php
+chmod 711 StatsRetrievalQuery.php
+chmod 711 getStatsLifetimeRetrieval.php
+chmod 711 getStatsRetrieval.php
+chmod 711 getYears.php
+chmod 711 HomePage.php
+chmod 711 Inspiration.php
+chmod 711 SortQuery.php
+chmod 711 StatsQuery.php
+chmod 711 Team.php
+chmod 711 QueriesForNames.txt
+chmod 711 getTuples.php
+chmod 711 dist
+
+after cd to dist
+chmod 711 css
+chmod 711 js
+
+cd to css folder
+chmod 711 bootstrap.css
+chmod 711 bootstrap.min.css
+chmod 711 bootstrap-theme.css
+chmod 711 bootstrap-theme.min.css
+
+cd to js folder
+chmod 711 bootstrap.js
+chmod 711 bootstrap.min.js
+chmod 711 npm.js
