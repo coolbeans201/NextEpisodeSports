@@ -13,7 +13,7 @@
 	<script type="text/javascript">
 	function setOptions(chosen, selBox){
 	selBox.options.length = 0;
-	if (chosen == "selectasport")
+	if (chosen == "a")
 	{
 	}
 	if (chosen == "Baseball")
