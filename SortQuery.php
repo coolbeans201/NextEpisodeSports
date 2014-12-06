@@ -173,27 +173,47 @@
         
 		h1 {
 			font-family: 'Rock Salt', sans-serif;
-			font-size: 60px;
+			font-size: 26px;
 			font-weight: normal;
-			color:#000000;
+			color:#FFFFFF;
 			text-align: center;
+			text-shadow: 2px 2px #000000;
+			padding-bottom: 15px;
 		}
 		
 		body {
-			font-family: 'Open Sans', sans-serif;
-			font-size: 24px;
+			font-size: 16px;
 			background-color: #F9F4E1;
+			background-image: url("black-gradient-background.png");
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
      	}
+		
+		.wrapper {
+			width: 100%;
+			overflow: hidden;
+		}
+		.container {
+			width: 100%;
+			margin: 0 auto;
+		}
+		
+		.white{
+			color:#FFFFFF
+		}
+		.banner-img {
+			width: 100%;
+		}
+		
+		 .buttoncenter {
+            text-align:center;
+			font-size: 24px;
+        }
 		
 		.chooseoperation {
 			text-align:center;
 		}
-		
-        .buttoncenter {
-            text-align:center;
-        }
-        
-        
+		 
 		nav ul ul {
 			display: none;
 		}
@@ -270,7 +290,16 @@
 		}
     </style>
 </head>
-<body background="squared_metal.png">
+<body >
+
+<div id="banner">
+    <div id="wrapper">
+        <div id="container">
+                <img class="banner-img" src="NESBanner.png" alt="N.A.L.A. Apparel"/>
+        </div>
+    </div>
+</div>
+
 <h1>Sort Query</h1>
 <hr>
 	<nav class="buttoncenter">
@@ -289,36 +318,40 @@
 			<li><a href="Inspiration.php">Inspiration</a></li>
 		</ul>
 	</nav>
-<form name="myform" method="post">
-<div>
-<font size="4">Select sport: </font>
-<select name="box1" id = "sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.playertype); ajaxFunction();">
-	<option value = "a" selected = "selected">-Select a Sport-</option>
-	<option value = "Baseball">Baseball</option>
-	<option value = "Basketball">Basketball</option>
-	<option value = "Hockey">Hockey</option>
-</select>
+	
+<div class = "white">
+	<form name="myform" method="post">
+	<div>
+	<font size="4">Select sport: </font>
+	<select name="box1" id = "sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.playertype); ajaxFunction();">
+		<option value = "a" selected = "selected">-Select a Sport-</option>
+		<option value = "Baseball">Baseball</option>
+		<option value = "Basketball">Basketball</option>
+		<option value = "Hockey">Hockey</option>
+	</select>
+	</div>
+	<div>
+	<font size="4">Select player type: </font>
+	<select name="playertype" id = "playertype" onchange = "ajaxFunction();"></select>
+	</div>
+	<div id = "ajaxDiv">Column names will be loaded here</div>
+	<div>
+	<font size="4">Select data range: </font>
+	<select name="datarange" id = "range">
+	  <option value = "5">Top 5</option>
+	  <option value = "10">Top 10</option>
+	  <option value = "20">Top 20</option>
+	  <option value = "50">Top 50</option>
+	  <option value = "100">Top 100</option>
+	</select>
+	</div>
+	<div>&nbsp;
+	<input type= "button" class="btn btn-success" style = "color:white" value="Compute Per Year" onclick="ajaxSortRetrieval();"></input>
+	<input type= "button" class="btn btn-primary" style = "color:white" value="Compute Lifetime" onclick="ajaxSortLifetimeRetrieval();"></input>
+	</div>
+	</form>
+	<div id='textBoxDiv'></div>
+	</body>
+
 </div>
-<div>
-<font size="4">Select player type: </font>
-<select name="playertype" id = "playertype" onchange = "ajaxFunction();"></select>
-</div>
-<div id = "ajaxDiv">Column names will be loaded here</div>
-<div>
-<font size="4">Select data range: </font>
-<select name="datarange" id = "range">
-  <option value = "5">Top 5</option>
-  <option value = "10">Top 10</option>
-  <option value = "20">Top 20</option>
-  <option value = "50">Top 50</option>
-  <option value = "100">Top 100</option>
-</select>
-</div>
-<div>&nbsp;
-<input type= "button" class="btn btn-success" style = "color:white" value="Compute Per Year" onclick="ajaxSortRetrieval();"></input>
-<input type= "button" class="btn btn-primary" style = "color:white" value="Compute Lifetime" onclick="ajaxSortLifetimeRetrieval();"></input>
-</div>
-</form>
-<div id='textBoxDiv'></div>
-</body>
 </html>
