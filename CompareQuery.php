@@ -132,24 +132,41 @@
         
 		h1 {
 			font-family: 'Rock Salt', sans-serif;
-			font-size: 60px;
+			font-size: 26px;
 			font-weight: normal;
-			color:#000000;
+			color:#FFFFFF;
 			text-align: center;
+			text-shadow: 2px 2px #000000;
+			padding-bottom: 15px;
 		}
 		
 		body {
-			font-family: 'Open Sans', sans-serif;
-			font-size: 20px;
+			font-size: 16px;
 			background-color: #F9F4E1;
+			background-image: url("black-gradient-background.png");
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
      	}
 		
-		.chooseoperation {
-			text-align:center;
+		.wrapper {
+			width: 100%;
+			overflow: hidden;
+		}
+		.container {
+			width: 100%;
+			margin: 0 auto;
 		}
 		
-        .buttoncenter {
+		.white{
+			color:#FFFFFF
+		}
+		.banner-img {
+			width: 100%;
+		}
+		
+		 .buttoncenter {
             text-align:center;
+			font-size: 24px;
         }
         
 		nav ul ul {
@@ -230,6 +247,15 @@
 </head>
 
 <body background="squared_metal.png">
+	
+	<div id="banner">
+    <div id="wrapper">
+        <div id="container">
+                <img class="banner-img" src="NESBanner.png" alt="N.A.L.A. Apparel"/>
+        </div>
+    </div>
+	</div>
+	
 	<h1>Compare Query</h1>
 
 	<hr>
@@ -251,7 +277,7 @@
 		</ul>
 	</nav>
 	
-
+	<div class = "white">
 		<form name="myform" method="post">
 		<div>
 			<font size = "4">Select sport: <select name="box1" id="sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.box2); ajaxFunction();">
@@ -267,5 +293,6 @@
 			</div>
 			</form>
 		<div id='compareDiv'></div>
+	<div/>	
 </body>
 </html>	
