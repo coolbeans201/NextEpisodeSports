@@ -172,6 +172,18 @@
 		.white{
 			color:#FFFFFF
 		}
+		
+		.black{
+			color:#000000
+		}
+		
+		.query{
+			background: #efefef; 
+			background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
+			background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
+			background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
+		}
+		
 		.banner-img {
 			width: 100%;
 		}
@@ -258,7 +270,7 @@
     </style>
 </head>
 
-<body background="squared_metal.png">
+<body>
 	
 	<div id="banner">
     <div id="wrapper">
@@ -289,17 +301,17 @@
 		</ul>
 	</nav>
 	
-	<div class = "white">
+	<div  class = "query">
 		<form name="myform" method="post">
 		<div>
-			<font size = "4">Select sport: <select name="box1" id="sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.box2); ajaxFunction();">
+			<font size = "4"> Select sport: <select name="box1" id="sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.box2); ajaxFunction();">
 				<option value="a" selected = "selected">-Select a Sport-</option>
 				<option value="Baseball">Baseball</option>
 				<option value="Basketball">Basketball</option>
 				<option value="Hockey">Hockey</option>
 			</select></font></div>
-			<div><font size = "4">Select player type: <select name="box2" id="playertype" onchange='ajaxFunction()'></select></font></div>
-			<div id='ajaxDiv'>Your result will display here</div>
+			<div ><font size = "4">Select player type: <select name="box2" class="black" id="playertype" onchange='ajaxFunction()'></select></font></div>
+			<div id='ajaxDiv'> <p >Your result will display here</p></div>
 			<div id = 'buttonDiv'>&nbsp;
 			<input type= "button" class="btn btn-success" style = "color:white" value="Compute" onclick="ajaxCompareQuery();"></input> <!--Button-->
 			</div>
