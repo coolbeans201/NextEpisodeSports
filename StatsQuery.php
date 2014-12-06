@@ -14,24 +14,41 @@
         
 		h1 {
 			font-family: 'Rock Salt', sans-serif;
-			font-size: 60px;
+			font-size: 26px;
 			font-weight: normal;
-			color:#000000;
+			color:#FFFFFF;
 			text-align: center;
+			text-shadow: 2px 2px #000000;
+			padding-bottom: 15px;
 		}
 		
 		body {
-			font-family: 'Open Sans', sans-serif;
-			font-size: 20px;
+			font-size: 16px;
 			background-color: #F9F4E1;
+			background-image: url("black-gradient-background.png");
+			background-size: 100% 100%;
+			background-repeat: no-repeat;
      	}
 		
-		.chooseoperation {
-			text-align:center;
+		.wrapper {
+			width: 100%;
+			overflow: hidden;
+		}
+		.container {
+			width: 100%;
+			margin: 0 auto;
 		}
 		
-        .buttoncenter {
+		.white{
+			color:#FFFFFF
+		}
+		.banner-img {
+			width: 100%;
+		}
+		
+		 .buttoncenter {
             text-align:center;
+			font-size: 24px;
         }
         
         
@@ -356,7 +373,16 @@ function ajaxStatsLifetimeRetrieval(){
 }
 </script>
 </head>
-<body background="squared_metal.png">
+
+<div id="banner">
+    <div id="wrapper">
+        <div id="container">
+                <img class="banner-img" src="NESBanner.png" alt="N.A.L.A. Apparel"/>
+        </div>
+    </div>
+</div>
+
+<body>
 <h1>Stats Query</h1>
 <hr>
 <nav class="buttoncenter">
@@ -375,38 +401,42 @@ function ajaxStatsLifetimeRetrieval(){
 		<li><a href="Inspiration.php">Inspiration</a></li>
 	</ul>
 </nav>
-<form name = "myForm" method = "post">
-<div>
-<font size = "4">Select sport: </font>
-<select name = "sport" id = "sport1" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); ajaxFunction2(); ajaxFunction();">
-	<option value = "selectasport" selected = "selected">-Select a Sport-</option>
-	<option value = "Baseball">Baseball</option>
-	<option value = "Basketball">Basketball</option>
-	<option value = "Hockey">Hockey</option>
-</select>
-</div>
-<div>
-<font size = "4">Select player type:</font>
-<select name = "playerType" id = "playerType1" onchange = "ajaxFunction2(); ajaxFunction();"></select>
-</div>
-<div>
-<font size = "4">Select an operation:</font>
-<select name = "operation" id = "operation1">
-	<option value = "average">Average</option>
-	<option value = "min">Minimum</option>
-	<option value = "max">Maximum</option>
-	<option value = "standardDeviation">Standard Deviation</option>
-</select>
-</div>
-<div id = "ajaxDiv2">Statistics will be loaded here</div>
-<div>
-<div id='ajaxDiv'>Date ranges will be loaded here</div>
-<div id = 'buttonDiv'>&nbsp;
-<input type= "button" class="btn btn-success" style = "color:white" value="Compute Per Year" onclick="ajaxStats();"></input>
-<input type= "button" class="btn btn-primary" style = "color:white" value="Compute Lifetime" onclick="ajaxStatsLifetimeRetrieval();"></input>
-</div>
-</form>
-<div id = "ResultDiv"></div>
+
+
+<div class = "white">
+	<form name = "myForm" method = "post">
+	<div>
+	<font size = "4">Select sport: </font>
+	<select name = "sport" id = "sport1" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); ajaxFunction2(); ajaxFunction();">
+		<option value = "selectasport" selected = "selected">-Select a Sport-</option>
+		<option value = "Baseball">Baseball</option>
+		<option value = "Basketball">Basketball</option>
+		<option value = "Hockey">Hockey</option>
+	</select>
+	</div>
+	<div>
+	<font size = "4">Select player type:</font>
+	<select name = "playerType" id = "playerType1" onchange = "ajaxFunction2(); ajaxFunction();"></select>
+	</div>
+	<div>
+	<font size = "4">Select an operation:</font>
+	<select name = "operation" id = "operation1">
+		<option value = "average">Average</option>
+		<option value = "min">Minimum</option>
+		<option value = "max">Maximum</option>
+		<option value = "standardDeviation">Standard Deviation</option>
+	</select>
+	</div>
+	<div id = "ajaxDiv2">Statistics will be loaded here</div>
+	<div>
+	<div id='ajaxDiv'>Date ranges will be loaded here</div>
+	<div id = 'buttonDiv'>&nbsp;
+	<input type= "button" class="btn btn-success" style = "color:white" value="Compute Per Year" onclick="ajaxStats();"></input>
+	<input type= "button" class="btn btn-primary" style = "color:white" value="Compute Lifetime" onclick="ajaxStatsLifetimeRetrieval();"></input>
+	</div>
+	</form>
+	<div id = "ResultDiv"></div>
+<div/>
 </body>
 </html>
 
