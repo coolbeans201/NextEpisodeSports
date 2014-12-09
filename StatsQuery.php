@@ -50,9 +50,13 @@
 			margin: 0 auto;
 		}
 		
-		.white{
-			color:#FFFFFF
+		.query{
+			background: #efefef; 
+			background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
+			background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
+			background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
 		}
+		
 		.banner-img {
 			width: 100%;
 		}
@@ -414,42 +418,43 @@ function ajaxStatsLifetimeRetrieval(){
 </nav>
 
 
-<div class = "white">
-	<form name = "myForm" method = "post">
-	<div>
-	<font size = "4">Select sport: </font>
-	<select name = "sport" id = "sport1" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); ajaxFunction2(); ajaxFunction();">
-		<option value = "selectasport" selected = "selected">-Select a Sport-</option>
-		<option value = "Baseball">Baseball</option>
-		<option value = "Basketball">Basketball</option>
-		<option value = "Hockey">Hockey</option>
-	</select>
-	</div>
-	<div>
-	<font size = "4">Select player type:</font>
-	<select name = "playerType" id = "playerType1" onchange = "ajaxFunction2(); ajaxFunction();"></select>
-	</div>
-	<div>
-	<font size = "4">Select an operation:</font>
-	<select name = "operation" id = "operation1">
-		<option value = "average">Average</option>
-		<option value = "min">Minimum</option>
-		<option value = "max">Maximum</option>
-		<option value = "standardDeviation">Standard Deviation</option>
-	</select>
-	</div>
-	<div id = "ajaxDiv2">Statistics will be loaded here</div>
-	<div>
-	<div id='ajaxDiv'>Date ranges will be loaded here</div>
-	<div id = 'buttonDiv'>&nbsp;
-	<input type= "button" class="btn btn-success" style = "color:white" value="Compute Per Year" onclick="ajaxStats();"></input>
-	<input type= "button" class="btn btn-primary" style = "color:white" value="Compute Lifetime" onclick="ajaxStatsLifetimeRetrieval();"></input>
-	</div>
-	</form>
-	<nav class="datagrid ">
-	<div id = "ResultDiv"></div>
-	</nav>
-<div/>
+	<div class = "query">
+		<form name = "myForm" method = "post">
+		<div>
+		<font size = "4">Select sport: </font>
+		<select name = "sport" id = "sport1" onChange = "setOptions(document.myForm.sport.options[document.myForm.sport.selectedIndex].value, document.myForm.playerType); ajaxFunction2(); ajaxFunction();">
+			<option value = "selectasport" selected = "selected">-Select a Sport-</option>
+			<option value = "Baseball">Baseball</option>
+			<option value = "Basketball">Basketball</option>
+			<option value = "Hockey">Hockey</option>
+		</select>
+		</div>
+		<div>
+		<font size = "4">Select player type:</font>
+		<select name = "playerType" id = "playerType1" onchange = "ajaxFunction2(); ajaxFunction();"></select>
+		</div>
+		<div>
+		<font size = "4">Select an operation:</font>
+		<select name = "operation" id = "operation1">
+			<option value = "average">Average</option>
+			<option value = "min">Minimum</option>
+			<option value = "max">Maximum</option>
+			<option value = "standardDeviation">Standard Deviation</option>
+		</select>
+		</div>
+		<div id = "ajaxDiv2">Statistics will be loaded here</div>
+		<div>
+		<div id='ajaxDiv'>Date ranges will be loaded here</div>
+		<div id = 'buttonDiv'>&nbsp;
+		<input type= "button" class="btn btn-success" style = "color:white" value="Compute Per Year" onclick="ajaxStats();"></input>
+		<input type= "button" class="btn btn-primary" style = "color:white" value="Compute Lifetime" onclick="ajaxStatsLifetimeRetrieval();"></input>
+		</div>
+		</form>
+		<nav class="datagrid ">
+		<div id = "ResultDiv"></div>
+		</nav>
+	<div/>
+	
 </body>
 </html>
 
