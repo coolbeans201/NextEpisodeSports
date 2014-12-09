@@ -167,7 +167,7 @@
 
 <nav class="buttoncenter">
 	<ul>
-		<li><a href="#">Functions</a>
+		<font size="5"><li><a href="#">Functions</a>
 			<ul>
 				<li><a href="StatsRetrievalQuery.php">Retrieve</a></li>
 				<li><a href="CompareQuery.php">Compare</a></li>
@@ -177,7 +177,7 @@
 		</li>
 		<li><a href="Team.php">Team</a>			
 		</li>
-		<li><a href="Inspiration.php">Inspiration</a></li>
+		<li><a href="Inspiration.php">Inspiration</a></li></font>
 	</ul>
 </nav>
 
