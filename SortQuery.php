@@ -210,9 +210,13 @@
 			margin: 0 auto;
 		}
 		
-		.white{
-			color:#FFFFFF
+		.query{
+			background: #efefef; 
+			background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
+			background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
+			background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
 		}
+		
 		.banner-img {
 			width: 100%;
 		}
@@ -331,41 +335,41 @@
 		</ul>
 	</nav>
 	
-<div class = "white">
-	<form name="myform" method="post">
-	<div>
-	<font size="4">Select sport: </font>
-	<select name="box1" id = "sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.playertype); ajaxFunction();">
-		<option value = "a" selected = "selected">-Select a Sport-</option>
-		<option value = "Baseball">Baseball</option>
-		<option value = "Basketball">Basketball</option>
-		<option value = "Hockey">Hockey</option>
-	</select>
-	</div>
-	<div>
-	<font size="4">Select player type: </font>
-	<select name="playertype" id = "playertype" onchange = "ajaxFunction();"></select>
-	</div>
-	<div id = "ajaxDiv">Column names will be loaded here</div>
-	<div>
-	<font size="4">Select data range: </font>
-	<select name="datarange" id = "range">
-	  <option value = "5">Top 5</option>
-	  <option value = "10">Top 10</option>
-	  <option value = "20">Top 20</option>
-	  <option value = "50">Top 50</option>
-	  <option value = "100">Top 100</option>
-	</select>
-	</div>
-	<div>&nbsp;
-	<input type= "button" class="btn btn-success" style = "color:white" value="Compute Per Year" onclick="ajaxSortRetrieval();"></input>
-	<input type= "button" class="btn btn-primary" style = "color:white" value="Compute Lifetime" onclick="ajaxSortLifetimeRetrieval();"></input>
-	</div>
-	</form>
-	<nav class="datagrid ">
-		<div id='textBoxDiv'></div>
-	</nav>
-	</body>
+	<div  class = "query">
+		<form name="myform" method="post">
+		<div>
+		<font size="4">Select sport: </font>
+		<select name="box1" id = "sport" onchange="setOptions(document.myform.box1.options[document.myform.box1.selectedIndex].value, document.myform.playertype); ajaxFunction();">
+			<option value = "a" selected = "selected">-Select a Sport-</option>
+			<option value = "Baseball">Baseball</option>
+			<option value = "Basketball">Basketball</option>
+			<option value = "Hockey">Hockey</option>
+		</select>
+		</div>
+		<div>
+		<font size="4">Select player type: </font>
+		<select name="playertype" id = "playertype" onchange = "ajaxFunction();"></select>
+		</div>
+		<div id = "ajaxDiv">Column names will be loaded here</div>
+		<div>
+		<font size="4">Select data range: </font>
+		<select name="datarange" id = "range">
+		  <option value = "5">Top 5</option>
+		  <option value = "10">Top 10</option>
+		  <option value = "20">Top 20</option>
+		  <option value = "50">Top 50</option>
+		  <option value = "100">Top 100</option>
+		</select>
+		</div>
+		<div>&nbsp;
+		<input type= "button" class="btn btn-success" style = "color:white" value="Compute Per Year" onclick="ajaxSortRetrieval();"></input>
+		<input type= "button" class="btn btn-primary" style = "color:white" value="Compute Lifetime" onclick="ajaxSortLifetimeRetrieval();"></input>
+		</div>
+		</form>
+		<nav class="datagrid ">
+			<div id='textBoxDiv'></div>
+		</nav>
+		</body>
 
-</div>
+	</div>
 </html>
