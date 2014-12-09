@@ -163,8 +163,11 @@
 			margin: 0 auto;
 		}
 		
-		.white{
-			color:#FFFFFF
+		.query{
+			background: #efefef; 
+			background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
+			background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
+			background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
 		}
 		.banner-img {
 			width: 100%;
@@ -293,7 +296,7 @@
 	</ul>
 </nav>
 
-<div class = "white">
+<div class = "query">
 	<form name="myform" method="post">
 	<div>
 	<font size = "4">Select sport:</font>
