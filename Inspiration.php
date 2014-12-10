@@ -1,10 +1,4 @@
-#summary{
-			display:block;
-			padding:0;
-			border:100px;
-			text-align:center;
-			font-size:18px;
-		} id ="summary"#!/usr/local/bin/php
+#!/usr/local/bin/php
 <html>
 <head>
 	<title>Inspiration</title>
@@ -180,7 +174,8 @@
 			border:100px;
 			text-align:center;
 			font-size:18px;
-		} id ="summary""
+		}
+		
 		
     </style>
 	
@@ -274,5 +269,6 @@ function ajaxFunction(){
 	
 	
 </body></html>
+
 
 
