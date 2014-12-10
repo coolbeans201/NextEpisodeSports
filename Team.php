@@ -208,7 +208,7 @@ hishim#!/usr/local/bin/php
 					<td> <img src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpf1/v/t1.0-9/304095_2413614714151_327036085_n.jpg?oh=751118a2b7f9fd35c471e1327713e4ac&oe=54F47EA7&__gda__=1423248366_b69ff1e3a905b0174196f83c7390a541" height = "100" /> </td>
 				</tr>
 				<tr> 
-					<td> <p style="color:white"><b><u>Derek Hua</u></b><br/>Derek is a third-year Computer Science and Engineering major with a minor in Business Administration from Boca Raton, FL. His interests include, programming, weight-lifting, cooking, and discovering new hobbies. He is currently seeking opportunities to apply himself in the form of a technical Co-Op or an internship. He not only seeking opportunities that will test hishim technical knowledge, but ones that will also encourage him to step out of my comfort zone, actively learn, and connect with others.</p> </td>
+					<td> <p style="color:white"><b><u>Derek Hua</u></b><br/>Derek is a third-year Computer Science and Engineering major with a minor in Business Administration from Boca Raton, FL. His interests include, programming, weight-lifting, cooking, and discovering new hobbies. He is currently seeking opportunities to apply himself in the form of a technical Co-Op or an internship. He not only seeking opportunities that will test his technical knowledge, but ones that will also encourage him to step out of my comfort zone, actively learn, and connect with others.</p> </td>
 					<td> <img src="https://scontent-a-mia.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/p417x417/10433079_401682496648066_6183619574339687075_n.jpg?oh=936862b69bef7511e5e9c1cc075e9072&oe=54FBC559" height = "100"/></td>
 				</tr>
 				<tr> 
