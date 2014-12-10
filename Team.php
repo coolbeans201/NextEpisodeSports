@@ -10,8 +10,8 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <style>
         <style style="text/css">
-	  .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
-	.datagrid {
+	    .datagrid table { border-collapse: collapse; text-align: left; width: 100%; } 
+		.datagrid {
 					
 					font: Arial, Helvetica, sans-serif; 
 					background: #fff; overflow: hidden; border: 10px solid #36752D; 
@@ -149,6 +149,19 @@
 			width: 100%;
 			text-align: left;
 		}
+		
+	
+		
+		
+		table {
+			width: 65%;
+		}
+		td {
+			text-align: center;
+			 padding: 15px;
+		}
+		
+		
     </style>
 
 </head>
@@ -156,7 +169,7 @@
 	<div id="banner">
     <div id="wrapper">
         <div id="container">
-                <img class="banner-img" src="NESBanner.png" alt="N.A.L.A. Apparel"/>
+                <img class="banner-img" src="NESBanner.png" alt=""/>
         </div>
     </div>
 	</div>
@@ -179,28 +192,30 @@
 			<li><a href="Inspiration.php">Inspiration</a></li>
 		</ul>
 	</nav>
-<div id=main>
-	<table >
-		<colgroup>
-			<col span="1" style="width: 75%;">
-			<col span="1" style="width: 25%;">
-		</colgroup>
-		<tr> 
-			<td> <p style="color:white"><b><u>Jesse Chau</u></b><br/>A country boy in his origins, Jesse was born in Clyde, North Carolina. He and his family hovered around the southern states north of Florida until the day the Sunlight called to them to venture down to Sunny South Florida. Jesse essentially grew up in Florida having lived there for one-fourth of his young life. It is no coincidence that his future bastion of education would be the University of Florida. A computer science major with a physics minor, his prevailing fascination in computers and science ended up becoming the focal point of his life, something he would not want any other way.</p> </td>
-			<td> <img src="https://scontent-b-mia.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/p417x417/393080_10151642856640833_1186289759_n.jpg?oh=226b96a499931729a658068c4dd3f6fe&oe=550D5EA5" height = "100" /> </td>
-		</tr>	
-		<tr> 
-			<td> <p style="color:white"><b><u>Xin He</u></b><br/>Xin is a third-year Computer Science major with a minor in Business Administration from Boca Raton, FL. In his free time, Xin likes to watch movies, browse the Internet, and play Planetside 2, a computer game he has dedicated much of his time to. He hopes to land an internship for the summer and beyond.</p></td>
-			<td> <img src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpf1/v/t1.0-9/304095_2413614714151_327036085_n.jpg?oh=751118a2b7f9fd35c471e1327713e4ac&oe=54F47EA7&__gda__=1423248366_b69ff1e3a905b0174196f83c7390a541" height = "100" /> </td>
-		</tr>
-		<tr> 
-			<td> <p style="color:white"><b><u>Derek Hua</u></b><br/>Derek is a third-year Computer Science and Engineering major with a minor in ... from Boca Raton, FL. He is currently seeking opportunities to apply himself in the form of a technical Co-Op or an internship. He not only seeking opportunities that will test my technical knowledge, but ones that will also encourage me to step out of my comfort zone, actively learn, and connect with others.</p> </td>
-			<td> <img src="https://scontent-a-mia.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/p417x417/10433079_401682496648066_6183619574339687075_n.jpg?oh=936862b69bef7511e5e9c1cc075e9072&oe=54FBC559" height = "100"/></td>
-		</tr>
-		<tr> 
-			<td> <p style="color:white"><b><u>Matt Weingarten</u></b><br/>Matt is a third-year Computer Science major with minors in Mathematics and Statistics from Safety Harbor, FL. In his free time, he likes to watch and play sports (hence, the inspiration for this website), play video games, and play Bridge. He never regrets being a Computer Science major, even though the projects that it entails can be time-consuming.</p> </td>
-			<td> <img src="https://scontent-b-mia.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/1920334_10203996137276308_8992998182298037988_n.jpg?oh=703adef206b1629659d03624303816d7&oe=551A3C78" height = "100" /> </td>
-		</tr>
-	</table>
-</div>
+	
+		<div>
+			<table align="center">
+				<colgroup>
+					<col span="1" style="width: 65%;">
+					<col span="1" style="width: 35%;">
+				</colgroup>
+				<tr> 
+					<td> <p style="color:white"><b><u>Jesse Chau</u></b><br/>A country boy in his origins, Jesse was born in Clyde, North Carolina. He and his family hovered around the southern states north of Florida until the day the Sunlight called to them to venture down to Sunny South Florida. Jesse essentially grew up in Florida having lived there for one-fourth of his young life. It is no coincidence that his future bastion of education would be the University of Florida. A computer science major with a physics minor, his prevailing fascination in computers and science ended up becoming the focal point of his life, something he would not want any other way.</p> </td>
+					<td> <img src="https://scontent-b-mia.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/p417x417/393080_10151642856640833_1186289759_n.jpg?oh=226b96a499931729a658068c4dd3f6fe&oe=550D5EA5" height = "100" /> </td>
+				</tr>	
+				<tr> 
+					<td> <p style="color:white"><b><u>Xin He</u></b><br/>Xin is a third-year Computer Science major with a minor in Business Administration from Boca Raton, FL. In his free time, Xin likes to watch movies, browse the Internet, and play Planetside 2, a computer game he has dedicated much of his time to. He hopes to land an internship for the summer and beyond.</p></td>
+					<td> <img src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpf1/v/t1.0-9/304095_2413614714151_327036085_n.jpg?oh=751118a2b7f9fd35c471e1327713e4ac&oe=54F47EA7&__gda__=1423248366_b69ff1e3a905b0174196f83c7390a541" height = "100" /> </td>
+				</tr>
+				<tr> 
+					<td> <p style="color:white"><b><u>Derek Hua</u></b><br/>Derek is a third-year Computer Science and Engineering major with a minor in Business Administration from Boca Raton, FL. His interests include, programming, weight-lifting, cooking, and discovering new hobbies. He is currently seeking opportunities to apply himself in the form of a technical Co-Op or an internship. He not only seeking opportunities that will test my technical knowledge, but ones that will also encourage me to step out of my comfort zone, actively learn, and connect with others.</p> </td>
+					<td> <img src="https://scontent-a-mia.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/p417x417/10433079_401682496648066_6183619574339687075_n.jpg?oh=936862b69bef7511e5e9c1cc075e9072&oe=54FBC559" height = "100"/></td>
+				</tr>
+				<tr> 
+					<td> <p style="color:white"><b><u>Matt Weingarten</u></b><br/>Matt is a third-year Computer Science major with minors in Mathematics and Statistics from Safety Harbor, FL. In his free time, he likes to watch and play sports (hence, the inspiration for this website), play video games, and play Bridge. He never regrets being a Computer Science major, even though the projects that it entails can be time-consuming.</p> </td>
+					<td> <img src="https://scontent-b-mia.xx.fbcdn.net/hphotos-xpa1/v/t1.0-9/1920334_10203996137276308_8992998182298037988_n.jpg?oh=703adef206b1629659d03624303816d7&oe=551A3C78" height = "100" /> </td>
+				</tr>
+			</table>
+		</div>
+	
 </body></html>
