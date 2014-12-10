@@ -28,10 +28,11 @@
 					 (select count(*) sCount from baseballfieldingpostseason) s,
 					 (select count(*) tCount from baseballteams) t";
 	echo '<font size = "4" color = "white">';
-	echo "<b> Tuple Count </b> <br>";
 	$statement = oci_parse($connection, $query);
 	oci_execute($statement);
+	
 	echo "<table border='1'>\n";
+
 	echo "<tr>\n";
 	echo '<th><font color = "white">Total Tuples</th>';
 	echo '</tr>';
