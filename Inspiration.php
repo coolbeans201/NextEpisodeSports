@@ -150,6 +150,26 @@
 			width: 100%;
 			text-align: left;
 		}
+		
+
+		
+			
+		table {
+			width: 50%;
+			margin-left:auto; 
+			margin-right:auto;
+		}
+		th {
+			text-align: center;
+			 padding: 15px;
+		}
+		td {
+			text-align: center;
+			 padding: 15px;
+		}
+		
+		
+		
     </style>
 	
 </head>
@@ -218,12 +238,29 @@ function ajaxFunction(){
 			<li><a href="Inspiration.php">Inspiration</a></li>
 		</ul>
 	</nav>
-<form name="myform" method="post">
-<p style="color:white">The Internet contains many databases covering each sport, such as basketball-reference.com, hockey-reference.com, or baseball-reference.com. However, there are no comprehensive sports database webpages out there. Since it seems more useful for all the sports information a user could want to lie in one website rather than a bunch of different websites, we combined the stats for teams, players, and coaches from baseball, basketball, and hockey into this database. We hope you enjoy!</p>
-<div id = 'buttonDiv'>&nbsp;
-<input type= "button" class="btn btn-success" style = "color:white" value="Calculate Tuples" onclick="ajaxFunction();"></input> <!--Button-->
-<div id='resultDiv'></div>
-</form>
+	
+
+	
+	<div>
+			<table >
+				
+				<tr> 
+					<td> <form name="myform" method="post">
+						<p style="color:white">The Internet contains many databases covering each sport, such as basketball-reference.com, hockey-reference.com, or baseball-reference.com. However, there are no comprehensive sports database webpages out there. Since it seems more useful for all the sports information a user could want to lie in one website rather than a bunch of different websites, we combined the stats for teams, players, and coaches from baseball, basketball, and hockey into this database. We hope you enjoy!</p>
+						<div id = 'buttonDiv'>&nbsp;
+						<input type= "button" class="btn btn-success" style = "color:white" value="Calculate Tuples" onclick="ajaxFunction();"></input> <!--Button-->
+						
+						</form>
+					</td>
+				</tr>	
+				
+				
+			</table>
+	</div>
+	
+	<div id='resultDiv'></div>
+	
+	
 </body></html>
 
 
