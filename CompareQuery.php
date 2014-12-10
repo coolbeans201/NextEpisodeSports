@@ -187,6 +187,7 @@
 			background: linear-gradient(top, #efefef 0%, #bbbbbb 100%);  
 			background: -moz-linear-gradient(top, #efefef 0%, #bbbbbb 100%); 
 			background: -webkit-linear-gradient(top, #efefef 0%,#bbbbbb 100%); 
+			
 		}
 		
 		.banner-img {
@@ -272,6 +273,15 @@
 			width: 100%;
 			text-align: left;
 		}
+		
+		.rotate {
+			/* Rotate div */
+			-ms-transform: rotate(270deg); /* IE 9 */
+			-webkit-transform: rotate(270deg); /* Chrome, Safari, Opera */
+			transform: rotate(270deg);
+		}
+		
+		
     </style>
 </head>
 
@@ -317,12 +327,17 @@
 			</select></font></div>
 			<div ><font size = "4">Select player type: <select name="box2" class="black" id="playertype" onchange='ajaxFunction()'></select></font></div>
 			<div id='ajaxDiv'> <p >Your result will display here</p></div>
+			
+			
+			
+			
 			<div id = 'buttonDiv'>&nbsp;
 			<input type= "button" class="btn btn-success" style = "color:white" value="Compute" onclick="ajaxCompareQuery();"></input> <!--Button-->
 			</div>
 			</form>
-		<nav class="datagrid ">
-		<div id='compareDiv'></div>
+			
+		<nav class="datagrid " >
+			<div id='compareDiv'></div>
 		</nav>
 	<div/>	
 </body>
