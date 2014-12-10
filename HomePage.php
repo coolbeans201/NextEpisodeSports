@@ -205,7 +205,7 @@
 						<p>and career stats for players, coaches, and teams, as well as see how many standard deviations a player, </p>
 						<p>coach, or team falls below or above the mean in a certain statistic. The webpage will also allow the user </p>
 						<p>to sort players, coaches, or teams by a certain statistic, as well as compare two or more players, coaches, </p>
-						<p>or teams on the sum of their standard deviations above or below the mean across all their statistics.</p>
+						<p>or teams.</p>
 						<br/>
 						<hr>
 					</div>
@@ -217,5 +217,6 @@
 </div>
 
 </body></html>
+
 
 
