@@ -1,4 +1,4 @@
-hishim#!/usr/local/bin/php
+#!/usr/local/bin/php
 <html>
 <head>
 	<title>Team</title>
