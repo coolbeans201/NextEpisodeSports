@@ -186,7 +186,7 @@
 			<col span="1" style="width: 25%;">
 		</colgroup>
 		<tr> 
-			<td> <p style="color:white"><b><u>Jesse Chau</u></b><br/>Jesse is a third-year Computer Science and Engineering major with a minor in Physics from Boca Raton, FL. In his free time, he likes to edit photos and play League of Legends. He hopes to land an internship for the summer.</p> </td>
+			<td> <p style="color:white"><b><u>Jesse Chau</u></b><br/>A country boy in his origins, Jesse was born in Clyde, North Carolina. He and his family hovered around the southern states north of Florida until the day the Sunlight called to them to venture down to Sunny South Florida. Jesse essentially grew up in Florida having lived there for one-fourth of his young life. It is no coincidence that his future bastion of education would be the University of Florida. A computer science major with a physics minor, his prevailing fascination in computers and science ended up becoming the focal point of his life, something he would not want any other way.</p> </td>
 			<td> <img src="https://scontent-b-mia.xx.fbcdn.net/hphotos-xfa1/v/t1.0-9/p417x417/393080_10151642856640833_1186289759_n.jpg?oh=226b96a499931729a658068c4dd3f6fe&oe=550D5EA5" height = "100" /> </td>
 		</tr>	
 		<tr> 
